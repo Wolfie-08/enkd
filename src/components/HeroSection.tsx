@@ -5,11 +5,8 @@ import heroImage from '@/assets/hero-bg.jpg';
 
 const HeroSection = () => {
   const typingTexts = [
-    'Python Developer',
-    'Remote Work Explorer', 
-    'Creative Coder',
-    'Side Project Builder',
-    'INFJ-A Personality'
+    'Mechanical Engineer',
+    'Developer'
   ];
 
   const socialLinks = [
@@ -77,7 +74,7 @@ const HeroSection = () => {
             transition={{ delay: 1.2, duration: 0.6 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8"
           >
-            Curious builder blending creativity, community, and code. Currently working on{' '}
+            Passionate about bridging the gap between engineering and technology. Currently working on{' '}
             <span className="text-primary font-semibold">AltPlaceBot</span> - a Telegram bot 
             revolutionizing remote work discovery.
           </motion.p>
