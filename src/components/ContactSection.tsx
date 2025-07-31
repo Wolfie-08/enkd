@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Send, Terminal, Mail, MessageSquare, User } from 'lucide-react';
+import { Send, Terminal, Mail, MessageSquare, User, Github, Linkedin } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
@@ -161,23 +161,49 @@ const ContactSection = () => {
             </div>
 
             {/* Quick Contact Info */}
-            <div className="space-y-4">
+            <div className="space-y-3">
               <motion.a
                 whileHover={{ scale: 1.02 }}
-                href="mailto:contact@example.com"
+                href="mailto:kdiyorbek133@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center space-x-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
               >
                 <Mail className="w-5 h-5 text-primary" />
-                <span>contact@wolfie-e.dev</span>
+                <span>kdiyorbek133@gmail.com</span>
               </motion.a>
               
               <motion.a
                 whileHover={{ scale: 1.02 }}
-                href="https://telegram.me/wolfie_e"
+                href="https://t.me/Wolfie_09"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center space-x-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
               >
                 <MessageSquare className="w-5 h-5 text-primary" />
-                <span>@wolfie_e on Telegram</span>
+                <span>@Wolfie_09 on Telegram</span>
+              </motion.a>
+
+              <motion.a
+                whileHover={{ scale: 1.02 }}
+                href="https://www.linkedin.com/in/diyorbek-komilov-b19802227"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
+              >
+                <Linkedin className="w-5 h-5 text-primary" />
+                <span>LinkedIn Profile</span>
+              </motion.a>
+
+              <motion.a
+                whileHover={{ scale: 1.02 }}
+                href="https://github.com/Wolfie-07"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
+              >
+                <Github className="w-5 h-5 text-primary" />
+                <span>GitHub Profile</span>
               </motion.a>
             </div>
           </motion.div>
