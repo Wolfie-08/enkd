@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Play, Bot, Globe, Code } from 'lucide-react';
+import { ExternalLink, Github, Play, Bot, Globe, Code, Sun } from 'lucide-react';
 
 const ProjectsSection = () => {
   const [ref, inView] = useInView({
@@ -21,6 +21,18 @@ const ProjectsSection = () => {
         github: '#',
         live: '#',
         demo: '#'
+      }
+    },
+    {
+      title: 'Solar Tracker',
+      description: 'High school engineering project featuring an automated solar panel tracking system that follows the sun for maximum energy efficiency.',
+      tags: ['Arduino', 'Engineering', 'Solar Energy', 'Automation', 'Sensors'],
+      icon: Sun,
+      status: 'Completed',
+      color: 'from-yellow-400 to-orange-400',
+      version: 'v1.0',
+      links: {
+        github: '#'
       }
     },
     {
@@ -114,6 +126,8 @@ const ProjectsSection = () => {
                     ? 'bg-green-500/20 text-green-400' 
                     : project.status === 'In Development'
                     ? 'bg-blue-500/20 text-blue-400'
+                    : project.status === 'Completed'
+                    ? 'bg-purple-500/20 text-purple-400'
                     : 'bg-orange-500/20 text-orange-400'
                 }`}>
                   {project.status}
