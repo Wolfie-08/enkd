@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Send, Terminal, Mail, MessageSquare, User, Github, Linkedin } from 'lucide-react';
+import { Send, Terminal, Mail, MessageSquare, User, Github, Linkedin, Tag, FileText } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
@@ -14,6 +14,8 @@ const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    inquiryType: '',
+    subject: '',
     message: ''
   });
 
@@ -46,6 +48,8 @@ const ContactSection = () => {
         .insert({
           name: formData.name,
           email: formData.email,
+          inquiry_type: formData.inquiryType,
+          subject: formData.subject,
           message: formData.message
         });
 
@@ -67,7 +71,7 @@ const ContactSection = () => {
       });
 
       // Reset form
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', inquiryType: '', subject: '', message: '' });
       
     } catch (error) {
       // Error terminal output
@@ -90,7 +94,7 @@ const ContactSection = () => {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
@@ -245,6 +249,43 @@ const ContactSection = () => {
                   required
                   className="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200"
                   placeholder="your@email.com"
+                />
+              </div>
+
+              <div>
+                <label className="flex items-center space-x-2 text-sm font-medium text-foreground mb-2">
+                  <Tag className="w-4 h-4" />
+                  <span>Inquiry Type</span>
+                </label>
+                <select
+                  name="inquiryType"
+                  value={formData.inquiryType}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200"
+                >
+                  <option value="">Select inquiry type</option>
+                  <option value="project">Project Collaboration</option>
+                  <option value="job">Job Opportunity</option>
+                  <option value="consultation">Consultation</option>
+                  <option value="general">General Question</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="flex items-center space-x-2 text-sm font-medium text-foreground mb-2">
+                  <FileText className="w-4 h-4" />
+                  <span>Subject</span>
+                </label>
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200"
+                  placeholder="Brief subject of your message"
                 />
               </div>
 
