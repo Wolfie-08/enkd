@@ -10,9 +10,9 @@ const HeroSection = () => {
   ];
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:contact@example.com', label: 'Email' },
+    { icon: Github, href: 'https://github.com/Wolfie-07', label: 'GitHub' },
+    { icon: Linkedin, href: 'www.linkedin.com/in/diyorbek-komilov-b19802227', label: 'LinkedIn' },
+    { icon: Mail, href: 'mailto:kdiyorbek133@gmail.com', label: 'Email' },
   ];
 
   return (
