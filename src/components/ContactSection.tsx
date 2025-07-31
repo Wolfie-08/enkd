@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Send, Terminal, Mail, MessageSquare, User } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const ContactSection = () => {
   const [ref, inView] = useInView({
@@ -21,32 +23,71 @@ const ContactSection = () => {
     '> Ready to receive messages',
     '> Type your message and press SEND'
   ]);
+  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate terminal output
-    const newOutput = [
+    // Add initial terminal output
+    const initialOutput = [
       ...terminalOutput,
       `> Processing message from ${formData.name}...`,
       '> Validating input data...',
-      '> Establishing secure connection...',
-      '> Message sent successfully!',
-      '> Thank you for reaching out. I\'ll get back to you soon.',
-      '> Connection closed.'
+      '> Establishing secure connection...'
     ];
+    
+    setTerminalOutput(initialOutput);
 
-    for (let i = terminalOutput.length; i < newOutput.length; i++) {
-      setTimeout(() => {
-        setTerminalOutput(prev => [...prev, newOutput[i]]);
-      }, (i - terminalOutput.length) * 500);
-    }
+    try {
+      // Submit to Supabase
+      const { error } = await supabase
+        .from('contacts')
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        });
 
-    setTimeout(() => {
+      if (error) throw error;
+
+      // Success terminal output
+      const successOutput = [
+        ...initialOutput,
+        '> Message sent successfully!',
+        '> Thank you for reaching out. I\'ll get back to you soon.',
+        '> Connection closed.'
+      ];
+
+      setTerminalOutput(successOutput);
+      
+      toast({
+        title: "Message sent!",
+        description: "Thanks for reaching out. I'll get back to you soon!",
+      });
+
+      // Reset form
       setFormData({ name: '', email: '', message: '' });
+      
+    } catch (error) {
+      // Error terminal output
+      const errorOutput = [
+        ...initialOutput,
+        '> Error: Failed to send message',
+        '> Please try again or contact me directly',
+        '> Connection closed.'
+      ];
+
+      setTerminalOutput(errorOutput);
+      
+      toast({
+        title: "Error sending message",
+        description: "Please try again or contact me directly via email.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 3000);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -213,9 +254,9 @@ const ContactSection = () => {
 
             <div className="mt-6 text-center">
               <p className="text-sm text-muted-foreground">
-                Want to connect Supabase for real form submissions?{' '}
+                Messages are stored securely via{' '}
                 <span className="text-primary font-semibold">
-                  Enable the Supabase integration first!
+                  Supabase integration
                 </span>
               </p>
             </div>
