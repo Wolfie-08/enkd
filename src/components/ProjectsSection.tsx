@@ -19,7 +19,7 @@ const ProjectsSection = () => {
       version: 'v2.1',
       links: {
         github: '#',
-        live: '#',
+        live: 'https://t.me/altplacebot',
         demo: '#'
       }
     },
@@ -45,7 +45,7 @@ const ProjectsSection = () => {
       version: 'v1.0',
       links: {
         github: '#',
-        live: '#'
+        live: 'https://wolfies.lovable.app'
       }
     },
     {
