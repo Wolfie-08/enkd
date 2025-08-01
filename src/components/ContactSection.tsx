@@ -310,7 +310,7 @@ const ContactSection = () => {
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className={`w-full btn-electric flex items-center justify-center space-x-2 ${
+                className={`w-full btn-electric text-white font-semibold flex items-center justify-center space-x-2 ${
                   isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
               >
