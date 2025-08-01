@@ -86,10 +86,10 @@ const HeroSection = () => {
             transition={{ delay: 1.6, duration: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
           >
-            <button className="btn-electric">
+            <a href="https://t.me/portfolio_kd08" target="_blank" rel="noopener noreferrer" className="btn-electric text-white font-semibold">
               <Download className="w-5 h-5 mr-2" />
               Download Resume
-            </button>
+            </a>
             <button 
               onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
               className="btn-terminal"
