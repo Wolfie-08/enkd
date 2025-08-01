@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Play, Bot, Globe, Code, Sun } from 'lucide-react';
+import { ExternalLink, Github, Play, Bot, Globe, Code, Sun, BookOpen, Search } from 'lucide-react';
 
 const ProjectsSection = () => {
   const [ref, inView] = useInView({
@@ -46,6 +46,30 @@ const ProjectsSection = () => {
       links: {
         github: '#',
         live: 'https://wolfies.lovable.app'
+      }
+    },
+    {
+      title: 'AI-Powered Journal',
+      description: 'Intelligent journaling application with AI-driven insights, mood analysis, and personalized writing prompts to enhance self-reflection.',
+      tags: ['AI', 'Machine Learning', 'React', 'NLP', 'Mental Health'],
+      icon: BookOpen,
+      status: 'In Development',
+      color: 'from-indigo-400 to-purple-400',
+      version: 'v0.3',
+      links: {
+        github: '#'
+      }
+    },
+    {
+      title: 'Reverse Engineering Project',
+      description: 'Technical analysis and reverse engineering of software systems to understand underlying architectures and security mechanisms.',
+      tags: ['Reverse Engineering', 'Security', 'Analysis', 'Tools', 'Research'],
+      icon: Search,
+      status: 'Completed',
+      color: 'from-red-400 to-pink-400',
+      version: 'v1.2',
+      links: {
+        github: '#'
       }
     },
     {
