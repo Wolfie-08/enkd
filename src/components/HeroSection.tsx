@@ -11,7 +11,7 @@ const HeroSection = () => {
 
   const socialLinks = [
     { icon: Github, href: 'https://github.com/Wolfie-07', label: 'GitHub' },
-    { icon: Linkedin, href: 'www.linkedin.com/in/diyorbek-komilov-b19802227', label: 'LinkedIn' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/diyorbek-komilov-b19802227/', label: 'LinkedIn' },
     { icon: Mail, href: 'mailto:kdiyorbek133@gmail.com', label: 'Email' },
   ];
 
