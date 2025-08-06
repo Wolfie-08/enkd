@@ -74,9 +74,7 @@ const HeroSection = () => {
             transition={{ delay: 1.2, duration: 0.6 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8"
           >
-            Passionate about bridging the gap between engineering and technology. Currently working on{' '}
-            <span className="text-primary font-semibold">AltPlaceBot</span> - a Telegram bot 
-            revolutionizing remote work discovery.
+            Always exploring how engineering and design can make life a little simpler, smarter, and more intentional. Building systems that work — and feel right — combining logic, aesthetics, and empathy. Curious about discovering new possibilities, collaborating meaningfully, and continuously working on myself as much as the things I create.
           </motion.p>
 
           {/* CTA Buttons */}
