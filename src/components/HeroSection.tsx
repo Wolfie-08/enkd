@@ -52,7 +52,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold text-gradient mb-4"
+            className="text-5xl md:text-7xl font-bold text-gradient mb-6"
           >
             Wolfie_e
           </motion.h1>
@@ -62,7 +62,7 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.6 }}
-            className="text-2xl md:text-3xl font-semibold text-foreground mb-8"
+            className="text-2xl md:text-3xl font-semibold text-foreground mb-6"
           >
             <TypingAnimation texts={typingTexts} />
           </motion.div>
