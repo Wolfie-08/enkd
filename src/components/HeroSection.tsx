@@ -72,7 +72,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.6 }}
-            className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8"
+            className="text-lg md:text-xl text-muted-foreground max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto mb-8 leading-relaxed text-center sm:text-left md:text-justify px-4"
           >
             Always exploring how engineering and design can make life a little simpler, smarter, and more intentional. Building systems that work — and feel right — combining logic, aesthetics, and empathy. Curious about discovering new possibilities, collaborating meaningfully, and continuously working on myself as much as the things I create.
           </motion.p>
