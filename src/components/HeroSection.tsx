@@ -52,7 +52,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold text-gradient mb-6"
+            className="text-5xl md:text-7xl font-bold text-gradient mb-2"
           >
             Wolfie_e
           </motion.h1>
