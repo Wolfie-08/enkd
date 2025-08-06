@@ -10,6 +10,30 @@ const ProjectsSection = () => {
 
   const projects = [
     {
+      title: 'StriveHub',
+      description: 'Web Developer - A comprehensive platform for global reach and professional networking.',
+      tags: ['React', 'TypeScript', 'Web Development', 'Platform'],
+      icon: Globe,
+      status: 'Live',
+      color: 'from-emerald-400 to-teal-400',
+      version: 'v1.0',
+      links: {
+        live: 'https://strivehub-global-reach.vercel.app/'
+      }
+    },
+    {
+      title: 'Learn Through Fun',
+      description: 'Co-Founder & Web Developer - Interactive STEM education platform for students in Uzbekistan. Discover hands-on projects, virtual experiments, and join a community of curious minds.',
+      tags: ['Education', 'STEM', 'Interactive', 'React', 'Community'],
+      icon: BookOpen,
+      status: 'Live',
+      color: 'from-violet-400 to-purple-400',
+      version: 'v1.0',
+      links: {
+        live: 'https://learn-through-fun.vercel.app/'
+      }
+    },
+    {
       title: 'AltPlaceBot',
       description: 'A Telegram bot helping remote workers discover alternative workspaces worldwide. Built with Python, aiogram, and Supabase.',
       tags: ['Python', 'aiogram', 'Supabase', 'Telegram API', 'UX'],
