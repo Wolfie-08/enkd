@@ -11,13 +11,14 @@ const ProjectsSection = () => {
   const projects = [
     {
       title: 'StriveHub',
-      description: 'Web Developer - A comprehensive platform for global reach and professional networking.',
+      description: 'Mentor & Web Developer - A movement led by students, for students. We provide completely free mentoring to help talented minds from Uzbekistan achieve their global education dreams.',
       tags: ['React', 'TypeScript', 'Web Development', 'Platform'],
       icon: Globe,
       status: 'Live',
       color: 'from-emerald-400 to-teal-400',
       version: 'v1.0',
       links: {
+        github: '#',
         live: 'https://strivehub-global-reach.vercel.app/'
       }
     },
@@ -30,6 +31,7 @@ const ProjectsSection = () => {
       color: 'from-violet-400 to-purple-400',
       version: 'v1.0',
       links: {
+        github: '#',
         live: 'https://learn-through-fun.vercel.app/'
       }
     },
