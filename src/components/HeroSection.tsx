@@ -86,9 +86,9 @@ const HeroSection = () => {
             transition={{ delay: 1.6, duration: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
           >
-            <a href="https://t.me/portfolio_kd08" target="_blank" rel="noopener noreferrer" className="btn-electric text-white font-semibold">
-              <Download className="w-5 h-5 mr-2" />
-              Download Resume
+            <a href="https://t.me/portfolio_kd08" target="_blank" rel="noopener noreferrer" className="bg-transparent border border-[hsl(var(--accent))] text-[hsl(var(--accent))] font-mono px-4 py-2 rounded transition-all duration-300 hover:bg-[hsl(var(--accent))] hover:text-background flex items-center gap-2">
+              <Download className="w-5 h-5" />
+              Resume
             </a>
             <button 
               onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
