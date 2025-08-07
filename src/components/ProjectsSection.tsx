@@ -91,11 +91,11 @@ const ProjectsSection = () => {
       description: 'Technical analysis and reverse engineering of software systems to understand underlying architectures and security mechanisms.',
       tags: ['Reverse Engineering', 'Security', 'Analysis', 'Tools', 'Research'],
       icon: Search,
-      status: 'Completed',
+      status: 'Planning',
       color: 'from-red-400 to-pink-400',
-      version: 'v1.2',
+      version: 'v0.1',
       links: {
-        github: '#'
+        demo: '#'
       }
     },
     {
