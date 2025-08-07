@@ -81,7 +81,7 @@ const ProjectsSection = () => {
       icon: BookOpen,
       status: 'Live',
       color: 'from-indigo-400 to-purple-400',
-      version: 'V 1.0 Live',
+      version: 'v1.0',
       links: {
         github: '#',
         live: 'https://solunea-ai-journal.vercel.app/'
