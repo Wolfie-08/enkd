@@ -11,7 +11,7 @@ const TimelineSection = () => {
   const timelineData = [
     {
       version: 'V1',
-      title: '🛠 Completed',
+      title: '🛠 MVP',
       status: 'completed',
       date: 'Telegram Bot',
       description: 'A functional Telegram bot with core commands that let users explore work-friendly spots like cafés and libraries.',
