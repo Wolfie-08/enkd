@@ -10,64 +10,96 @@ const TimelineSection = () => {
 
   const timelineData = [
     {
-      version: 'v1.0',
-      title: 'Foundation & Research',
+      version: 'V1',
+      title: '🛠 Completed',
       status: 'completed',
-      date: 'Q1 2024',
-      description: 'Initial concept development and market research for remote work solutions.',
+      date: 'Telegram Bot',
+      description: 'A functional Telegram bot with core commands that let users explore work-friendly spots like cafés and libraries.',
       features: [
-        'Market analysis & user interviews',
-        'Technical architecture planning', 
-        'MVP feature definition',
-        'Technology stack selection'
+        'Core bot commands',
+        'Workspace discovery',
+        'Café and library finder',
+        'Basic user interactions'
       ],
-      icon: Code,
+      icon: CheckCircle,
       color: 'text-green-400',
       bgColor: 'bg-green-400/10'
     },
     {
-      version: 'v2.0',
-      title: 'AltPlaceBot MVP',
-      status: 'completed',
-      date: 'Q2 2024',
-      description: 'Core Telegram bot functionality with basic workspace discovery features.',
+      version: 'V2',
+      title: 'Dynamic Discovery',
+      status: 'planned',
+      date: 'Roadmap',
+      description: 'Enable users to suggest, store, and retrieve alternative space recommendations using a Supabase-backed, scalable database — making AltPlace community-powered and content-rich.',
       features: [
-        'Telegram bot integration',
-        'Basic location search',
-        'User preference system',
-        'Simple recommendation engine'
+        'Community-powered suggestions',
+        'Supabase database integration',
+        'Scalable content storage',
+        'User-generated recommendations'
       ],
       icon: Users,
-      color: 'text-blue-400',
-      bgColor: 'bg-blue-400/10'
+      color: 'text-muted-foreground',
+      bgColor: 'bg-muted/10'
     },
     {
-      version: 'v2.1',
-      title: 'Enhanced Features',
+      version: 'V3',
+      title: 'Notion Workspace Integration',
       status: 'current',
-      date: 'Q3 2024',
-      description: 'Advanced features with AI-powered recommendations and community integration.',
+      date: 'Current Status',
+      description: 'Let users organize projects and plans within collaborative Notion-style spaces directly through the bot. Includes features to create shared workspaces and invite collaborators.',
       features: [
-        'AI-powered workspace matching',
-        'Community feedback system',
-        'Advanced filtering options',
-        'Integration with coworking APIs'
+        'Notion-style workspaces',
+        'Collaborative spaces',
+        'Project organization',
+        'Team invitations'
       ],
       icon: Zap,
       color: 'text-primary',
       bgColor: 'bg-primary/10'
     },
     {
-      version: 'v3.0',
-      title: 'Platform Expansion',
+      version: 'V4',
+      title: 'AI-Personalized Recommendations',
       status: 'planned',
-      date: 'Q4 2024',
-      description: 'Multi-platform expansion with web app and mobile companion.',
+      date: 'Future',
+      description: 'Smart suggestions based on user preferences (price, location, noise level, busy hours, etc.), combined with automated planning and time-based insights.',
       features: [
-        'Web application launch',
-        'Mobile app development',
-        'Real-time availability tracking',
-        'Booking integration system'
+        'AI-powered suggestions',
+        'Preference-based matching',
+        'Time-based insights',
+        'Smart scheduling'
+      ],
+      icon: ArrowRight,
+      color: 'text-muted-foreground',
+      bgColor: 'bg-muted/10'
+    },
+    {
+      version: 'V5',
+      title: 'Travel Mode',
+      status: 'planned',
+      date: 'Future',
+      description: 'Support for travelers seeking daily-stay hotels, short-term apartments, and curated spots — expanding AltPlace into a lightweight travel assistant.',
+      features: [
+        'Travel-friendly accommodations',
+        'Short-term rentals',
+        'Curated travel spots',
+        'Travel planning assistant'
+      ],
+      icon: ArrowRight,
+      color: 'text-muted-foreground',
+      bgColor: 'bg-muted/10'
+    },
+    {
+      version: 'V6',
+      title: 'City Discovery Layer',
+      status: 'planned',
+      date: 'Future',
+      description: 'Introduce an "Explore" mode with scenic routes, parks, cultural spaces, and hidden places to walk, unwind, and experience the city — ideal for newcomers and locals alike.',
+      features: [
+        'Scenic routes exploration',
+        'Cultural spaces discovery',
+        'Hidden gems finder',
+        'City experience guide'
       ],
       icon: ArrowRight,
       color: 'text-muted-foreground',
@@ -103,7 +135,7 @@ const TimelineSection = () => {
             Project Roadmap
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Building AltPlaceBot iteratively - from concept to global platform
+            🔍 AltPlace — Redefining How We Explore & Work in Cities
           </p>
         </motion.div>
 
@@ -212,9 +244,7 @@ const TimelineSection = () => {
               The Vision
             </h3>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Building the ultimate platform for remote workers to discover, connect, and thrive in 
-              alternative workspaces worldwide. Each iteration brings us closer to revolutionizing 
-              how digital nomads and remote professionals find their perfect work environment.
+              AltPlace is a growing platform designed to help students, remote workers, travelers, and locals discover alternative workspaces, libraries, event venues, and hidden gems within their city. What began as a simple Telegram bot has become a vision to support modern, mobile lifestyles — blending productivity, exploration, and community.
             </p>
           </div>
         </motion.div>
