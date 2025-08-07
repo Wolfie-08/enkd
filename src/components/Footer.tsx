@@ -12,10 +12,10 @@ const Footer = () => {
           className="text-center space-y-2"
         >
           <p className="text-muted-foreground">
-            Built with ⚡ by <span className="text-foreground font-semibold">Diyorbek</span> using React, TypeScript, and Framer Motion
+            Built with ♥️ by <span className="text-foreground font-semibold">Diyorbek</span> using React, TypeScript, and Framer Motion
           </p>
           <p className="text-sm text-muted-foreground">
-            © 2025 <span className="text-gradient font-semibold">Wolfie_e</span> • INFJ-A Developer • Curiosity
+            © 2025 <span className="text-foreground font-semibold">Wolfie_e</span> • INFJ-A Developer • Curiosity
           </p>
         </motion.div>
       </div>

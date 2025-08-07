@@ -28,7 +28,7 @@ const TimelineSection = () => {
     {
       version: 'V2',
       title: 'Dynamic Discovery',
-      status: 'planned',
+      status: 'completed',
       date: 'Roadmap',
       description: 'Enable users to suggest, store, and retrieve alternative space recommendations using a Supabase-backed, scalable database — making AltPlace community-powered and content-rich.',
       features: [
@@ -38,8 +38,8 @@ const TimelineSection = () => {
         'User-generated recommendations'
       ],
       icon: Users,
-      color: 'text-muted-foreground',
-      bgColor: 'bg-muted/10'
+      color: 'text-green-400',
+      bgColor: 'bg-green-400/10'
     },
     {
       version: 'V3',
