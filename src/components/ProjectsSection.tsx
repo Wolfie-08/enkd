@@ -44,9 +44,8 @@ const ProjectsSection = () => {
       color: 'from-blue-400 to-cyan-400',
       version: 'v2.1',
       links: {
-        github: '#',
-        live: 'https://t.me/altplacebot',
-        demo: '#'
+        github: 'https://github.com/Wolfie-07/AltPlace',
+        demo: 'https://t.me/altplacebot'
       }
     },
     {
