@@ -75,15 +75,16 @@ const ProjectsSection = () => {
       }
     },
     {
-      title: 'AI-Powered Journal',
+      title: 'Solunea - AI - journal',
       description: 'Intelligent journaling application with AI-driven insights, mood analysis, and personalized writing prompts to enhance self-reflection.',
       tags: ['AI', 'Machine Learning', 'React', 'NLP', 'Mental Health'],
       icon: BookOpen,
-      status: 'In Development',
+      status: 'Live',
       color: 'from-indigo-400 to-purple-400',
-      version: 'v0.3',
+      version: 'V 1.0 Live',
       links: {
-        github: '#'
+        github: '#',
+        live: 'https://solunea-ai-journal.vercel.app/'
       }
     },
     {
