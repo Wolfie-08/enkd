@@ -57,7 +57,7 @@ const ProjectsSection = () => {
       color: 'from-yellow-400 to-orange-400',
       version: 'v1.0',
       links: {
-        github: '#'
+        demo: '#'
       }
     },
     {
