@@ -13,12 +13,12 @@ interface Song {
 }
 
 const defaultSongs: Song[] = [
-  { id: '1', title: 'Golden_hour', artist: 'JVKE', src: '/assets/audio/golden_hour.m4a', cover: '/assets/images/covers/hour.jpg' },
-  { id: '2', title: 'Circles', artist: 'Post Malone', src: '/assets/audio/circles.m4a', cover: '/assets/images/covers/circles.jpg' },
-  { id: '3', title: 'Vagabond', artist: 'MisterWives', src: '/assets/audio/vagabond.m4a', cover: '/assets/images/covers/vagabond.jpg' },
-  { id: '4', title: 'Vagabond', artist: 'Wolfmother', src: '/assets/audio/vagabond1.m4a', cover: '/assets/images/covers/vagabond1.jpg' },
-  { id: '5', title: 'Army_Dreamers', artist: 'Kate Bush', src: '/assets/audio/dreamers.m4a', cover: '/assets/images/covers/dreamers.jpg' },
-  { id: '6', title: 'Ordinary', artist: 'Alex Warren', src: '/assets/audio/ordinary.m4a', cover: '/assets/images/covers/ordinary.jpg' },
+  { id: '1', title: 'Golden_hour', artist: 'JVKE', src: '/audio/golden_hour.mp3', cover: '/images/covers/hour.jpg' },
+  { id: '2', title: 'Circles', artist: 'Post Malone', src: '/audio/circles.mp3', cover: '/images/covers/circles.jpg' },
+  { id: '3', title: 'Vagabond', artist: 'MisterWives', src: '/audio/vagabond.mp3', cover: '/images/covers/vagabond.jpg' },
+  { id: '4', title: 'Vagabond', artist: 'Wolfmother', src: '/audio/vagabond1.mp3', cover: '/images/covers/vagabond1.jpg' },
+  { id: '5', title: 'Army_Dreamers', artist: 'Kate Bush', src: '/audio/dreamers.mp3', cover: '/images/covers/dreamers.jpg' },
+  { id: '6', title: 'Ordinary', artist: 'Alex Warren', src: '/audio/ordinary.mp3', cover: '/images/covers/ordinary.jpg' },
 ];
 
 const MusicPlayer = () => {
