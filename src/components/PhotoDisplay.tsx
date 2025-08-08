@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { User } from 'lucide-react';
-import myPhoto from '../../assets/DSC09097.JPG';
+import myPhoto from '../assets/DSC09097.JPG';
 
 interface PhotoDisplayProps {
   className?: string;
