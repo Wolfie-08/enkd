@@ -88,7 +88,7 @@ const PhotoDisplay = ({ photoUrl, onPhotoUpload, className = '' }: PhotoDisplayP
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <h3 className="text-white font-semibold text-lg">Wolfie_e</h3>
+          <h3 className="text-white font-semibold text-lg">Diyorbek</h3>
           <p className="text-white/60 text-sm">Mechanical Engineer & Developer</p>
         </motion.div>
       </motion.div>
