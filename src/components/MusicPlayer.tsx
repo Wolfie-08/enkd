@@ -1,7 +1,19 @@
-import { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Play, Pause, SkipBack, SkipForward, Volume2, Heart, MoreHorizontal, Loader2, PlusCircle, Trash2 } from 'lucide-react';
-import { Slider } from '@/components/ui/slider';
+import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import {
+  Play,
+  Pause,
+  SkipBack,
+  SkipForward,
+  Volume2,
+  Heart,
+  MoreHorizontal,
+  Loader2,
+  PlusCircle,
+  Trash2,
+} from "lucide-react";
+import { Slider } from "@/components/ui/slider";
+import Vibrant from "node-vibrant";
 
 interface Song {
   id: string;
@@ -9,38 +21,58 @@ interface Song {
   artist: string;
   src: string;
   cover: string;
-  duration?: string; // Will be auto-fetched
+  duration?: string;
 }
 
 const defaultSongs: Song[] = [
-  { id: '1', title: 'Golden_hour', artist: 'JVKE', src: '/audio/golden_hour.mp3', cover: '/images/covers/hour.jpg' },
-  { id: '2', title: 'Circles', artist: 'Post Malone', src: '/audio/circles.mp3', cover: '/images/covers/circles.jpg' },
-  { id: '3', title: 'Vagabond', artist: 'MisterWives', src: '/audio/vagabond.mp3', cover: '/images/covers/vagabond.jpg' },
-  { id: '4', title: 'Vagabond', artist: 'Wolfmother', src: '/audio/vagabond1.mp3', cover: '/images/covers/vagabond1.jpg' },
-  { id: '5', title: 'Army_Dreamers', artist: 'Kate Bush', src: '/audio/dreamers.mp3', cover: '/images/covers/dreamers.jpg' },
-  { id: '6', title: 'Ordinary', artist: 'Alex Warren', src: '/audio/ordinary.mp3', cover: '/images/covers/ordinary.jpg' },
+  { id: "1", title: "Golden Hour", artist: "JVKE", src: "/audio/golden_hour.mp3", cover: "/images/covers/hour.jpg" },
+  { id: "2", title: "Circles", artist: "Post Malone", src: "/audio/circles.mp3", cover: "/images/covers/circles.jpg" },
+  { id: "3", title: "Vagabond", artist: "MisterWives", src: "/audio/vagabond.mp3", cover: "/images/covers/vagabond.jpg" },
+  { id: "4", title: "Vagabond", artist: "Wolfmother", src: "/audio/vagabond1.mp3", cover: "/images/covers/vagabond1.jpg" },
+  { id: "5", title: "Army Dreamers", artist: "Kate Bush", src: "/audio/dreamers.mp3", cover: "/images/covers/dreamers.jpg" },
+  { id: "6", title: "Ordinary", artist: "Alex Warren", src: "/audio/ordinary.mp3", cover: "/images/covers/ordinary.jpg" },
 ];
 
 const MusicPlayer = () => {
-  const [songs, setSongs] = useState<Song[]>(defaultSongs);
+  const [songs, setSongs] = useState(defaultSongs);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [volume, setVolume] = useState([75]);
   const [likedSongs, setLikedSongs] = useState<Set<string>>(new Set());
   const [progress, setProgress] = useState([0]);
   const [loading, setLoading] = useState(false);
+  const [bgColor, setBgColor] = useState<string>("rgba(0,0,0,0.6)");
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const dataArrayRef = useRef<Uint8Array | null>(null);
+  const animationIdRef = useRef<number | null>(null);
+
   const currentSong = songs[currentSongIndex];
 
-  // Auto-load duration
+  // Extract dominant color from cover
+  useEffect(() => {
+    Vibrant.from(currentSong.cover).getPalette().then((palette) => {
+      if (palette?.Vibrant) {
+        const rgb = palette.Vibrant.rgb;
+        setBgColor(`rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.4)`);
+      }
+    });
+  }, [currentSong]);
+
+  // Preload audio for instant playback
+  useEffect(() => {
+    const preloadAudio = new Audio(currentSong.src);
+    preloadAudio.load();
+  }, [currentSong]);
+
+  // Load duration
   useEffect(() => {
     const audio = new Audio(currentSong.src);
-    audio.addEventListener('loadedmetadata', () => {
+    audio.addEventListener("loadedmetadata", () => {
       const minutes = Math.floor(audio.duration / 60);
-      const seconds = Math.floor(audio.duration % 60)
-        .toString()
-        .padStart(2, '0');
+      const seconds = Math.floor(audio.duration % 60).toString().padStart(2, "0");
       setSongs((prev) =>
         prev.map((s, idx) =>
           idx === currentSongIndex ? { ...s, duration: `${minutes}:${seconds}` } : s
@@ -49,7 +81,52 @@ const MusicPlayer = () => {
     });
   }, [currentSongIndex, currentSong.src]);
 
-  // Handle Play/Pause
+  // Web Audio API waveform setup
+  useEffect(() => {
+    if (!audioRef.current) return;
+    const audioCtx = new AudioContext();
+    const source = audioCtx.createMediaElementSource(audioRef.current);
+    const analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 256;
+
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+
+    analyserRef.current = analyser;
+    dataArrayRef.current = new Uint8Array(analyser.frequencyBinCount);
+
+    const draw = () => {
+      if (!canvasRef.current || !analyserRef.current || !dataArrayRef.current) return;
+      const ctx = canvasRef.current.getContext("2d");
+      if (!ctx) return;
+
+      analyserRef.current.getByteFrequencyData(dataArrayRef.current);
+
+      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+      const barWidth = (canvasRef.current.width / dataArrayRef.current.length) * 2.5;
+      let x = 0;
+
+      dataArrayRef.current.forEach((value) => {
+        const barHeight = value / 2;
+        const gradient = ctx.createLinearGradient(0, 0, 0, canvasRef.current.height);
+        gradient.addColorStop(0, "#1db954");
+        gradient.addColorStop(1, "#191414");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(x, canvasRef.current.height - barHeight, barWidth, barHeight);
+        x += barWidth + 1;
+      });
+
+      animationIdRef.current = requestAnimationFrame(draw);
+    };
+
+    draw();
+    return () => {
+      if (animationIdRef.current) cancelAnimationFrame(animationIdRef.current);
+      audioCtx.close();
+    };
+  }, [currentSongIndex]);
+
+  // Play / Pause
   const handlePlayPause = () => {
     if (!audioRef.current) return;
     if (isPlaying) {
@@ -60,75 +137,52 @@ const MusicPlayer = () => {
     setIsPlaying(!isPlaying);
   };
 
-  // Handle Next Song
-  const handleNext = () => {
-    setCurrentSongIndex((prev) => (prev + 1) % songs.length);
-  };
+  const handleNext = () => setCurrentSongIndex((prev) => (prev + 1) % songs.length);
+  const handlePrevious = () => setCurrentSongIndex((prev) => (prev - 1 + songs.length) % songs.length);
 
-  // Handle Previous Song
-  const handlePrevious = () => {
-    setCurrentSongIndex((prev) => (prev - 1 + songs.length) % songs.length);
-  };
-
-  // Update progress bar
+  // Progress tracking
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-
     const updateProgress = () => {
       setProgress([(audio.currentTime / audio.duration) * 100 || 0]);
     };
-
-    audio.addEventListener('timeupdate', updateProgress);
+    audio.addEventListener("timeupdate", updateProgress);
     return () => {
-      audio.removeEventListener('timeupdate', updateProgress);
+      audio.removeEventListener("timeupdate", updateProgress);
     };
   }, [currentSongIndex]);
 
-  // Handle like toggle
-  const toggleLike = (songId: string) => {
+  const toggleLike = (id: string) => {
     setLikedSongs((prev) => {
       const newSet = new Set(prev);
-      newSet.has(songId) ? newSet.delete(songId) : newSet.add(songId);
+      newSet.has(id) ? newSet.delete(id) : newSet.add(id);
       return newSet;
     });
   };
 
-  // Handle local add song
-  const handleAddSong = () => {
-    const newSong: Song = {
-      id: Date.now().toString(),
-      title: 'New Song',
-      artist: 'Unknown Artist',
-      src: '/assets/audio/sample.mp3',
-      cover: '/assets/images/covers/sample.jpg',
-    };
-    setSongs((prev) => [...prev, newSong]);
-  };
-
-  // Handle remove song
-  const handleRemoveSong = (id: string) => {
-    setSongs((prev) => prev.filter((s) => s.id !== id));
-    if (currentSongIndex >= songs.length - 1) {
-      setCurrentSongIndex(0);
-    }
-  };
-
   return (
-    <div className="w-full max-w-sm bg-black/20 backdrop-blur-xl rounded-3xl p-6 border border-white/10">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-[#1db954] flex items-center justify-center">
-            <Play className="w-4 h-4 text-white" />
+    <div
+      className="relative w-full max-w-sm rounded-3xl overflow-hidden"
+      style={{
+        background: bgColor,
+        backdropFilter: "blur(20px)",
+      }}
+    >
+      <canvas ref={canvasRef} width={300} height={80} className="absolute top-2 left-1/2 -translate-x-1/2 z-10 opacity-60" />
+      <div className="p-6 relative z-20">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-[#1db954] flex items-center justify-center">
+              <Play className="w-4 h-4 text-white" />
+            </div>
+            <span className="text-white font-semibold">Spotify</span>
           </div>
-          <span className="text-white font-semibold">Spotify</span>
+          <MoreHorizontal className="w-5 h-5 text-white/60" />
         </div>
-        <MoreHorizontal className="w-5 h-5 text-white/60" />
-      </div>
 
-      {/* Current Song */}
-      <div className="text-center mb-6">
+        {/* Song Info */}
         <motion.img
           src={currentSong.cover}
           alt={currentSong.title}
@@ -139,83 +193,90 @@ const MusicPlayer = () => {
         {loading && <Loader2 className="w-6 h-6 text-white animate-spin mx-auto mb-2" />}
         <h3 className="text-white font-semibold text-lg mb-1">{currentSong.title}</h3>
         <p className="text-white/60 text-sm">{currentSong.artist}</p>
-      </div>
 
-      {/* Audio Element */}
-      <audio
-        ref={audioRef}
-        src={currentSong.src}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
-        onLoadStart={() => setLoading(true)}
-        onCanPlay={() => setLoading(false)}
-        onEnded={handleNext}
-        volume={volume[0] / 100}
-      />
+        {/* Audio */}
+        <audio
+          ref={audioRef}
+          src={currentSong.src}
+          preload="auto"
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          onLoadStart={() => setLoading(true)}
+          onCanPlay={() => setLoading(false)}
+          onEnded={handleNext}
+        />
 
-      {/* Progress Bar */}
-      <div className="mb-6">
-        <Slider value={progress} onValueChange={(val) => {
-          if (audioRef.current) {
-            audioRef.current.currentTime = (val[0] / 100) * audioRef.current.duration;
-          }
-          setProgress(val);
-        }} max={100} step={1} />
-        <div className="flex justify-between text-xs text-white/60 mt-2">
-          <span>
-            {audioRef.current ? `${Math.floor(audioRef.current.currentTime / 60)}:${Math.floor(audioRef.current.currentTime % 60).toString().padStart(2, '0')}` : '0:00'}
-          </span>
-          <span>{currentSong.duration || '0:00'}</span>
+        {/* Progress */}
+        <Slider
+          value={progress}
+          onValueChange={(val) => {
+            if (audioRef.current) {
+              audioRef.current.currentTime = (val[0] / 100) * audioRef.current.duration;
+            }
+            setProgress(val);
+          }}
+          max={100}
+          step={1}
+        />
+
+        {/* Controls */}
+        <div className="flex items-center justify-center gap-6 mt-4">
+          <motion.button onClick={handlePrevious} whileHover={{ scale: 1.1 }}>
+            <SkipBack className="text-white" />
+          </motion.button>
+          <motion.button onClick={handlePlayPause} className="w-12 h-12 rounded-full bg-white flex items-center justify-center">
+            {isPlaying ? <Pause className="text-black" /> : <Play className="text-black ml-0.5" />}
+          </motion.button>
+          <motion.button onClick={handleNext} whileHover={{ scale: 1.1 }}>
+            <SkipForward className="text-white" />
+          </motion.button>
         </div>
-      </div>
 
-      {/* Controls */}
-      <div className="flex items-center justify-center gap-6 mb-6">
-        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={handlePrevious} className="text-white/80 hover:text-white">
-          <SkipBack className="w-6 h-6" />
-        </motion.button>
-        <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handlePlayPause} className="w-12 h-12 rounded-full bg-white flex items-center justify-center">
-          {isPlaying ? <Pause className="w-5 h-5 text-black" /> : <Play className="w-5 h-5 text-black ml-0.5" />}
-        </motion.button>
-        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={handleNext} className="text-white/80 hover:text-white">
-          <SkipForward className="w-6 h-6" />
-        </motion.button>
-      </div>
+        {/* Volume */}
+        <div className="flex items-center gap-3 mt-6">
+          <Volume2 className="w-4 h-4 text-white/60" />
+          <Slider
+            value={volume}
+            onValueChange={(val) => {
+              setVolume(val);
+              if (audioRef.current) audioRef.current.volume = val[0] / 100;
+            }}
+            max={100}
+            step={1}
+            className="flex-1"
+          />
+        </div>
 
-      {/* Volume Control */}
-      <div className="flex items-center gap-3 mb-6">
-        <Volume2 className="w-4 h-4 text-white/60" />
-        <Slider value={volume} onValueChange={(val) => {
-          setVolume(val);
-          if (audioRef.current) audioRef.current.volume = val[0] / 100;
-        }} max={100} step={1} className="flex-1" />
-      </div>
-
-      {/* Playlist */}
-      <div className="max-h-64 overflow-y-auto">
-        <h4 className="text-white/80 text-sm font-medium mb-3 flex items-center justify-between">
-          Up Next
-          <button onClick={handleAddSong} className="text-green-400 hover:text-green-300">
-            <PlusCircle className="w-4 h-4" />
-          </button>
-        </h4>
-        <div className="space-y-2">
+        {/* Playlist */}
+        <div className="max-h-64 overflow-y-auto mt-6">
+          <h4 className="text-white/80 text-sm font-medium mb-3 flex justify-between">
+            Up Next
+            <button onClick={() => {}} className="text-green-400 hover:text-green-300">
+              <PlusCircle className="w-4 h-4" />
+            </button>
+          </h4>
           {songs.map((song, index) => (
-            <motion.div key={song.id} whileHover={{ scale: 1.02 }} onClick={() => setCurrentSongIndex(index)} className={`flex items-center gap-3 p-2 rounded-xl cursor-pointer transition-colors ${index === currentSongIndex ? 'bg-white/10' : 'hover:bg-white/5'}`}>
+            <motion.div
+              key={song.id}
+              whileHover={{ scale: 1.02 }}
+              onClick={() => setCurrentSongIndex(index)}
+              className={`flex items-center gap-3 p-2 rounded-xl cursor-pointer ${index === currentSongIndex ? "bg-white/10" : "hover:bg-white/5"}`}
+            >
               <img src={song.cover} alt={song.title} className="w-10 h-10 rounded-lg object-cover" />
-              <div className="flex-1 min-w-0">
+              <div className="flex-1">
                 <p className="text-white text-sm font-medium truncate">{song.title}</p>
                 <p className="text-white/60 text-xs truncate">{song.artist}</p>
               </div>
-              <div className="flex items-center gap-2">
-                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={(e) => { e.stopPropagation(); toggleLike(song.id); }} className={`${likedSongs.has(song.id) ? 'text-red-500' : 'text-white/40'} hover:text-red-500`}>
-                  <Heart className="w-4 h-4" fill={likedSongs.has(song.id) ? 'currentColor' : 'none'} />
-                </motion.button>
-                <span className="text-white/40 text-xs">{song.duration || '...'}</span>
-                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={(e) => { e.stopPropagation(); handleRemoveSong(song.id); }} className="text-white/40 hover:text-red-400">
-                  <Trash2 className="w-4 h-4" />
-                </motion.button>
-              </div>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleLike(song.id);
+                }}
+                className={`${likedSongs.has(song.id) ? "text-red-500" : "text-white/40"}`}
+              >
+                <Heart fill={likedSongs.has(song.id) ? "currentColor" : "none"} />
+              </motion.button>
             </motion.div>
           ))}
         </div>
