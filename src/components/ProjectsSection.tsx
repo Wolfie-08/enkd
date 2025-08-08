@@ -233,6 +233,8 @@ const ProjectsSection = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     href={project.links.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center space-x-1 px-3 py-2 text-sm rounded-lg bg-primary/20 text-primary hover:bg-primary/30 transition-colors"
                   >
                     <ExternalLink className="w-4 h-4" />

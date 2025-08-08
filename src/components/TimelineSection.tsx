@@ -240,7 +240,7 @@ const TimelineSection = () => {
           className="mt-16 text-center"
         >
           <div className="card-glow rounded-xl p-8">
-            <h3 className="text-2xl font-bold text-gradient mb-4">
+            <h3 className="text-2xl font-bold text-white mb-4">
               The Vision
             </h3>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
