@@ -51,16 +51,16 @@ const HeroSection = () => {
       </div>
 
       {/* Main Layout */}
-      <div className="relative z-10 min-h-screen flex flex-col lg:flex-row items-center justify-between max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative z-10 min-h-screen flex flex-col lg:flex-row items-start justify-between max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         
         {/* Left Panel - Photo & Controls */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-full lg:w-1/4 mb-8 lg:mb-0"
+          className="w-full lg:w-1/4 mb-8 lg:mb-0 flex flex-col"
         >
-          <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/10">
+          <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/10 mb-6">
             <PhotoDisplay />
             
             {/* Quick Stats */}
@@ -96,6 +96,9 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
+
+          {/* Certificates - Left Bottom */}
+          <CertificatesCarousel />
         </motion.div>
 
         {/* Center Panel - Main Content */}
@@ -103,7 +106,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-full lg:w-2/5 text-center px-4 lg:px-8"
+          className="w-full lg:w-2/5 text-center px-4 lg:px-8 flex flex-col justify-center min-h-[60vh]"
         >
           {/* Greeting */}
           <motion.p 
@@ -210,16 +213,6 @@ const HeroSection = () => {
           <MusicPlayer />
         </motion.div>
       </div>
-
-      {/* Certificates Carousel - Bottom */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20"
-      >
-        <CertificatesCarousel />
-      </motion.div>
 
       {/* Scroll Indicator */}
       <motion.div 
