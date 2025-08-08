@@ -1,16 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  Play,
-  Pause,
-  SkipBack,
-  SkipForward,
-  Volume2,
-  Heart,
-  MoreHorizontal,
-  Loader2,
-  PlusCircle,
-  Trash2,
+  Play, Pause, SkipBack, SkipForward, Volume2, Heart, MoreHorizontal, Loader2, PlusCircle
 } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import Vibrant from "node-vibrant";
@@ -25,25 +16,29 @@ interface Song {
 }
 
 const defaultSongs: Song[] = [
-  { id: "1", title: "Golden Hour", artist: "JVKE", src: "/audio/golden_hour.mp3", cover: "/images/covers/hour.jpg" },
-  { id: "2", title: "Circles", artist: "Post Malone", src: "/audio/circles.mp3", cover: "/images/covers/circles.jpg" },
-  { id: "3", title: "Vagabond", artist: "MisterWives", src: "/audio/vagabond.mp3", cover: "/images/covers/vagabond.jpg" },
-  { id: "4", title: "Vagabond", artist: "Wolfmother", src: "/audio/vagabond1.mp3", cover: "/images/covers/vagabond1.jpg" },
-  { id: "5", title: "Army Dreamers", artist: "Kate Bush", src: "/audio/dreamers.mp3", cover: "/images/covers/dreamers.jpg" },
-  { id: "6", title: "Ordinary", artist: "Alex Warren", src: "/audio/ordinary.mp3", cover: "/images/covers/ordinary.jpg" },
+  { id: "1", title: "Golden Hour", artist: "JVKE", src: "/audio/golden_hour.m4a", cover: "/images/covers/hour.jpg" },
+  { id: "2", title: "Circles", artist: "Post Malone", src: "/audio/circles.m4a", cover: "/images/covers/circles.jpg" },
+  { id: "3", title: "Vagabond", artist: "MisterWives", src: "/audio/vagabond.m4a", cover: "/images/covers/vagabond.jpg" },
+  { id: "4", title: "Vagabond", artist: "Wolfmother", src: "/audio/vagabond1.m4a", cover: "/images/covers/vagabond1.jpg" },
+  { id: "5", title: "Army Dreamers", artist: "Kate Bush", src: "/audio/dreamers.m4a", cover: "/images/covers/dreamers.jpg" },
+  { id: "6", title: "Ordinary", artist: "Alex Warren", src: "/audio/ordinary.m4a", cover: "/images/covers/ordinary.jpg" },
 ];
 
 const MusicPlayer = () => {
   const [songs, setSongs] = useState(defaultSongs);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState([75]);
   const [likedSongs, setLikedSongs] = useState<Set<string>>(new Set());
   const [progress, setProgress] = useState([0]);
   const [loading, setLoading] = useState(false);
-  const [bgColor, setBgColor] = useState<string>("rgba(0,0,0,0.6)");
+  const [bgColor, setBgColor] = useState("rgba(0,0,0,0.6)");
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  // Two refs for crossfade
+  const audioRefs = useRef<[HTMLAudioElement | null, HTMLAudioElement | null]>([null, null]);
+  const currentAudioRef = useRef(0);
+
+  // Waveform analyser
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const dataArrayRef = useRef<Uint8Array | null>(null);
@@ -51,41 +46,34 @@ const MusicPlayer = () => {
 
   const currentSong = songs[currentSongIndex];
 
-  // Extract dominant color from cover
+  // Extract colors for background
   useEffect(() => {
     Vibrant.from(currentSong.cover).getPalette().then((palette) => {
       if (palette?.Vibrant) {
         const rgb = palette.Vibrant.rgb;
-        setBgColor(`rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.4)`);
+        setBgColor(`rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.35)`);
       }
     });
   }, [currentSong]);
 
-  // Preload audio for instant playback
+  // Init two audio elements
   useEffect(() => {
-    const preloadAudio = new Audio(currentSong.src);
-    preloadAudio.load();
-  }, [currentSong]);
-
-  // Load duration
-  useEffect(() => {
-    const audio = new Audio(currentSong.src);
-    audio.addEventListener("loadedmetadata", () => {
-      const minutes = Math.floor(audio.duration / 60);
-      const seconds = Math.floor(audio.duration % 60).toString().padStart(2, "0");
-      setSongs((prev) =>
-        prev.map((s, idx) =>
-          idx === currentSongIndex ? { ...s, duration: `${minutes}:${seconds}` } : s
-        )
-      );
+    audioRefs.current = [
+      new Audio(currentSong.src),
+      new Audio()
+    ];
+    audioRefs.current.forEach(audio => {
+      if (audio) {
+        audio.preload = "auto";
+        audio.volume = volume[0] / 100;
+      }
     });
-  }, [currentSongIndex, currentSong.src]);
+    setupAnalyser(audioRefs.current[0]!);
+  }, []);
 
-  // Web Audio API waveform setup
-  useEffect(() => {
-    if (!audioRef.current) return;
+  const setupAnalyser = (audioEl: HTMLAudioElement) => {
     const audioCtx = new AudioContext();
-    const source = audioCtx.createMediaElementSource(audioRef.current);
+    const source = audioCtx.createMediaElementSource(audioEl);
     const analyser = audioCtx.createAnalyser();
     analyser.fftSize = 256;
 
@@ -96,18 +84,16 @@ const MusicPlayer = () => {
     dataArrayRef.current = new Uint8Array(analyser.frequencyBinCount);
 
     const draw = () => {
-      if (!canvasRef.current || !analyserRef.current || !dataArrayRef.current) return;
+      if (!canvasRef.current || !dataArrayRef.current) return;
       const ctx = canvasRef.current.getContext("2d");
       if (!ctx) return;
-
-      analyserRef.current.getByteFrequencyData(dataArrayRef.current);
-
+      analyser.getByteFrequencyData(dataArrayRef.current);
       ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-      const barWidth = (canvasRef.current.width / dataArrayRef.current.length) * 2.5;
-      let x = 0;
 
+      const barWidth = (canvasRef.current.width / dataArrayRef.current.length) * 1.5;
+      let x = 0;
       dataArrayRef.current.forEach((value) => {
-        const barHeight = value / 2;
+        const barHeight = value * 0.7;
         const gradient = ctx.createLinearGradient(0, 0, 0, canvasRef.current.height);
         gradient.addColorStop(0, "#1db954");
         gradient.addColorStop(1, "#191414");
@@ -118,48 +104,51 @@ const MusicPlayer = () => {
 
       animationIdRef.current = requestAnimationFrame(draw);
     };
-
     draw();
-    return () => {
-      if (animationIdRef.current) cancelAnimationFrame(animationIdRef.current);
-      audioCtx.close();
-    };
-  }, [currentSongIndex]);
+  };
 
-  // Play / Pause
   const handlePlayPause = () => {
-    if (!audioRef.current) return;
+    const audio = audioRefs.current[currentAudioRef.current];
+    if (!audio) return;
     if (isPlaying) {
-      audioRef.current.pause();
+      audio.pause();
     } else {
-      audioRef.current.play();
+      audio.play();
     }
     setIsPlaying(!isPlaying);
   };
 
-  const handleNext = () => setCurrentSongIndex((prev) => (prev + 1) % songs.length);
-  const handlePrevious = () => setCurrentSongIndex((prev) => (prev - 1 + songs.length) % songs.length);
+  const crossfadeTo = (nextIndex: number) => {
+    const currentIdx = currentAudioRef.current;
+    const nextIdx = (currentIdx + 1) % 2;
 
-  // Progress tracking
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    const updateProgress = () => {
-      setProgress([(audio.currentTime / audio.duration) * 100 || 0]);
-    };
-    audio.addEventListener("timeupdate", updateProgress);
-    return () => {
-      audio.removeEventListener("timeupdate", updateProgress);
-    };
-  }, [currentSongIndex]);
+    const currentAudio = audioRefs.current[currentIdx]!;
+    const nextAudio = audioRefs.current[nextIdx]!;
+    nextAudio.src = songs[nextIndex].src;
+    nextAudio.currentTime = 0;
+    nextAudio.volume = 0;
+    nextAudio.play();
 
-  const toggleLike = (id: string) => {
-    setLikedSongs((prev) => {
-      const newSet = new Set(prev);
-      newSet.has(id) ? newSet.delete(id) : newSet.add(id);
-      return newSet;
-    });
+    const fadeDuration = 2; // seconds
+    const step = 0.05;
+    let vol = 0;
+    const fadeInterval = setInterval(() => {
+      vol += step / fadeDuration;
+      currentAudio.volume = Math.max(0, currentAudio.volume - step / fadeDuration);
+      nextAudio.volume = Math.min(volume[0] / 100, vol);
+      if (vol >= volume[0] / 100) {
+        clearInterval(fadeInterval);
+        currentAudio.pause();
+        currentAudioRef.current = nextIdx;
+        setupAnalyser(nextAudio);
+      }
+    }, step * 1000);
+
+    setCurrentSongIndex(nextIndex);
   };
+
+  const handleNext = () => crossfadeTo((currentSongIndex + 1) % songs.length);
+  const handlePrevious = () => crossfadeTo((currentSongIndex - 1 + songs.length) % songs.length);
 
   return (
     <div
@@ -167,6 +156,7 @@ const MusicPlayer = () => {
       style={{
         background: bgColor,
         backdropFilter: "blur(20px)",
+        transition: "background 0.5s ease"
       }}
     >
       <canvas ref={canvasRef} width={300} height={80} className="absolute top-2 left-1/2 -translate-x-1/2 z-10 opacity-60" />
@@ -183,35 +173,29 @@ const MusicPlayer = () => {
         </div>
 
         {/* Song Info */}
-        <motion.img
-          src={currentSong.cover}
-          alt={currentSong.title}
-          className="w-24 h-24 rounded-2xl mx-auto mb-4"
-          animate={isPlaying ? { rotate: 360 } : { rotate: 0 }}
-          transition={{ repeat: isPlaying ? Infinity : 0, duration: 6, ease: "linear" }}
-        />
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={currentSong.cover}
+            src={currentSong.cover}
+            alt={currentSong.title}
+            className="w-24 h-24 rounded-2xl mx-auto mb-4"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1, rotate: isPlaying ? 360 : 0 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ repeat: isPlaying ? Infinity : 0, duration: 6, ease: "linear" }}
+          />
+        </AnimatePresence>
         {loading && <Loader2 className="w-6 h-6 text-white animate-spin mx-auto mb-2" />}
         <h3 className="text-white font-semibold text-lg mb-1">{currentSong.title}</h3>
         <p className="text-white/60 text-sm">{currentSong.artist}</p>
-
-        {/* Audio */}
-        <audio
-          ref={audioRef}
-          src={currentSong.src}
-          preload="auto"
-          onPlay={() => setIsPlaying(true)}
-          onPause={() => setIsPlaying(false)}
-          onLoadStart={() => setLoading(true)}
-          onCanPlay={() => setLoading(false)}
-          onEnded={handleNext}
-        />
 
         {/* Progress */}
         <Slider
           value={progress}
           onValueChange={(val) => {
-            if (audioRef.current) {
-              audioRef.current.currentTime = (val[0] / 100) * audioRef.current.duration;
+            const audio = audioRefs.current[currentAudioRef.current];
+            if (audio) {
+              audio.currentTime = (val[0] / 100) * audio.duration;
             }
             setProgress(val);
           }}
@@ -239,7 +223,8 @@ const MusicPlayer = () => {
             value={volume}
             onValueChange={(val) => {
               setVolume(val);
-              if (audioRef.current) audioRef.current.volume = val[0] / 100;
+              const audio = audioRefs.current[currentAudioRef.current];
+              if (audio) audio.volume = val[0] / 100;
             }}
             max={100}
             step={1}
@@ -251,7 +236,7 @@ const MusicPlayer = () => {
         <div className="max-h-64 overflow-y-auto mt-6">
           <h4 className="text-white/80 text-sm font-medium mb-3 flex justify-between">
             Up Next
-            <button onClick={() => {}} className="text-green-400 hover:text-green-300">
+            <button className="text-green-400 hover:text-green-300">
               <PlusCircle className="w-4 h-4" />
             </button>
           </h4>
@@ -259,7 +244,7 @@ const MusicPlayer = () => {
             <motion.div
               key={song.id}
               whileHover={{ scale: 1.02 }}
-              onClick={() => setCurrentSongIndex(index)}
+              onClick={() => crossfadeTo(index)}
               className={`flex items-center gap-3 p-2 rounded-xl cursor-pointer ${index === currentSongIndex ? "bg-white/10" : "hover:bg-white/5"}`}
             >
               <img src={song.cover} alt={song.title} className="w-10 h-10 rounded-lg object-cover" />
@@ -271,7 +256,11 @@ const MusicPlayer = () => {
                 whileHover={{ scale: 1.1 }}
                 onClick={(e) => {
                   e.stopPropagation();
-                  toggleLike(song.id);
+                  setLikedSongs(prev => {
+                    const newSet = new Set(prev);
+                    newSet.has(song.id) ? newSet.delete(song.id) : newSet.add(song.id);
+                    return newSet;
+                  });
                 }}
                 className={`${likedSongs.has(song.id) ? "text-red-500" : "text-white/40"}`}
               >
