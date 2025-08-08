@@ -1,33 +1,12 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { Upload, User } from 'lucide-react';
+import { User } from 'lucide-react';
+import myPhoto from '../../assets/DSC09097.JPG';
 
 interface PhotoDisplayProps {
-  photoUrl?: string;
-  onPhotoUpload?: (file: File) => void;
   className?: string;
 }
 
-const PhotoDisplay = ({ photoUrl, onPhotoUpload, className = '' }: PhotoDisplayProps) => {
-  const [dragOver, setDragOver] = useState(false);
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setDragOver(false);
-    
-    const files = e.dataTransfer.files;
-    if (files.length > 0 && onPhotoUpload) {
-      onPhotoUpload(files[0]);
-    }
-  };
-
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files.length > 0 && onPhotoUpload) {
-      onPhotoUpload(files[0]);
-    }
-  };
-
+const PhotoDisplay = ({ className = '' }: PhotoDisplayProps) => {
   return (
     <div className={`relative ${className}`}>
       <motion.div
@@ -38,19 +17,11 @@ const PhotoDisplay = ({ photoUrl, onPhotoUpload, className = '' }: PhotoDisplayP
       >
         {/* Photo Container */}
         <div 
-          className={`relative w-32 h-32 mx-auto rounded-2xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300 ${
-            dragOver ? 'border-primary scale-105' : ''
-          }`}
-          onDrop={handleDrop}
-          onDragOver={(e) => {
-            e.preventDefault();
-            setDragOver(true);
-          }}
-          onDragLeave={() => setDragOver(false)}
+          className="relative w-32 h-32 mx-auto rounded-2xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20"
         >
-          {photoUrl ? (
+          {myPhoto ? (
             <motion.img
-              src={photoUrl}
+              src={myPhoto}
               alt="Profile"
               className="w-full h-full object-cover"
               whileHover={{ scale: 1.05 }}
@@ -59,26 +30,9 @@ const PhotoDisplay = ({ photoUrl, onPhotoUpload, className = '' }: PhotoDisplayP
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center text-white/60">
               <User className="w-8 h-8 mb-2" />
-              <span className="text-xs text-center px-2">Drop photo here</span>
+              <span className="text-xs text-center px-2">No Photo</span>
             </div>
           )}
-          
-          {/* Upload Overlay */}
-          <motion.div 
-            className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
-            whileHover={{ opacity: 1 }}
-          >
-            <label htmlFor="photo-upload" className="cursor-pointer">
-              <Upload className="w-6 h-6 text-white" />
-              <input
-                id="photo-upload"
-                type="file"
-                accept="image/*"
-                onChange={handleFileInput}
-                className="hidden"
-              />
-            </label>
-          </motion.div>
         </div>
         
         {/* Name/Title */}
