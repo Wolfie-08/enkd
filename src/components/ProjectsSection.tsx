@@ -255,7 +255,7 @@ const ProjectsSection = () => {
               </div>
 
               {/* Hover Glow Effect */}
-              <div className={`absolute inset-0 bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-xl`} />
+              <div className={`absolute inset-0 bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-xl pointer-events-none`} />
             </motion.div>
           ))}
         </motion.div>
