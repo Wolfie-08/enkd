@@ -68,7 +68,7 @@ const HeroSection = () => {
               <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-white/60 text-sm">Experience</span>
-                  <span className="text-white text-sm font-semibold">3+ Years</span>
+                  <span className="text-white text-sm font-semibold">6+ Months</span>
                 </div>
                 <div className="w-full bg-white/10 rounded-full h-2">
                   <motion.div
@@ -83,7 +83,7 @@ const HeroSection = () => {
               <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-white/60 text-sm">Projects</span>
-                  <span className="text-white text-sm font-semibold">15+</span>
+                  <span className="text-white text-sm font-semibold">5+</span>
                 </div>
                 <div className="w-full bg-white/10 rounded-full h-2">
                   <motion.div
