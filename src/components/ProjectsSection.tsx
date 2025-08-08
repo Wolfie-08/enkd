@@ -70,7 +70,7 @@ const ProjectsSection = () => {
       version: 'v1.0',
       links: {
         github: '#',
-        live: 'https://wolfies.lovable.app'
+        live: '/'
       }
     },
     {
