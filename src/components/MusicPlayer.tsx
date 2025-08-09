@@ -43,6 +43,7 @@ const MusicPlayer = () => {
   const analyserRef = useRef<AnalyserNode | null>(null);
   const dataArrayRef = useRef<Uint8Array | null>(null);
   const animationIdRef = useRef<number | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
 
   const currentSong = songs[currentSongIndex];
 
@@ -83,39 +84,61 @@ const MusicPlayer = () => {
   }, []);
 
   const setupAnalyser = (audioEl: HTMLAudioElement) => {
-    const audioCtx = new AudioContext();
-    const source = audioCtx.createMediaElementSource(audioEl);
-    const analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 256;
+    try {
+      // Clean up previous animation
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
 
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination);
+      // Create or reuse AudioContext
+      if (!audioContextRef.current) {
+        audioContextRef.current = new AudioContext();
+      }
 
-    analyserRef.current = analyser;
-    dataArrayRef.current = new Uint8Array(analyser.frequencyBinCount);
+      const audioCtx = audioContextRef.current;
+      
+      // Don't create new source if audio element is already connected
+      if (!(audioEl as any)._audioSource) {
+        const source = audioCtx.createMediaElementSource(audioEl);
+        const analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 256;
 
-    const draw = () => {
-      if (!canvasRef.current || !dataArrayRef.current) return;
-      const ctx = canvasRef.current.getContext("2d");
-      if (!ctx) return;
-      analyser.getByteFrequencyData(dataArrayRef.current);
-      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        source.connect(analyser);
+        analyser.connect(audioCtx.destination);
 
-      const barWidth = (canvasRef.current.width / dataArrayRef.current.length) * 1.5;
-      let x = 0;
-      dataArrayRef.current.forEach((value) => {
-        const barHeight = value * 0.7;
-        const gradient = ctx.createLinearGradient(0, 0, 0, canvasRef.current.height);
-        gradient.addColorStop(0, "#1db954");
-        gradient.addColorStop(1, "#191414");
-        ctx.fillStyle = gradient;
-        ctx.fillRect(x, canvasRef.current.height - barHeight, barWidth, barHeight);
-        x += barWidth + 1;
-      });
+        analyserRef.current = analyser;
+        dataArrayRef.current = new Uint8Array(analyser.frequencyBinCount);
+        
+        // Mark this audio element as connected
+        (audioEl as any)._audioSource = source;
+      }
 
-      animationIdRef.current = requestAnimationFrame(draw);
-    };
-    draw();
+      const draw = () => {
+        if (!canvasRef.current || !dataArrayRef.current || !analyserRef.current) return;
+        const ctx = canvasRef.current.getContext("2d");
+        if (!ctx) return;
+        
+        analyserRef.current.getByteFrequencyData(dataArrayRef.current);
+        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+
+        const barWidth = (canvasRef.current.width / dataArrayRef.current.length) * 1.5;
+        let x = 0;
+        dataArrayRef.current.forEach((value) => {
+          const barHeight = value * 0.7;
+          const gradient = ctx.createLinearGradient(0, 0, 0, canvasRef.current.height);
+          gradient.addColorStop(0, "#1db954");
+          gradient.addColorStop(1, "#191414");
+          ctx.fillStyle = gradient;
+          ctx.fillRect(x, canvasRef.current.height - barHeight, barWidth, barHeight);
+          x += barWidth + 1;
+        });
+
+        animationIdRef.current = requestAnimationFrame(draw);
+      };
+      draw();
+    } catch (error) {
+      console.warn('Audio analyser setup failed:', error);
+    }
   };
 
   const handlePlayPause = () => {
@@ -151,7 +174,6 @@ const MusicPlayer = () => {
         clearInterval(fadeInterval);
         currentAudio.pause();
         currentAudioRef.current = nextIdx;
-        setupAnalyser(nextAudio);
       }
     }, step * 1000);
 
