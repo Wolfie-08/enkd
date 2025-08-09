@@ -203,7 +203,7 @@ const MusicPlayer = () => {
             className="flex items-center gap-3 hover:opacity-80 transition-opacity"
           >
             <div className="w-8 h-8 rounded-full bg-[#1db954] flex items-center justify-center">
-              <img src="/lovable-uploads/db3350e4-2750-416f-b423-1570826edd6d.png" alt="Spotify" className="w-4 h-4" />
+              <img src="/lovable-uploads/db3350e4-2750-416f-b423-1570826edd6d.png" alt="Spotify" className="w-6 h-6" />
             </div>
             <span className="text-white font-semibold">Spotify</span>
           </a>
