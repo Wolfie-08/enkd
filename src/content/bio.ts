@@ -1,0 +1,5 @@
+export const bioShort = `Always exploring how engineering and design can make life a little simpler, smarter, and more intentional. Building systems that work — and feel right — combining logic, aesthetics, and empathy.`;
+
+export const bioLong = `I’m a mechanical engineer and developer who loves building systems that are thoughtful, intuitive, and genuinely useful. My work sits at the intersection of logic and aesthetics — where clean structure meets human-centered design. Whether I’m prototyping hardware, crafting interfaces, or shaping product flows, I aim for results that are both technically sound and effortless to use.
+
+I enjoy exploring how small improvements compound over time: clearer information, smoother interactions, better defaults. I like teams that move with intention, learn fast, and ship responsibly. Outside of work, I’m usually tinkering with tools, reading about engineering history, or refining personal systems that keep life steady, curious, and creative.`

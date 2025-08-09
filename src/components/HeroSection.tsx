@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, Download } from 'lucide-react';
 import TypingAnimation from './TypingAnimation';
 import PhotoDisplay from './PhotoDisplay';
 import MusicPlayer from './MusicPlayer';
 import CertificatesCarousel from './CertificatesCarousel';
-
+import { bioShort, bioLong } from '@/content/bio';
 const HeroSection = () => {
   const typingTexts = [
     'Mechanical Engineer',
@@ -16,6 +17,8 @@ const HeroSection = () => {
     { icon: Linkedin, href: 'https://www.linkedin.com/in/diyorbek-komilov-b19802227/', label: 'LinkedIn' },
     { icon: Mail, href: 'mailto:kdiyorbek133@gmail.com', label: 'Email' },
   ];
+
+  const [expanded, setExpanded] = useState(false);
 
   return (
     <section 
@@ -139,14 +142,32 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Description */}
-          <motion.p 
+          <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.4, duration: 0.6 }}
-            className="text-base md:text-lg text-white/70 max-w-2xl mx-auto mb-8 leading-relaxed"
+            className="max-w-2xl mx-auto mb-8"
           >
-            Always exploring how engineering and design can make life a little simpler, smarter, and more intentional. Building systems that work — and feel right — combining logic, aesthetics, and empathy.
-          </motion.p>
+            <p className="text-base md:text-lg text-white/70 leading-relaxed">
+              {bioShort}
+            </p>
+            {expanded && (
+              <motion.p
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                className="text-base md:text-lg text-white/70 leading-relaxed mt-4"
+              >
+                {bioLong}
+              </motion.p>
+            )}
+            <button
+              onClick={() => setExpanded((v) => !v)}
+              className="mt-3 text-primary underline-offset-4 hover:underline"
+              aria-expanded={expanded}
+            >
+              {expanded ? 'Show less' : 'Read more'}
+            </button>
+          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div 

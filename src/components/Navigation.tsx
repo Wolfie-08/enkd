@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Code, User, Briefcase, Clock, Mail } from 'lucide-react';
-
+import { useNavigate } from 'react-router-dom';
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -14,22 +14,26 @@ const Navigation = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  const navigate = useNavigate();
 
   const navItems = [
-    { name: 'About', href: '#about', icon: User },
+    { name: 'About', href: '/about', icon: User },
     { name: 'Projects', href: '#projects', icon: Briefcase },
     { name: 'Timeline', href: '#timeline', icon: Clock },
     { name: 'Contact', href: '#contact', icon: Mail },
   ];
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNav = (href: string) => {
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate(href);
     }
     setIsOpen(false);
   };
-
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -58,7 +62,7 @@ const Navigation = () => {
                 key={item.name}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => handleNav(item.href)}
                 className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 <item.icon className="h-4 w-4" />
@@ -96,7 +100,7 @@ const Navigation = () => {
                   initial={{ x: -50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: index * 0.1 }}
-                  onClick={() => scrollToSection(item.href)}
+                  onClick={() => handleNav(item.href)}
                   className="flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-muted-foreground hover:text-primary hover:bg-muted/50 transition-all duration-200"
                 >
                   <item.icon className="h-5 w-5" />
