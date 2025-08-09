@@ -53,6 +53,8 @@ const MusicPlayer = () => {
         const rgb = palette.Vibrant.rgb;
         setBgColor(`rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.35)`);
       }
+    }).catch(() => {
+      setBgColor("rgba(0,0,0,0.6)");
     });
   }, [currentSong]);
 
@@ -66,6 +68,15 @@ const MusicPlayer = () => {
       if (audio) {
         audio.preload = "auto";
         audio.volume = volume[0] / 100;
+        audio.addEventListener('loadeddata', () => setLoading(false));
+        audio.addEventListener('loadstart', () => setLoading(true));
+        audio.addEventListener('timeupdate', () => {
+          if (audio === audioRefs.current[currentAudioRef.current]) {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            setProgress([progress || 0]);
+          }
+        });
+        audio.addEventListener('ended', handleNext);
       }
     });
     setupAnalyser(audioRefs.current[0]!);
