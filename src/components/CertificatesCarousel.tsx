@@ -15,11 +15,10 @@ interface CertificatesCarouselProps {
 }
 
 const defaultCertificates: Certificate[] = [
-  { id: '1', title: 'React Developer Certification', issuer: 'Meta', date: '2024' },
-  { id: '2', title: 'JavaScript Algorithms', issuer: 'freeCodeCamp', date: '2023' },
-  { id: '3', title: 'Mechanical Engineering Degree', issuer: 'University', date: '2022' },
-  { id: '4', title: 'AWS Cloud Practitioner', issuer: 'Amazon', date: '2024' },
-  { id: '5', title: 'Python Programming', issuer: 'Python Institute', date: '2023' },
+  { id: '1', title: 'Young Member of the New York Academy of Sciences', issuer: 'The New York Academy of Sciences', date: '30 Jul, 2025' },
+  { id: '2', title: 'For Publication of Paper Entitled: ONE STEP FROM COMPLEXITY TO SIMPLICITY', issuer: 'AMERICAN JOURNAL OF EDUCATION AND LEARNING', date: 'April, 2025' },
+  { id: '3', title: 'Divide and Conquer, Sorting and Searching, and Randomised Algorithms', issuer: 'Stanford University|Online Course', date: '25 Apr, 2024' },
+  { id: '4', title: 'Foundations of Project Management', issuer: 'Google', date: '9 Mar, 2024' }
 ];
 
 const CertificatesCarousel = ({ certificates = defaultCertificates }: CertificatesCarouselProps) => {
