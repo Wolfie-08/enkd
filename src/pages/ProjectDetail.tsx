@@ -54,10 +54,82 @@ export default function ProjectDetail() {
           )}
         </div>
 
-        <section className="rounded-xl border border-border p-6 bg-card text-card-foreground">
-          <h2 className="text-xl font-semibold mb-3">Overview</h2>
-          <p className="text-muted-foreground">This is a compact case study template. You can expand it with problem statements, approach, iterations, technical details, and outcomes.</p>
-        </section>
+        {project.caseStudy ? (
+          <div className="space-y-6">
+            <section className="rounded-xl border border-border p-6 bg-card text-card-foreground">
+              <h2 className="text-xl font-semibold mb-3">Overview</h2>
+              <p className="text-muted-foreground">{project.description}</p>
+            </section>
+
+            <section className="rounded-xl border border-border p-6 bg-card text-card-foreground">
+              <h2 className="text-xl font-semibold mb-3">Problem Statement</h2>
+              <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                {project.caseStudy.problem.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section className="rounded-xl border border-border p-6 bg-card text-card-foreground">
+              <h2 className="text-xl font-semibold mb-3">Approach</h2>
+              <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                {project.caseStudy.approach.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section className="rounded-xl border border-border p-6 bg-card text-card-foreground">
+              <h2 className="text-xl font-semibold mb-3">Iterations</h2>
+              <ol className="list-decimal pl-5 space-y-2 text-muted-foreground">
+                {project.caseStudy.iterations.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ol>
+            </section>
+
+            <section className="rounded-xl border border-border p-6 bg-card text-card-foreground">
+              <h2 className="text-xl font-semibold mb-3">Technical Details</h2>
+              <div className="mb-3">
+                <h3 className="font-medium mb-2">Stack</h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.caseStudy.technical.stack.map((t) => (
+                    <span key={t} className="px-2 py-1 text-xs rounded-md bg-muted/50 text-muted-foreground">{t}</span>
+                  ))}
+                </div>
+              </div>
+              <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                {project.caseStudy.technical.details.map((d, idx) => (
+                  <li key={idx}>{d}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section className="rounded-xl border border-border p-6 bg-card text-card-foreground">
+              <h2 className="text-xl font-semibold mb-3">Outcomes</h2>
+              <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                {project.caseStudy.outcomes.results.map((r, idx) => (
+                  <li key={idx}>{r}</li>
+                ))}
+              </ul>
+              {project.caseStudy.outcomes.metrics && (
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {project.caseStudy.outcomes.metrics.map((m) => (
+                    <div key={m.label} className="rounded-md border border-border p-3">
+                      <div className="text-sm text-muted-foreground">{m.label}</div>
+                      <div className="font-semibold">{m.value}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+          </div>
+        ) : (
+          <section className="rounded-xl border border-border p-6 bg-card text-card-foreground">
+            <h2 className="text-xl font-semibold mb-3">Overview</h2>
+            <p className="text-muted-foreground">This is a compact case study template. You can expand it with problem statements, approach, iterations, technical details, and outcomes.</p>
+          </section>
+        )}
       </article>
     </main>
   );
