@@ -1,333 +1,101 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { Send, Terminal, Mail, MessageSquare, User, Github, Linkedin, Tag, FileText } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
-import { useToast } from '@/hooks/use-toast';
+import { motion } from "framer-motion";
+import { Send } from "lucide-react";
+import { useState } from "react";
 
 const ContactSection = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    inquiryType: '',
-    subject: '',
     message: ''
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [terminalOutput, setTerminalOutput] = useState([
-    '> Contact system initialized...',
-    '> Ready to receive messages',
-    '> Type your message and press SEND'
-  ]);
-  const { toast } = useToast();
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Add initial terminal output
-    const initialOutput = [
-      ...terminalOutput,
-      `> Processing message from ${formData.name}...`,
-      '> Validating input data...',
-      '> Establishing secure connection...'
-    ];
-    
-    setTerminalOutput(initialOutput);
-
-    try {
-      // Submit to Supabase
-      const { error } = await supabase
-        .from('contacts')
-        .insert({
-          name: formData.name,
-          email: formData.email,
-          inquiry_type: formData.inquiryType,
-          subject: formData.subject,
-          message: formData.message
-        });
-
-      if (error) throw error;
-
-      // Success terminal output
-      const successOutput = [
-        ...initialOutput,
-        '> Message sent successfully!',
-        '> Thank you for reaching out. I\'ll get back to you soon.',
-        '> Connection closed.'
-      ];
-
-      setTerminalOutput(successOutput);
-      
-      toast({
-        title: "Message sent!",
-        description: "Thanks for reaching out. I'll get back to you soon!",
-      });
-
-      // Reset form
-      setFormData({ name: '', email: '', inquiryType: '', subject: '', message: '' });
-      
-    } catch (error) {
-      // Error terminal output
-      const errorOutput = [
-        ...initialOutput,
-        '> Error: Failed to send message',
-        '> Please try again or contact me directly',
-        '> Connection closed.'
-      ];
-
-      setTerminalOutput(errorOutput);
-      
-      toast({
-        title: "Error sending message",
-        description: "Please try again or contact me directly via email.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    console.log('Form submitted:', formData);
+    // Handle form submission here
   };
 
   return (
-    <section id="contact" className="py-20 bg-background">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-16 bg-muted/30">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gradient mb-4">
-            Let's Connect
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Ready to collaborate or just want to chat about tech and remote work?
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Let's Work Together</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Have a project in mind or want to collaborate? I'd love to hear from you.
           </p>
         </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Terminal Interface */}
-          <motion.div
-            ref={ref}
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="card-glow rounded-xl p-6"
-          >
-            <div className="bg-background/50 rounded-lg p-4 mb-6">
-              {/* Terminal Header */}
-              <div className="flex items-center space-x-2 mb-4 pb-2 border-b border-border">
-                <div className="flex space-x-2">
-                  <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                  <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                </div>
-                <Terminal className="w-4 h-4 text-muted-foreground ml-2" />
-                <span className="text-sm font-mono text-muted-foreground">
-                  wolfie_e@portfolio:~$
-                </span>
-              </div>
-
-              {/* Terminal Output */}
-              <div className="font-mono text-sm space-y-1 h-64 overflow-y-auto">
-                {terminalOutput.map((line, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: index * 0.1 }}
-                    className={`${
-                      line.includes('successfully') || line.includes('Thank you') 
-                        ? 'text-green-400' 
-                        : line.includes('Error') 
-                        ? 'text-red-400'
-                        : 'text-terminal-green'
-                    }`}
-                  >
-                    {line}
-                  </motion.div>
-                ))}
-                <div className="terminal-cursor"></div>
-              </div>
-            </div>
-
-            {/* Quick Contact Info */}
-            <div className="space-y-3">
-              <motion.a
-                whileHover={{ scale: 1.02 }}
-                href="mailto:kdiyorbek133@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
-              >
-                <Mail className="w-5 h-5 text-primary" />
-                <span>kdiyorbek133@gmail.com</span>
-              </motion.a>
-              
-              <motion.a
-                whileHover={{ scale: 1.02 }}
-                href="https://t.me/Wolfie_09"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
-              >
-                <MessageSquare className="w-5 h-5 text-primary" />
-                <span>@Wolfie_09 on Telegram</span>
-              </motion.a>
-
-              <motion.a
-                whileHover={{ scale: 1.02 }}
-                href="https://www.linkedin.com/in/diyorbek-komilov-b19802227"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
-              >
-                <Linkedin className="w-5 h-5 text-primary" />
-                <span>LinkedIn Profile</span>
-              </motion.a>
-
-              <motion.a
-                whileHover={{ scale: 1.02 }}
-                href="https://github.com/Wolfie-07"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
-              >
-                <Github className="w-5 h-5 text-primary" />
-                <span>GitHub Profile</span>
-              </motion.a>
-            </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+        
+        <div className="max-w-2xl mx-auto">
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="card-glow rounded-xl p-6"
+            onSubmit={handleSubmit}
+            className="bg-card border border-border rounded-xl p-8 space-y-6"
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label className="flex items-center space-x-2 text-sm font-medium text-foreground mb-2">
-                  <User className="w-4 h-4" />
-                  <span>Name</span>
+                <label htmlFor="name" className="block text-sm font-medium mb-2">
+                  Name
                 </label>
                 <input
                   type="text"
-                  name="name"
+                  id="name"
                   value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200"
+                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
                   placeholder="Your name"
+                  required
                 />
               </div>
-
               <div>
-                <label className="flex items-center space-x-2 text-sm font-medium text-foreground mb-2">
-                  <Mail className="w-4 h-4" />
-                  <span>Email</span>
+                <label htmlFor="email" className="block text-sm font-medium mb-2">
+                  Email
                 </label>
                 <input
                   type="email"
-                  name="email"
+                  id="email"
                   value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200"
+                  onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
                   placeholder="your@email.com"
+                  required
                 />
               </div>
-
-              <div>
-                <label className="flex items-center space-x-2 text-sm font-medium text-foreground mb-2">
-                  <Tag className="w-4 h-4" />
-                  <span>Inquiry Type</span>
-                </label>
-                <select
-                  name="inquiryType"
-                  value={formData.inquiryType}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200"
-                >
-                  <option value="">Select inquiry type</option>
-                  <option value="project">Project Collaboration</option>
-                  <option value="job">Job Opportunity</option>
-                  <option value="consultation">Consultation</option>
-                  <option value="general">General Question</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="flex items-center space-x-2 text-sm font-medium text-foreground mb-2">
-                  <FileText className="w-4 h-4" />
-                  <span>Subject</span>
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200"
-                  placeholder="Brief subject of your message"
-                />
-              </div>
-
-              <div>
-                <label className="flex items-center space-x-2 text-sm font-medium text-foreground mb-2">
-                  <MessageSquare className="w-4 h-4" />
-                  <span>Message</span>
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={6}
-                  className="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-200 resize-none"
-                  placeholder="Tell me about your project, idea, or just say hello!"
-                />
-              </div>
-
-              <motion.button
-                type="submit"
-                disabled={isSubmitting}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className={`w-full btn-electric text-white font-semibold flex items-center justify-center space-x-2 ${
-                  isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
-                }`}
-              >
-                <Send className="w-5 h-5" />
-                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
-              </motion.button>
-            </form>
-
-            <div className="mt-6 text-center">
-              <p className="text-sm text-muted-foreground">
-                Messages are stored securely via{' '}
-                <span className="text-primary font-semibold">
-                  Supabase integration
-                </span>
-              </p>
             </div>
-          </motion.div>
+            
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium mb-2">
+                Message
+              </label>
+              <textarea
+                id="message"
+                rows={5}
+                value={formData.message}
+                onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+                className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none"
+                placeholder="Tell me about your project..."
+                required
+              />
+            </div>
+            
+            <motion.button
+              type="submit"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full bg-primary text-primary-foreground font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 hover:bg-primary/90"
+            >
+              <Send className="w-5 h-5" />
+              Send Message
+            </motion.button>
+          </motion.form>
         </div>
       </div>
     </section>
