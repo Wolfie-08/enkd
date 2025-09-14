@@ -7,13 +7,114 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.12 (cd3cf9e)"
   }
   public: {
     Tables: {
+      ai_analyses: {
+        Row: {
+          created_at: string
+          id: string
+          input_text: string | null
+          keywords: string[] | null
+          pitch_deck_url: string | null
+          pitch_rewrite: string | null
+          source: string | null
+          strengths: string[] | null
+          suggestions: string[] | null
+          user_id: string
+          weaknesses: string[] | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          input_text?: string | null
+          keywords?: string[] | null
+          pitch_deck_url?: string | null
+          pitch_rewrite?: string | null
+          source?: string | null
+          strengths?: string[] | null
+          suggestions?: string[] | null
+          user_id: string
+          weaknesses?: string[] | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          input_text?: string | null
+          keywords?: string[] | null
+          pitch_deck_url?: string | null
+          pitch_rewrite?: string | null
+          source?: string | null
+          strengths?: string[] | null
+          suggestions?: string[] | null
+          user_id?: string
+          weaknesses?: string[] | null
+        }
+        Relationships: []
+      }
+      analytics_events: {
+        Row: {
+          created_at: string
+          event_type: string
+          id: string
+          metadata: Json | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          event_type: string
+          id?: string
+          metadata?: Json | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          event_type?: string
+          id?: string
+          metadata?: Json | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      comments: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          post_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          post_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          post_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comments_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contacts: {
         Row: {
           consent: boolean | null
@@ -23,6 +124,9 @@ export type Database = {
           inquiry_type: string | null
           message: string | null
           name: string
+          processed: boolean | null
+          processed_at: string | null
+          processed_by: string | null
           subject: string | null
           urgency: string | null
         }
@@ -34,6 +138,9 @@ export type Database = {
           inquiry_type?: string | null
           message?: string | null
           name: string
+          processed?: boolean | null
+          processed_at?: string | null
+          processed_by?: string | null
           subject?: string | null
           urgency?: string | null
         }
@@ -45,8 +152,166 @@ export type Database = {
           inquiry_type?: string | null
           message?: string | null
           name?: string
+          processed?: boolean | null
+          processed_at?: string | null
+          processed_by?: string | null
           subject?: string | null
           urgency?: string | null
+        }
+        Relationships: []
+      }
+      likes: {
+        Row: {
+          created_at: string
+          id: string
+          post_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          post_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          post_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "likes_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          read_at: string | null
+          receiver_id: string
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          read_at?: string | null
+          receiver_id: string
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          read_at?: string | null
+          receiver_id?: string
+          sender_id?: string
+        }
+        Relationships: []
+      }
+      posts: {
+        Row: {
+          content_image_url: string | null
+          content_text: string | null
+          content_video_url: string | null
+          created_at: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content_image_url?: string | null
+          content_text?: string | null
+          content_video_url?: string | null
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content_image_url?: string | null
+          content_text?: string | null
+          content_video_url?: string | null
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          account_type: string | null
+          bio: string | null
+          created_at: string
+          email: string | null
+          equity_percent: number | null
+          founded_year: number | null
+          full_name: string | null
+          id: string
+          industries: string[] | null
+          industry: string | null
+          location: string | null
+          logo_url: string | null
+          name: string | null
+          pitch_deck_url: string | null
+          raising_amount: number | null
+          region: string | null
+          role: string | null
+          stage: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          account_type?: string | null
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          equity_percent?: number | null
+          founded_year?: number | null
+          full_name?: string | null
+          id?: string
+          industries?: string[] | null
+          industry?: string | null
+          location?: string | null
+          logo_url?: string | null
+          name?: string | null
+          pitch_deck_url?: string | null
+          raising_amount?: number | null
+          region?: string | null
+          role?: string | null
+          stage?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          account_type?: string | null
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          equity_percent?: number | null
+          founded_year?: number | null
+          full_name?: string | null
+          id?: string
+          industries?: string[] | null
+          industry?: string | null
+          location?: string | null
+          logo_url?: string | null
+          name?: string | null
+          pitch_deck_url?: string | null
+          raising_amount?: number | null
+          region?: string | null
+          role?: string | null
+          stage?: string | null
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
