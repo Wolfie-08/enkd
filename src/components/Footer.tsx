@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { Github, Linkedin, Mail, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -18,8 +18,8 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/diyorbek-komilov-b19802227/", label: "LinkedIn" },
+    { icon: Send, href: "https://t.me/Wolfie_08", label: "Telegram" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/diyorbek-k/", label: "LinkedIn" },
     { icon: Github, href: "https://github.com/Wolfie-07", label: "GitHub" },
   ];
 

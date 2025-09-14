@@ -31,6 +31,58 @@ const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").repla
 
 export const projects: Project[] = [
   {
+    title: "Space Fest 2025",
+    description: "A community event celebrating World Space Week with contests, workshops, exhibits, and live NASA astronaut interaction via Zoom.",
+    tags: ["Education", "Aerospace", "STEM", "Fest", "Community", "Engineering"],
+    icon: "🚀",
+    status: "Completed",
+    color: "from-purple-600 to-indigo-600",
+    version: "v1.0",
+    links: {
+      demo: "https://spacefest.vercel.app/"
+    },
+    slug: "space-fest-2025",
+    caseStudy: {
+      problem: [
+        "Need to promote space science and technology awareness in Uzbekistan while celebrating UN's World Space Week (October 4-10)",
+        "Bringing together students, educators, and space enthusiasts in an engaging format",
+        "Creating accessible space education content for diverse audiences"
+      ],
+      approach: [
+        "Partnered with New Uzbekistan University, UzCosmos, and MUBL club",
+        "Created comprehensive day-long event with multiple engagement formats",
+        "Organized competitive contests, hands-on workshops, and educational exhibits",
+        "Arranged unique live Zoom session with NASA astronaut"
+      ],
+      iterations: [
+        "Initial planning phase with stakeholder alignment and venue coordination",
+        "Workshop content development and contest format design",
+        "NASA astronaut outreach and technical setup for live session",
+        "Registration system implementation and marketing campaign",
+        "Event execution with real-time coordination and feedback collection"
+      ],
+      technical: {
+        stack: ["React", "Next.js", "Tailwind CSS", "Vercel", "Zoom API"],
+        details: [
+          "Web platform built for event registration and information sharing",
+          "Live streaming setup for NASA astronaut interaction",
+          "Contest management system for multiple competition tracks",
+          "Digital exhibit platform for space technology showcases",
+          "Real-time event coordination and attendee management system"
+        ]
+      },
+      outcomes: {
+        results: [
+          "Successfully engaged local community in space science education",
+          "Established partnership network between academic and space organizations",
+          "Created reusable event framework for future STEM celebrations",
+          "Increased awareness of space technology careers among students",
+          "Built foundation for ongoing space education initiatives in Uzbekistan"
+        ]
+      }
+    }
+  },
+  {
     title: "StriveHub",
     description:
       "Mentor & Web Developer - A movement led by students, for students. We provide completely free mentoring to help talented minds from Uzbekistan achieve their global education dreams.",
