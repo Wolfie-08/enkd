@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { bioShort, bioLong } from '@/content/bio';
+import TypingAnimation from './TypingAnimation';
 
 const HeroSection = () => {
   const socialLinks = [
@@ -55,7 +56,7 @@ const HeroSection = () => {
           className="inline-block mb-8"
         >
           <span className="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium">
-            ENGINEERING STUDENT
+            FRESHMAN
           </span>
         </motion.div>
 
@@ -66,7 +67,14 @@ const HeroSection = () => {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white"
         >
-          My Journey Through <span className="text-gradient">Life</span>
+          My Journey Through{' '}
+          <span className="text-gradient">
+            <TypingAnimation 
+              texts={["Mechanical Engineer", "Developer", "Designer"]}
+              speed={120}
+              pauseDuration={2500}
+            />
+          </span>
         </motion.h1>
 
         {/* Description */}
@@ -77,7 +85,7 @@ const HeroSection = () => {
           className="max-w-3xl mx-auto mb-8"
         >
           <p className="text-lg text-white/70 leading-relaxed mb-4">
-            Follow my educational journey from first-year fundamentals to advanced engineering concepts. Each milestone represents growth, learning, and innovation in the ever-evolving field of engineering.
+            Follow my path as a curious builder — from first-year fundamentals to hands-on projects. Each step is a mix of growth, creativity, and problem-solving at the crossroads of engineering, design, and code.
           </p>
         </motion.div>
 
@@ -116,17 +124,17 @@ const HeroSection = () => {
           <div className="text-center">
             <div className="w-16 h-16 bg-blue-500 rounded-lg mx-auto mb-4"></div>
             <h3 className="text-xl font-semibold mb-2 text-white">Foundation Years</h3>
-            <p className="text-white/60 text-sm">Mathematics, physics, and core engineering principles</p>
+            <p className="text-white/60 text-sm">Math, physics, and the core principles that fuel every engineer.</p>
           </div>
           <div className="text-center">
             <div className="w-16 h-16 bg-green-500 rounded-lg mx-auto mb-4"></div>
             <h3 className="text-xl font-semibold mb-2 text-white">Specialization Phase</h3>
-            <p className="text-white/60 text-sm">Deep dive into chosen engineering discipline</p>
+            <p className="text-white/60 text-sm">Diving deeper into my chosen field and sharpening my craft.</p>
           </div>
           <div className="text-center">
             <div className="w-16 h-16 bg-purple-500 rounded-lg mx-auto mb-4"></div>
             <h3 className="text-xl font-semibold mb-2 text-white">Innovation Era</h3>
-            <p className="text-white/60 text-sm">Capstone projects and real-world applications</p>
+            <p className="text-white/60 text-sm">Capstone projects, experiments, and bringing ideas into reality.</p>
           </div>
         </motion.div>
       </div>
