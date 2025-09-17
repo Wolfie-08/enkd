@@ -244,7 +244,7 @@ const TimelineSection = () => {
               The Vision
             </h3>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              AltPlace is a growing platform designed to help students, remote workers, travelers, and locals discover alternative workspaces, libraries, event venues, and hidden gems within their city. What began as a simple Telegram bot has become a vision to support modern, mobile lifestyles — blending productivity, exploration, and community.
+              We&apos;re creating Uzbekistan&apos;s first lifestyle-driven workspace discovery platform that transforms how students, freelancers, and remote workers find and experience productive spaces. More than just a directory, we&apos;re building a community-powered ecosystem that makes quality workspaces accessible to everyone.
             </p>
           </div>
         </motion.div>
