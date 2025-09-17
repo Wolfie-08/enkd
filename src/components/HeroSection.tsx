@@ -67,7 +67,6 @@ const HeroSection = () => {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white"
         >
-          My Journey Through{' '}
           <TypingAnimation 
             texts={["Mechanical Engineer", "Developer", "Designer"]}
             speed={120}
