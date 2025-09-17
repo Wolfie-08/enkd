@@ -317,10 +317,81 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      startup_profiles_public: {
+        Row: {
+          account_type: string | null
+          bio: string | null
+          created_at: string | null
+          founded_year: number | null
+          id: string | null
+          industries: string[] | null
+          industry: string | null
+          location: string | null
+          logo_url: string | null
+          name: string | null
+          region: string | null
+          stage: string | null
+          user_id: string | null
+        }
+        Insert: {
+          account_type?: string | null
+          bio?: string | null
+          created_at?: string | null
+          founded_year?: number | null
+          id?: string | null
+          industries?: string[] | null
+          industry?: string | null
+          location?: string | null
+          logo_url?: string | null
+          name?: string | null
+          region?: string | null
+          stage?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          account_type?: string | null
+          bio?: string | null
+          created_at?: string | null
+          founded_year?: number | null
+          id?: string | null
+          industries?: string[] | null
+          industry?: string | null
+          location?: string | null
+          logo_url?: string | null
+          name?: string | null
+          region?: string | null
+          stage?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      get_startup_admin_data: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          account_type: string
+          bio: string
+          created_at: string
+          email: string
+          equity_percent: number
+          founded_year: number
+          full_name: string
+          id: string
+          industries: string[]
+          industry: string
+          location: string
+          logo_url: string
+          name: string
+          pitch_deck_url: string
+          raising_amount: number
+          region: string
+          role: string
+          stage: string
+          updated_at: string
+          user_id: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
