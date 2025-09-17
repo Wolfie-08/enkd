@@ -1,4 +1,4 @@
-import { Globe, BookOpen, Bot, Sun, Search, Code } from "lucide-react";
+import { Globe, BookOpen, Bot, Sun, Search, Code, Rocket } from "lucide-react";
 
 export type CaseStudy = {
   problem: string[];
@@ -34,7 +34,7 @@ export const projects: Project[] = [
     title: "Space Fest 2025",
     description: "A community event celebrating World Space Week with contests, workshops, exhibits, and live NASA astronaut interaction via Zoom.",
     tags: ["Education", "Aerospace", "STEM", "Fest", "Community", "Engineering"],
-    icon: "🚀",
+    icon: Rocket,
     status: "Completed",
     color: "from-purple-600 to-indigo-600",
     version: "v1.0",
