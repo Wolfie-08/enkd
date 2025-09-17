@@ -68,13 +68,12 @@ const HeroSection = () => {
           className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white"
         >
           My Journey Through{' '}
-          <span className="text-gradient">
-            <TypingAnimation 
-              texts={["Mechanical Engineer", "Developer", "Designer"]}
-              speed={120}
-              pauseDuration={2500}
-            />
-          </span>
+          <TypingAnimation 
+            texts={["Mechanical Engineer", "Developer", "Designer"]}
+            speed={120}
+            pauseDuration={2500}
+            className="text-white"
+          />
         </motion.h1>
 
         {/* Description */}
