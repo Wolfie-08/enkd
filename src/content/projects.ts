@@ -39,7 +39,7 @@ export const projects: Project[] = [
     color: "from-purple-600 to-indigo-600",
     version: "v1.0",
     links: {
-      demo: "https://spacefest.vercel.app/"
+      demo: "spacefest.newuu.uz"
     },
     slug: "space-fest-2025",
     caseStudy: {
