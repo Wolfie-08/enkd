@@ -118,7 +118,7 @@ const MusicPlayer = () => {
         const ctx = canvasRef.current.getContext("2d");
         if (!ctx) return;
         
-        analyserRef.current.getByteFrequencyData(dataArrayRef.current);
+        analyserRef.current.getByteFrequencyData(dataArrayRef.current as unknown as Uint8Array<ArrayBuffer>);
         ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
         const barWidth = (canvasRef.current.width / dataArrayRef.current.length) * 1.5;

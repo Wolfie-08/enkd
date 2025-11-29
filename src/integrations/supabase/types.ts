@@ -368,7 +368,7 @@ export type Database = {
     }
     Functions: {
       get_startup_admin_data: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: {
           account_type: string
           bio: string
