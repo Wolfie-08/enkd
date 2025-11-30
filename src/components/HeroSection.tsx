@@ -1,21 +1,14 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail } from 'lucide-react';
-import { bioShort, bioLong } from '@/content/bio';
-import TypingAnimation from './TypingAnimation';
+import { Link } from 'react-router-dom';
+import profilePhoto from '@/assets/profile-photo.png';
+import { Button } from './ui/button';
 
 const HeroSection = () => {
-  const socialLinks = [
-    { icon: Github, href: 'https://github.com/Wolfie-07', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/diyorbek-komilov-b19802227/', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:kdiyorbek133@gmail.com', label: 'Email' },
-  ];
-
-  const [expanded, setExpanded] = useState(false);
+  const tags = ['mechanics', 'robotics', 'developer', 'designer'];
 
   return (
     <section 
-      id="about"
+      id="home"
       className="min-h-screen relative overflow-hidden"
       style={{
         background: 'linear-gradient(135deg, #0f0f23 0%, #1a0933 25%, #2d1b4e 50%, #4a2c5a 75%, #6b3e66 100%)',
@@ -46,95 +39,106 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-        
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-block mb-8"
-        >
-          <span className="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium">
-            FRESHMAN
-          </span>
-        </motion.div>
-
-        {/* Main Title */}
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white"
-        >
-          <TypingAnimation 
-            texts={["Mechanical Engineer", "Developer", "Designer"]}
-            speed={120}
-            pauseDuration={2500}
-            className="text-white"
-          />
-        </motion.h1>
-
-        {/* Description */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="max-w-3xl mx-auto mb-8"
-        >
-          <p className="text-lg text-white/70 leading-relaxed mb-4">
-            Follow my path as a curious builder — from first-year fundamentals to hands-on projects. Each step is a mix of growth, creativity, and problem-solving at the crossroads of engineering, design, and code.
-          </p>
-        </motion.div>
-
-        {/* CTA Buttons */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
-        >
-          <motion.button 
-            onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300 hover:shadow-lg"
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+          
+          {/* Left Side - Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-6"
           >
-            Explore My Journey
-          </motion.button>
-          <motion.button 
-            onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300 hover:bg-white/20"
-          >
-            View Projects
-          </motion.button>
-        </motion.div>
+            <div>
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-2">
+                Diyorbek
+              </h1>
+              <p className="text-xl text-white/80 mb-1">Student</p>
+              <p className="text-lg text-white/70">
+                Mechanical engineering at{' '}
+                <a 
+                  href="https://newuu.uz" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 underline transition-colors"
+                >
+                  NewUU
+                </a>
+              </p>
+            </div>
 
-        {/* Three Phases */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12"
-        >
-          <div className="text-center">
-            <div className="w-16 h-16 bg-blue-500 rounded-lg mx-auto mb-4"></div>
-            <h3 className="text-xl font-semibold mb-2 text-white">Foundation Years</h3>
-            <p className="text-white/60 text-sm">Math, physics, and the core principles that fuel every engineer.</p>
-          </div>
-          <div className="text-center">
-            <div className="w-16 h-16 bg-green-500 rounded-lg mx-auto mb-4"></div>
-            <h3 className="text-xl font-semibold mb-2 text-white">Specialization Phase</h3>
-            <p className="text-white/60 text-sm">Diving deeper into my chosen field and sharpening my craft.</p>
-          </div>
-          <div className="text-center">
-            <div className="w-16 h-16 bg-purple-500 rounded-lg mx-auto mb-4"></div>
-            <h3 className="text-xl font-semibold mb-2 text-white">Innovation Era</h3>
-            <p className="text-white/60 text-sm">Capstone projects, experiments, and bringing ideas into reality.</p>
-          </div>
-        </motion.div>
+            {/* Tags */}
+            <div className="flex flex-wrap gap-3">
+              {tags.map((tag) => (
+                <span 
+                  key={tag}
+                  className="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white/90 text-sm font-medium backdrop-blur-sm"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Link to="/about">
+                <Button 
+                  size="lg"
+                  className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold px-8"
+                >
+                  About me
+                </Button>
+              </Link>
+              <Button 
+                size="lg"
+                variant="outline"
+                onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 font-semibold px-8"
+              >
+                View Projects
+              </Button>
+              <a 
+                href="https://drive.google.com/drive/folders/your-portfolio-folder" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <Button 
+                  size="lg"
+                  variant="outline"
+                  className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 font-semibold px-8"
+                >
+                  Portfolio
+                </Button>
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right Side - Image Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative"
+          >
+            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/20 p-8 shadow-2xl">
+              {/* Decorative elements */}
+              <div className="absolute top-4 left-4 w-16 h-16 border-2 border-blue-400/30 rounded-full" />
+              <div className="absolute bottom-4 right-4 w-20 h-20 border-2 border-purple-400/30 rounded-full" />
+              
+              {/* Image */}
+              <div className="relative rounded-2xl overflow-hidden">
+                <img 
+                  src={profilePhoto} 
+                  alt="Diyorbek - Mechanical Engineering Student"
+                  className="w-full h-auto object-cover"
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent" />
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );
