@@ -1,15 +1,15 @@
 import Navigation from '@/components/Navigation';
-import HeroSection from '@/components/HeroSection';
+import ProjectsSection from '@/components/ProjectsSection';
 import Footer from '@/components/Footer';
 
-const Index = () => {
+const Projects = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <HeroSection />
+      <ProjectsSection />
       <Footer />
     </div>
   );
 };
 
-export default Index;
+export default Projects;
