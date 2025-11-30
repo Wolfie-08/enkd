@@ -31,31 +31,22 @@ const Navigation = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled 
-          ? 'bg-background/80 backdrop-blur-md border-b border-border shadow-lg' 
-          : 'bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border shadow-lg transition-all duration-500"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+        <div className="flex items-center justify-center h-16 relative">
+          {/* Logo - Absolute positioned on left */}
           <motion.div
             whileHover={{ scale: 1.08, rotate: [0, -5, 5, 0] }}
             transition={{ duration: 0.3 }}
-            className="flex items-center space-x-2 cursor-pointer"
+            className="absolute left-4 flex items-center space-x-2 cursor-pointer"
             onClick={() => navigate('/')}
           >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            >
-              <Code className="h-8 w-8 text-primary" />
-            </motion.div>
+            <Code className="h-8 w-8 text-primary" />
             <span className="text-xl font-bold text-gradient">Wolfie_e</span>
           </motion.div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Centered */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item, index) => (
               <motion.button
@@ -84,8 +75,8 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          {/* Mobile Menu Button - Absolute positioned on right */}
+          <div className="md:hidden absolute right-4">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
