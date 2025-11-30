@@ -53,9 +53,8 @@ const HeroSection = () => {
               <h1 className="text-5xl md:text-6xl font-bold text-white mb-2">
                 Diyorbek
               </h1>
-              <p className="text-xl text-white/80 mb-1">Student</p>
-              <p className="text-lg text-white/70">
-                Mechanical engineering at{' '}
+              <p className="text-lg text-white/80">
+                Mechanical engineering student at{' '}
                 <a 
                   href="https://newuu.uz" 
                   target="_blank" 
