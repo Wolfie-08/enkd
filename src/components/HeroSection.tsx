@@ -119,7 +119,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/20 p-8 shadow-2xl">
+            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/20 p-3 shadow-2xl">
               {/* Decorative elements */}
               <div className="absolute top-4 left-4 w-16 h-16 border-2 border-blue-400/30 rounded-full" />
               <div className="absolute bottom-4 right-4 w-20 h-20 border-2 border-purple-400/30 rounded-full" />
