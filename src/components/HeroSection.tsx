@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Download } from 'lucide-react';
 import profilePhoto from '@/assets/profile-photo.png';
 import { Button } from './ui/button';
-
 const HeroSection = () => {
   const tags = ['mechanics', 'robotics', 'developer', 'designer'];
 
@@ -79,7 +79,7 @@ const HeroSection = () => {
             </div>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-wrap gap-4 pt-4">
               <Button 
                 size="lg"
                 onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
@@ -107,6 +107,19 @@ const HeroSection = () => {
                   className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 font-semibold px-8"
                 >
                   Portfolio
+                </Button>
+              </a>
+              <a 
+                href="/resume.pdf" 
+                download
+              >
+                <Button 
+                  size="lg"
+                  variant="outline"
+                  className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 font-semibold px-8 gap-2"
+                >
+                  <Download className="w-4 h-4" />
+                  Resume
                 </Button>
               </a>
             </div>
