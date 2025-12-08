@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Code, User, Briefcase, Mail } from 'lucide-react';
+import { Menu, X, Code, Briefcase, Mail } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
+
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -17,7 +19,6 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const navItems = [
-    { name: 'About', href: '/about', icon: User },
     { name: 'Projects', href: '/projects', icon: Briefcase },
     { name: 'Contact', href: '/contact', icon: Mail },
   ];
@@ -26,6 +27,15 @@ const Navigation = () => {
     navigate(href);
     setIsOpen(false);
   };
+
+  const scrollToAbout = () => {
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsOpen(false);
+  };
+
   return (
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
@@ -48,12 +58,30 @@ const Navigation = () => {
 
           {/* Desktop Navigation - Centered */}
           <div className="hidden md:flex items-center space-x-8">
+            {/* About - scrolls to section */}
+            <motion.button
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.4 }}
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={scrollToAbout}
+              className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-all duration-300 relative group"
+            >
+              <span className="relative">
+                About
+                <motion.span
+                  className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"
+                />
+              </span>
+            </motion.button>
+
             {navItems.map((item, index) => (
               <motion.button
                 key={item.name}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.3, duration: 0.4 }}
+                transition={{ delay: index * 0.1 + 0.4, duration: 0.4 }}
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleNav(item.href)}
@@ -75,21 +103,26 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Mobile Menu Button - Absolute positioned on right */}
-          <div className="md:hidden absolute right-4">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-muted-foreground hover:text-primary transition-colors duration-300"
-            >
-              <motion.div
-                animate={{ rotate: isOpen ? 90 : 0 }}
-                transition={{ duration: 0.3 }}
+          {/* Right side - Theme Toggle + Mobile Menu */}
+          <div className="absolute right-4 flex items-center space-x-2">
+            <ThemeToggle />
+            
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setIsOpen(!isOpen)}
+                className="text-muted-foreground hover:text-primary transition-colors duration-300"
               >
-                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </motion.div>
-            </motion.button>
+                <motion.div
+                  animate={{ rotate: isOpen ? 90 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                </motion.div>
+              </motion.button>
+            </div>
           </div>
         </div>
       </div>
@@ -105,13 +138,27 @@ const Navigation = () => {
             className="md:hidden bg-background/95 backdrop-blur-md border-b border-border"
           >
             <div className="px-4 pt-2 pb-4 space-y-2">
+              {/* About - scrolls to section */}
+              <motion.button
+                initial={{ x: -50, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -50, opacity: 0 }}
+                transition={{ delay: 0, duration: 0.3 }}
+                whileHover={{ x: 10, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={scrollToAbout}
+                className="flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-muted-foreground hover:text-primary hover:bg-muted/50 transition-all duration-300"
+              >
+                <span>About</span>
+              </motion.button>
+
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.name}
                   initial={{ x: -50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   exit={{ x: -50, opacity: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.3 }}
+                  transition={{ delay: (index + 1) * 0.1, duration: 0.3 }}
                   whileHover={{ x: 10, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleNav(item.href)}

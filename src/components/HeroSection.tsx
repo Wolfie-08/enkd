@@ -80,22 +80,22 @@ const HeroSection = () => {
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link to="/about">
-                <Button 
-                  size="lg"
-                  className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold px-8"
-                >
-                  About me
-                </Button>
-              </Link>
               <Button 
                 size="lg"
-                variant="outline"
-                onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 font-semibold px-8"
+                onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold px-8"
               >
-                View Projects
+                About me
               </Button>
+              <Link to="/projects">
+                <Button 
+                  size="lg"
+                  variant="outline"
+                  className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 font-semibold px-8"
+                >
+                  View Projects
+                </Button>
+              </Link>
               <a 
                 href="https://drive.google.com/drive/folders/your-portfolio-folder" 
                 target="_blank" 
