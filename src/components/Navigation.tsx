@@ -37,74 +37,53 @@ const Navigation = () => {
   };
 
   return (
-    <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border shadow-lg transition-all duration-500"
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-center h-16 relative">
-          {/* Logo - Absolute positioned on left */}
+    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="bg-background/60 backdrop-blur-xl border border-border/50 shadow-lg rounded-full px-2 py-2"
+      >
+        <div className="flex items-center gap-1">
+          {/* Logo */}
           <motion.div
-            whileHover={{ scale: 1.08, rotate: [0, -5, 5, 0] }}
-            transition={{ duration: 0.3 }}
-            className="absolute left-4 flex items-center space-x-2 cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+            className="flex items-center gap-2 cursor-pointer px-4 py-2"
             onClick={() => navigate('/')}
           >
-            <Code className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold text-gradient">Wolfie_e</span>
+            <Code className="h-5 w-5 text-primary" />
+            <span className="text-sm font-bold text-foreground hidden sm:inline">Wolfie_e</span>
           </motion.div>
 
-          {/* Desktop Navigation - Centered */}
-          <div className="hidden md:flex items-center space-x-8">
-            {/* About - scrolls to section */}
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-1">
+            {/* About */}
             <motion.button
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.4 }}
-              whileHover={{ scale: 1.1, y: -2 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={scrollToAbout}
-              className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-all duration-300 relative group"
+              className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-full hover:bg-muted/50"
             >
-              <span className="relative">
-                About
-                <motion.span
-                  className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"
-                />
-              </span>
+              About
             </motion.button>
 
-            {navItems.map((item, index) => (
+            {navItems.map((item) => (
               <motion.button
                 key={item.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.4, duration: 0.4 }}
-                whileHover={{ scale: 1.1, y: -2 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleNav(item.href)}
-                className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-all duration-300 relative group"
+                className="flex items-center gap-2 px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-full hover:bg-muted/50"
               >
-                <motion.div
-                  whileHover={{ rotate: [0, -10, 10, 0] }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <item.icon className="h-4 w-4" />
-                </motion.div>
-                <span className="relative">
-                  {item.name}
-                  <motion.span
-                    className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"
-                  />
-                </span>
+                <item.icon className="h-4 w-4" />
+                <span>{item.name}</span>
               </motion.button>
             ))}
           </div>
 
-          {/* Right side - Theme Toggle + Mobile Menu */}
-          <div className="absolute right-4 flex items-center space-x-2">
+          {/* Right side */}
+          <div className="flex items-center gap-1 pl-2">
             <ThemeToggle />
             
             {/* Mobile Menu Button */}
@@ -113,88 +92,54 @@ const Navigation = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                className="p-2 text-muted-foreground hover:text-foreground transition-colors rounded-full hover:bg-muted/50"
               >
-                <motion.div
-                  animate={{ rotate: isOpen ? 90 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                </motion.div>
+                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </motion.button>
             </div>
           </div>
         </div>
-      </div>
+      </motion.nav>
 
       {/* Mobile Navigation */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0, y: -20 }}
-            animate={{ opacity: 1, height: 'auto', y: 0 }}
-            exit={{ opacity: 0, height: 0, y: -20 }}
-            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border shadow-lg"
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden absolute top-full left-4 right-4 mt-2 bg-background/90 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl overflow-hidden"
           >
-            <div className="px-4 pt-4 pb-6 space-y-1">
-              {/* About - scrolls to section */}
+            <div className="p-2 space-y-1">
               <motion.button
-                initial={{ x: -30, opacity: 0 }}
+                initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -30, opacity: 0 }}
-                transition={{ delay: 0.1, duration: 0.3, ease: "easeOut" }}
-                whileHover={{ x: 8, backgroundColor: "hsl(var(--muted))" }}
-                whileTap={{ scale: 0.98 }}
+                transition={{ delay: 0.1 }}
                 onClick={scrollToAbout}
-                className="flex items-center justify-between w-full text-left px-4 py-3 rounded-xl text-foreground hover:text-primary transition-all duration-300"
+                className="flex items-center justify-between w-full px-4 py-3 text-sm text-foreground hover:bg-muted/50 rounded-xl transition-colors"
               >
-                <span className="font-medium">About</span>
-                <motion.div
-                  initial={{ x: 0 }}
-                  whileHover={{ x: 4 }}
-                  className="text-muted-foreground"
-                >
-                  →
-                </motion.div>
+                <span>About</span>
               </motion.button>
 
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.name}
-                  initial={{ x: -30, opacity: 0 }}
+                  initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  exit={{ x: -30, opacity: 0 }}
-                  transition={{ delay: (index + 1) * 0.1 + 0.1, duration: 0.3, ease: "easeOut" }}
-                  whileHover={{ x: 8, backgroundColor: "hsl(var(--muted))" }}
-                  whileTap={{ scale: 0.98 }}
+                  transition={{ delay: (index + 1) * 0.1 + 0.1 }}
                   onClick={() => handleNav(item.href)}
-                  className="flex items-center justify-between w-full text-left px-4 py-3 rounded-xl text-foreground hover:text-primary transition-all duration-300"
+                  className="flex items-center gap-3 w-full px-4 py-3 text-sm text-foreground hover:bg-muted/50 rounded-xl transition-colors"
                 >
-                  <div className="flex items-center gap-3">
-                    <motion.div
-                      whileHover={{ rotate: [0, -10, 10, 0] }}
-                      transition={{ duration: 0.3 }}
-                      className="p-2 rounded-lg bg-muted/50"
-                    >
-                      <item.icon className="h-4 w-4" />
-                    </motion.div>
-                    <span className="font-medium">{item.name}</span>
-                  </div>
-                  <motion.div
-                    initial={{ x: 0 }}
-                    whileHover={{ x: 4 }}
-                    className="text-muted-foreground"
-                  >
-                    →
-                  </motion.div>
+                  <item.icon className="h-4 w-4 text-muted-foreground" />
+                  <span>{item.name}</span>
                 </motion.button>
               ))}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </div>
   );
 };
 
