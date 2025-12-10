@@ -64,6 +64,9 @@ const HeroSection = () => {
                   NewUU
                 </a>
               </p>
+              <p className="text-lg text-white/60 italic">
+                Turning ideas into real, working products.
+              </p>
             </div>
 
             {/* Tags */}
@@ -130,7 +133,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
+            className="relative max-w-[80%] mx-auto"
           >
             <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/20 p-3 shadow-2xl">
               {/* Decorative elements */}
