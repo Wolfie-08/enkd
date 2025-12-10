@@ -131,46 +131,63 @@ const Navigation = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden bg-background/95 backdrop-blur-md border-b border-border"
+            initial={{ opacity: 0, height: 0, y: -20 }}
+            animate={{ opacity: 1, height: 'auto', y: 0 }}
+            exit={{ opacity: 0, height: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border shadow-lg"
           >
-            <div className="px-4 pt-2 pb-4 space-y-2">
+            <div className="px-4 pt-4 pb-6 space-y-1">
               {/* About - scrolls to section */}
               <motion.button
-                initial={{ x: -50, opacity: 0 }}
+                initial={{ x: -30, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -50, opacity: 0 }}
-                transition={{ delay: 0, duration: 0.3 }}
-                whileHover={{ x: 10, scale: 1.02 }}
+                exit={{ x: -30, opacity: 0 }}
+                transition={{ delay: 0.1, duration: 0.3, ease: "easeOut" }}
+                whileHover={{ x: 8, backgroundColor: "hsl(var(--muted))" }}
                 whileTap={{ scale: 0.98 }}
                 onClick={scrollToAbout}
-                className="flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-muted-foreground hover:text-primary hover:bg-muted/50 transition-all duration-300"
+                className="flex items-center justify-between w-full text-left px-4 py-3 rounded-xl text-foreground hover:text-primary transition-all duration-300"
               >
-                <span>About</span>
+                <span className="font-medium">About</span>
+                <motion.div
+                  initial={{ x: 0 }}
+                  whileHover={{ x: 4 }}
+                  className="text-muted-foreground"
+                >
+                  →
+                </motion.div>
               </motion.button>
 
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.name}
-                  initial={{ x: -50, opacity: 0 }}
+                  initial={{ x: -30, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  exit={{ x: -50, opacity: 0 }}
-                  transition={{ delay: (index + 1) * 0.1, duration: 0.3 }}
-                  whileHover={{ x: 10, scale: 1.02 }}
+                  exit={{ x: -30, opacity: 0 }}
+                  transition={{ delay: (index + 1) * 0.1 + 0.1, duration: 0.3, ease: "easeOut" }}
+                  whileHover={{ x: 8, backgroundColor: "hsl(var(--muted))" }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleNav(item.href)}
-                  className="flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-muted-foreground hover:text-primary hover:bg-muted/50 transition-all duration-300"
+                  className="flex items-center justify-between w-full text-left px-4 py-3 rounded-xl text-foreground hover:text-primary transition-all duration-300"
                 >
+                  <div className="flex items-center gap-3">
+                    <motion.div
+                      whileHover={{ rotate: [0, -10, 10, 0] }}
+                      transition={{ duration: 0.3 }}
+                      className="p-2 rounded-lg bg-muted/50"
+                    >
+                      <item.icon className="h-4 w-4" />
+                    </motion.div>
+                    <span className="font-medium">{item.name}</span>
+                  </div>
                   <motion.div
-                    whileHover={{ rotate: [0, -10, 10, 0] }}
-                    transition={{ duration: 0.3 }}
+                    initial={{ x: 0 }}
+                    whileHover={{ x: 4 }}
+                    className="text-muted-foreground"
                   >
-                    <item.icon className="h-5 w-5" />
+                    →
                   </motion.div>
-                  <span>{item.name}</span>
                 </motion.button>
               ))}
             </div>
