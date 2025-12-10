@@ -99,6 +99,10 @@ const HeroSection = () => {
                   View Projects
                 </Button>
               </Link>
+            </div>
+            
+            {/* Secondary Buttons Row */}
+            <div className="flex flex-wrap gap-4">
               <a 
                 href="https://drive.google.com/drive/folders/your-portfolio-folder" 
                 target="_blank" 
