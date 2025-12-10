@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Code, Briefcase, Mail } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
+import { Button } from './ui/button';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,16 +41,22 @@ const Navigation = () => {
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="bg-background/60 backdrop-blur-xl border border-border/50 shadow-lg rounded-full px-2 py-2"
+        animate={{ 
+          y: 0, 
+          opacity: 1,
+          scale: scrolled ? 0.95 : 1,
+          paddingTop: scrolled ? '6px' : '8px',
+          paddingBottom: scrolled ? '6px' : '8px',
+        }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="bg-background/60 backdrop-blur-xl border border-border/50 shadow-lg rounded-full px-2"
       >
         <div className="flex items-center gap-1">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
-            className="flex items-center gap-2 cursor-pointer px-4 py-2"
+            className="flex items-center gap-2 cursor-pointer px-3 py-2"
             onClick={() => navigate('/')}
           >
             <Code className="h-5 w-5 text-primary" />
@@ -63,7 +70,7 @@ const Navigation = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={scrollToAbout}
-              className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-full hover:bg-muted/50"
+              className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-full hover:bg-muted/50"
             >
               About
             </motion.button>
@@ -74,16 +81,26 @@ const Navigation = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleNav(item.href)}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-full hover:bg-muted/50"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-full hover:bg-muted/50"
               >
-                <item.icon className="h-4 w-4" />
+                <item.icon className="h-3.5 w-3.5" />
                 <span>{item.name}</span>
               </motion.button>
             ))}
           </div>
 
-          {/* Right side */}
-          <div className="flex items-center gap-1 pl-2">
+          {/* Right side - CTA + Theme Toggle */}
+          <div className="flex items-center gap-2 pl-2">
+            {/* CTA Button */}
+            <Link to="/contact" className="hidden sm:block">
+              <Button 
+                size="sm" 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-4 text-xs font-semibold"
+              >
+                Get in Touch
+              </Button>
+            </Link>
+            
             <ThemeToggle />
             
             {/* Mobile Menu Button */}
@@ -135,6 +152,20 @@ const Navigation = () => {
                   <span>{item.name}</span>
                 </motion.button>
               ))}
+              
+              {/* Mobile CTA */}
+              <motion.div
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="pt-2"
+              >
+                <Link to="/contact" onClick={() => setIsOpen(false)}>
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl">
+                    Get in Touch
+                  </Button>
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}

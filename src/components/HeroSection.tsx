@@ -81,28 +81,16 @@ const HeroSection = () => {
               ))}
             </div>
 
-            {/* Buttons */}
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Button 
-                size="lg"
-                onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold px-8"
-              >
-                About me
-              </Button>
+            {/* Buttons - All in one row */}
+            <div className="flex flex-wrap gap-3 pt-4">
               <Link to="/projects">
                 <Button 
                   size="lg"
-                  variant="outline"
-                  className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 font-semibold px-8"
+                  className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold px-6"
                 >
                   View Projects
                 </Button>
               </Link>
-            </div>
-            
-            {/* Secondary Buttons Row */}
-            <div className="flex flex-wrap gap-4">
               <a 
                 href="https://drive.google.com/drive/folders/your-portfolio-folder" 
                 target="_blank" 
@@ -111,7 +99,7 @@ const HeroSection = () => {
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 font-semibold px-8"
+                  className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 font-semibold px-6"
                 >
                   Portfolio
                 </Button>
@@ -123,7 +111,7 @@ const HeroSection = () => {
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 font-semibold px-8 gap-2"
+                  className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 font-semibold px-6 gap-2"
                 >
                   <Download className="w-4 h-4" />
                   Resume
