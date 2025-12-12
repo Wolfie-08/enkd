@@ -1,18 +1,20 @@
 import Navigation from '@/components/Navigation';
-import ContactSection from '@/components/ContactSection';
+import BlogSection from '@/components/BlogSection';
 import Footer from '@/components/Footer';
 import PageTransition from '@/components/PageTransition';
 
-const Contact = () => {
+const Blog = () => {
   return (
     <PageTransition>
       <div className="min-h-screen bg-background">
         <Navigation />
-        <ContactSection />
+        <div className="pt-24">
+          <BlogSection />
+        </div>
         <Footer />
       </div>
     </PageTransition>
   );
 };
 
-export default Contact;
+export default Blog;

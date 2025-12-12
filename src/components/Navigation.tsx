@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Code, Briefcase, Mail } from 'lucide-react';
+import { Menu, X, Code, Briefcase, BookOpen } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import { Button } from './ui/button';
@@ -21,7 +21,7 @@ const Navigation = () => {
 
   const navItems = [
     { name: 'Projects', href: '/projects', icon: Briefcase },
-    { name: 'Contact', href: '/contact', icon: Mail },
+    { name: 'Blog', href: '/blog', icon: BookOpen },
   ];
 
   const handleNav = (href: string) => {

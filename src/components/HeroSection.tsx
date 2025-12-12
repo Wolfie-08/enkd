@@ -132,6 +132,21 @@ const HeroSection = () => {
               <div className="absolute top-4 left-4 w-16 h-16 border-2 border-blue-400/30 rounded-full" />
               <div className="absolute bottom-4 right-4 w-20 h-20 border-2 border-purple-400/30 rounded-full" />
               
+              {/* Floating animated circle - bottom left */}
+              <motion.div
+                animate={{ 
+                  y: [0, -15, 0],
+                  x: [0, 8, 0],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{ 
+                  duration: 4, 
+                  repeat: Infinity, 
+                  ease: "easeInOut" 
+                }}
+                className="absolute -bottom-3 -left-3 w-14 h-14 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 shadow-lg shadow-cyan-400/40 z-10"
+              />
+              
               {/* Image */}
               <div className="relative rounded-2xl overflow-hidden">
                 <img 
