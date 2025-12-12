@@ -1,4 +1,4 @@
-import { Globe, BookOpen, Bot, Sun, Search, Code, Rocket } from "lucide-react";
+import { Globe, BookOpen, Bot, Sun, Search, Code, Rocket, Cpu } from "lucide-react";
 
 export type CaseStudy = {
   problem: string[];
@@ -30,6 +30,50 @@ export type Project = {
 const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 export const projects: Project[] = [
+  {
+    title: "MUBL Bootcamp",
+    description:
+      "A hands-on intensive designed for students to develop technical and creative skills in robotics, 3D modeling & printing, and strategic project development. Students will form teams and present final projects.",
+    tags: ["3D Printing", "AI", "Robotics", "Education", "Workshop"],
+    icon: Cpu,
+    status: "In Development",
+    color: "from-cyan-400 to-blue-500",
+    version: "v1.0",
+    links: { live: "https://mubl-bootcamp.vercel.app/" },
+    slug: "mubl-bootcamp",
+    caseStudy: {
+      problem: [
+        "Students lack access to hands-on technical training in emerging technologies like 3D printing, AI, and robotics.",
+        "Traditional education often separates theory from practice, limiting real-world skill development.",
+        "Need for structured team-based learning that mirrors industry collaboration."
+      ],
+      approach: [
+        "Designed intensive bootcamp format combining workshops, hands-on labs, and team projects.",
+        "Curriculum covers 3D modeling & printing, AI fundamentals, and robotics engineering.",
+        "Team formation and final project presentations to simulate real-world product development."
+      ],
+      iterations: [
+        "Developing curriculum structure and learning outcomes.",
+        "Building registration and information platform.",
+        "Planning equipment and materials for hands-on sessions."
+      ],
+      technical: {
+        stack: ["React", "Next.js", "Tailwind CSS", "Vercel"],
+        details: [
+          "Web platform for bootcamp registration and schedule management.",
+          "Resource hub for workshop materials and documentation.",
+          "Team collaboration features for project development."
+        ]
+      },
+      outcomes: {
+        results: [
+          "Currently in development phase with v1.0 launch planned.",
+          "Building partnerships with local makerspaces and tech communities.",
+          "Preparing comprehensive curriculum for diverse skill levels."
+        ]
+      }
+    }
+  },
   {
     title: "Space Fest 2025",
     description: "A community event celebrating World Space Week with contests, workshops, exhibits, and live NASA astronaut interaction via Zoom.",
