@@ -1,4 +1,4 @@
-import { Globe, BookOpen, Bot, Sun, Search, Code, Rocket, Cpu } from "lucide-react";
+import { Globe, BookOpen, Bot, Sun, Code, Rocket, Cpu } from "lucide-react";
 
 export type CaseStudy = {
   problem: string[];
@@ -395,48 +395,6 @@ export const projects: Project[] = [
           "Higher return-to-write within 48h after prompt redesign.",
           "Users report clearer, more consistent reflection sessions.",
           "Responsive UX on low-end devices."
-        ]
-      }
-    }
-  },
-  {
-    title: "Reverse Engineering Project",
-    description:
-      "Technical analysis and reverse engineering of software systems to understand underlying architectures and security mechanisms.",
-    tags: ["Reverse Engineering", "Security", "Analysis", "Tools", "Research"],
-    icon: Search,
-    status: "Planning",
-    color: "from-red-400 to-pink-400",
-    version: "v0.1",
-    links: { demo: "#" },
-    slug: slugify("Reverse Engineering Project"),
-    caseStudy: {
-      problem: [
-        "Investigate system internals to document behavior and potential weaknesses.",
-        "Produce reproducible methodology and tooling notes.",
-        "Share responsible, educational insights."
-      ],
-      approach: [
-        "Define scope and legal/ethical boundaries.",
-        "Toolchain selection and environment isolation.",
-        "Document findings with clear callouts and mitigations."
-      ],
-      iterations: [
-        "Create redacted public artifacts for education.",
-        "Automate repeatable steps with scripts.",
-        "Peer review for accuracy and clarity."
-      ],
-      technical: {
-        stack: ["Ghidra", "radare2", "Frida", "Burp Suite"],
-        details: [
-          "Sandboxed analysis environments.",
-          "Repeatable checklist for each target type.",
-          "Focus on pedagogy over novelty."
-        ]
-      },
-      outcomes: {
-        results: [
-          "Planned publication of a methodology guide and sample walkthroughs."
         ]
       }
     }
