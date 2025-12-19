@@ -276,7 +276,7 @@ export const projects: Project[] = [
     status: "Completed",
     color: "from-yellow-400 to-orange-400",
     version: "v1.0",
-    links: { demo: "#" },
+    links: { demo: "https://t.me/portfolio_kd08" },
     slug: slugify("Solar Tracker"),
     caseStudy: {
       problem: [
