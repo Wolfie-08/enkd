@@ -105,7 +105,7 @@ const HeroSection = () => {
                 </Button>
               </a>
               <a 
-                href="/resume.pdf" 
+                href="/Diyorbek_Komilov_CV.pdf" 
                 download
               >
                 <Button 
