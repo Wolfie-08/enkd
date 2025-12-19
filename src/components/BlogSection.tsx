@@ -39,14 +39,8 @@ const storylineItems = [
   },
   {
     number: "07",
-    title: "My first Adventure?!",
-    subtitle: "Studying abroad.",
-    description: "The leap into independence and immersion in a new environment. Challenges, culture shock, and fresh perspectives combined to stretch comfort zones and spark new ideas."
-  },
-  {
-    number: "08",
     title: "Day one of My idea?!",
-    subtitle: "Launching Alt – Find Your Flow//.",
+    subtitle: "Launching Alt – Find Your Flow.",
     description: "The culmination of reflection, experimentation, teaching, failures, and adventures: building a platform to help others explore, create, and find their own flow. The real journey is just beginning."
   }
 ];
