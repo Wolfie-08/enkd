@@ -85,8 +85,9 @@ const HeroSection = () => {
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="backdrop-blur-sm font-semibold px-6 bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  className="backdrop-blur-sm font-semibold px-6 gap-2 bg-white/10 border-white/20 text-white hover:bg-white/20"
                 >
+                  <Download className="w-4 h-4" />
                   Portfolio
                 </Button>
               </a>
