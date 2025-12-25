@@ -3,12 +3,9 @@ import { Link } from 'react-router-dom';
 import { Download } from 'lucide-react';
 import profilePhoto from '@/assets/profile-photo.png';
 import { Button } from './ui/button';
-import { useTheme } from 'next-themes';
 
 const HeroSection = () => {
   const tags = ['mechanics', 'robotics', 'developer', 'designer'];
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
 
   return (
     <section 
@@ -27,7 +24,7 @@ const HeroSection = () => {
       </video>
       
       {/* Overlay for readability */}
-      <div className={`absolute inset-0 ${isDark ? 'bg-black/50' : ''}`} />
+      <div className="absolute inset-0 bg-black/30" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
@@ -40,21 +37,21 @@ const HeroSection = () => {
             className="space-y-6"
           >
             <div>
-              <h1 className={`text-5xl md:text-6xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <h1 className="text-5xl md:text-6xl font-bold mb-2 text-white">
                 Diyorbek
               </h1>
-              <p className={`text-lg ${isDark ? 'text-white/80' : 'text-gray-700'}`}>
+              <p className="text-lg text-white/80">
                 Mechanical engineering student at{' '}
                 <a 
                   href="https://newuu.uz" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className={`underline transition-colors ${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-gray-900 hover:text-gray-700'}`}
+                  className="underline transition-colors text-blue-400 hover:text-blue-300"
                 >
                   NewUU
                 </a>
               </p>
-              <p className={`text-lg italic ${isDark ? 'text-white/60' : 'text-gray-600'}`}>
+              <p className="text-lg italic text-white/60">
                 Turning ideas into real, working products.
               </p>
             </div>
@@ -64,11 +61,7 @@ const HeroSection = () => {
               {tags.map((tag) => (
                 <span 
                   key={tag}
-                  className={`px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm ${
-                    isDark 
-                      ? 'bg-white/10 border border-white/20 text-white/90' 
-                      : 'bg-violet-900/10 border border-violet-300/40 text-violet-900'
-                  }`}
+                  className="px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm bg-white/10 border border-white/20 text-white/90"
                 >
                   {tag}
                 </span>
@@ -93,11 +86,7 @@ const HeroSection = () => {
                 <Button 
                   size="lg"
                   variant="outline"
-                  className={`backdrop-blur-sm font-semibold px-6 ${
-                    isDark 
-                      ? 'bg-white/10 border-white/20 text-white hover:bg-white/20' 
-                      : 'bg-white/60 border-violet-300/50 text-violet-900 hover:bg-white/80'
-                  }`}
+                  className="backdrop-blur-sm font-semibold px-6 bg-white/10 border-white/20 text-white hover:bg-white/20"
                 >
                   Portfolio
                 </Button>
@@ -109,11 +98,7 @@ const HeroSection = () => {
                 <Button 
                   size="lg"
                   variant="outline"
-                  className={`backdrop-blur-sm font-semibold px-6 gap-2 ${
-                    isDark 
-                      ? 'bg-white/10 border-white/20 text-white hover:bg-white/20' 
-                      : 'bg-white/60 border-violet-300/50 text-violet-900 hover:bg-white/80'
-                  }`}
+                  className="backdrop-blur-sm font-semibold px-6 gap-2 bg-white/10 border-white/20 text-white hover:bg-white/20"
                 >
                   <Download className="w-4 h-4" />
                   Resume
@@ -129,14 +114,10 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative max-w-[80%] mx-auto"
           >
-            <div className={`relative rounded-3xl overflow-hidden backdrop-blur-sm p-3 shadow-2xl ${
-              isDark 
-                ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/20' 
-                : 'bg-gradient-to-br from-white/80 to-white/60 border border-violet-200/50'
-            }`}>
+            <div className="relative rounded-3xl overflow-hidden backdrop-blur-sm p-3 shadow-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20">
               {/* Decorative elements */}
-              <div className={`absolute top-4 left-4 w-16 h-16 border-2 rounded-full ${isDark ? 'border-blue-400/30' : 'border-violet-400/40'}`} />
-              <div className={`absolute bottom-4 right-4 w-20 h-20 border-2 rounded-full ${isDark ? 'border-purple-400/30' : 'border-indigo-400/40'}`} />
+              <div className="absolute top-4 left-4 w-16 h-16 border-2 rounded-full border-blue-400/30" />
+              <div className="absolute bottom-4 right-4 w-20 h-20 border-2 rounded-full border-purple-400/30" />
               
               {/* Floating animated circle - bottom left */}
               <motion.div
@@ -150,11 +131,7 @@ const HeroSection = () => {
                   repeat: Infinity, 
                   ease: "easeInOut" 
                 }}
-                className={`absolute -bottom-3 -left-3 w-14 h-14 rounded-full shadow-lg z-10 ${
-                  isDark 
-                    ? 'bg-gradient-to-br from-cyan-400 to-blue-500 shadow-cyan-400/40' 
-                    : 'bg-gradient-to-br from-violet-400 to-indigo-500 shadow-violet-400/40'
-                }`}
+                className="absolute -bottom-3 -left-3 w-14 h-14 rounded-full shadow-lg z-10 bg-gradient-to-br from-cyan-400 to-blue-500 shadow-cyan-400/40"
               />
               
               {/* Image */}
@@ -165,7 +142,7 @@ const HeroSection = () => {
                   className="w-full h-auto object-cover"
                 />
                 {/* Gradient overlay */}
-                <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-t from-purple-900/20 to-transparent' : 'bg-gradient-to-t from-violet-500/10 to-transparent'}`} />
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent" />
               </div>
             </div>
           </motion.div>
