@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Send, Instagram, Twitter } from "lucide-react";
+import { Linkedin, Send, Instagram, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -17,11 +17,6 @@ const Footer = () => {
     { name: "diyorbek-k", href: "https://www.linkedin.com/in/diyorbek-k/", icon: Linkedin },
   ];
 
-  const socialLinks = [
-    { icon: Send, href: "https://t.me/Wolfie_08", label: "Telegram" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/diyorbek-k/", label: "LinkedIn" },
-    { icon: Github, href: "https://github.com/Wolfie-07", label: "GitHub" },
-  ];
 
   return (
     <footer className="bg-muted/30 border-t border-border">
@@ -35,23 +30,6 @@ const Footer = () => {
               Bridging engineering fundamentals with innovative solutions through continuous learning, problem-solving, and collaborative development.
             </p>
             
-            {/* Social Links */}
-            <div className="flex space-x-4 pt-4">
-              {socialLinks.map((link) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-2 rounded-full bg-foreground text-background hover:bg-foreground/80 transition-colors"
-                  aria-label={link.label}
-                >
-                  <link.icon className="w-5 h-5" />
-                </motion.a>
-              ))}
-            </div>
           </div>
 
           {/* Middle Section - Navigation */}

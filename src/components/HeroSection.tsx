@@ -27,7 +27,7 @@ const HeroSection = () => {
       </video>
       
       {/* Overlay for readability */}
-      <div className={`absolute inset-0 ${isDark ? 'bg-black/50' : 'bg-white/40'}`} />
+      <div className={`absolute inset-0 ${isDark ? 'bg-black/50' : ''}`} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
@@ -49,7 +49,7 @@ const HeroSection = () => {
                   href="https://newuu.uz" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className={`underline transition-colors ${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-violet-600 hover:text-violet-500'}`}
+                  className={`underline transition-colors ${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-gray-900 hover:text-gray-700'}`}
                 >
                   NewUU
                 </a>
