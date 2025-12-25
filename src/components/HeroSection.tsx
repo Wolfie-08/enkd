@@ -79,9 +79,8 @@ const HeroSection = () => {
                 </Button>
               </Link>
               <a 
-                href="https://drive.google.com/drive/folders/your-portfolio-folder" 
-                target="_blank" 
-                rel="noopener noreferrer"
+                href="/Portfolio.pdf" 
+                download
               >
                 <Button 
                   size="lg"
