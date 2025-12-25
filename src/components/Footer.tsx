@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Send } from "lucide-react";
+import { Github, Linkedin, Send, Instagram, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -11,10 +11,10 @@ const Footer = () => {
   ];
 
   const connectLinks = [
-    { name: "Future Vision", href: "#contact" },
-    { name: "Collaboration", href: "#contact" },
-    { name: "Newsletter", href: "#contact" },
-    { name: "Speaking", href: "#contact" },
+    { name: "@kdiyor_17", href: "https://t.me/kdiyor_17", icon: Send },
+    { name: "@kwolfie_17", href: "https://www.instagram.com/kwolfie_17/", icon: Instagram },
+    { name: "@Enkd127", href: "https://x.com/Enkd127", icon: Twitter },
+    { name: "diyorbek-k", href: "https://www.linkedin.com/in/diyorbek-k/", icon: Linkedin },
   ];
 
   const socialLinks = [
@@ -83,15 +83,18 @@ const Footer = () => {
           {/* Right Section - Connect */}
           <div className="space-y-4">
             <h4 className="text-lg font-semibold">Connect</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {connectLinks.map((link) => (
                 <li key={link.name}>
-                  <button
-                    onClick={() => document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' })}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2"
                   >
+                    <link.icon className="w-4 h-4" />
                     {link.name}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
