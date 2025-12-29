@@ -131,7 +131,7 @@ const HeroSection = () => {
                   repeat: Infinity, 
                   ease: "easeInOut" 
                 }}
-                className="absolute -bottom-3 -left-3 w-14 h-14 rounded-full shadow-lg z-10 bg-gradient-to-br from-cyan-400 to-blue-500 shadow-cyan-400/40"
+                className="absolute -bottom-3 -left-3 w-14 h-14 rounded-full z-10 border-2 border-cyan-400"
               />
               
               {/* Image */}
