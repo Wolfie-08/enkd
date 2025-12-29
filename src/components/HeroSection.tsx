@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Download } from 'lucide-react';
 import profilePhoto from '@/assets/profile-photo.png';
+import heroBgVideo from '@/assets/hero-bg.mp4';
 import { Button } from './ui/button';
 
 const HeroSection = () => {
@@ -18,9 +19,10 @@ const HeroSection = () => {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover scale-[1.8]"
+        style={{ objectPosition: 'center center' }}
       >
-        <source src="/videos/hero-bg.mp4" type="video/mp4" />
+        <source src={heroBgVideo} type="video/mp4" />
       </video>
       
       {/* Overlay for readability */}
