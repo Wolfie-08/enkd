@@ -71,11 +71,12 @@ const HeroSection = () => {
             </div>
 
             {/* Buttons - All in one row */}
-            <div className="flex flex-wrap gap-3 pt-4">
+            <div className="flex flex-wrap gap-4 pt-4">
               <Link to="/projects">
                 <Button 
                   size="lg"
-                  className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold px-6"
+                  variant="glossy"
+                  className="font-semibold px-8"
                 >
                   View Projects
                 </Button>
@@ -86,8 +87,8 @@ const HeroSection = () => {
               >
                 <Button 
                   size="lg"
-                  variant="outline"
-                  className="backdrop-blur-sm font-semibold px-6 gap-2 bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  variant="glossyDark"
+                  className="font-semibold px-6 gap-2"
                 >
                   <Download className="w-4 h-4" />
                   Portfolio
@@ -99,8 +100,8 @@ const HeroSection = () => {
               >
                 <Button 
                   size="lg"
-                  variant="outline"
-                  className="backdrop-blur-sm font-semibold px-6 gap-2 bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  variant="glossyLight"
+                  className="font-semibold px-6 gap-2"
                 >
                   <Download className="w-4 h-4" />
                   Resume
