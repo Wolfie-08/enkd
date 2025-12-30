@@ -37,7 +37,7 @@ const HeroSection = () => {
                   NewUU
                 </a>
               </p>
-              <p className="text-xl italic text-muted-foreground/60">
+              <p className="text-muted-foreground/60">
                 Turning ideas into real, working products.
               </p>
             </div>
