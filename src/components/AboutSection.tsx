@@ -79,38 +79,31 @@ const AboutSection = () => {
             className="rounded-xl border border-border p-6 bg-card text-card-foreground"
           >
             <h3 className="text-xl font-semibold mb-3">Process</h3>
-            <ol className="space-y-3 list-decimal list-inside text-sm text-muted-foreground">
+            <ol className="space-y-3 list-decimal list-inside text-sm text-muted-foreground mb-6">
               <li>Understand the problem and constraints.</li>
               <li>Prototype quickly and test assumptions.</li>
               <li>Refine the solution and polish details.</li>
             </ol>
+
+            <h3 className="text-xl font-semibold mb-4">Skills & Tools</h3>
+            <div className="flex flex-wrap gap-2">
+              {skills.map((s, index) => (
+                <motion.span
+                  key={s}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  whileHover={{ scale: 1.1 }}
+                  className="px-3 py-1 text-xs rounded-md bg-muted/50 text-muted-foreground cursor-default"
+                >
+                  {s}
+                </motion.span>
+              ))}
+            </div>
           </motion.div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 rounded-xl border border-border p-6 bg-card text-card-foreground"
-        >
-          <h3 className="text-xl font-semibold mb-4">Skills & Tools</h3>
-          <div className="flex flex-wrap gap-2">
-            {skills.map((s, index) => (
-              <motion.span
-                key={s}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                whileHover={{ scale: 1.1 }}
-                className="px-3 py-1 text-xs rounded-md bg-muted/50 text-muted-foreground cursor-default"
-              >
-                {s}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
