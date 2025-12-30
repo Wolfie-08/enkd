@@ -32,7 +32,7 @@ const HeroSection = () => {
                   href="https://newuu.uz" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="underline transition-colors text-primary hover:text-primary/80"
+                  className="hover:text-primary/80"
                 >
                   NewUU
                 </a>
