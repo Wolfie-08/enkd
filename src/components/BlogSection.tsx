@@ -7,16 +7,24 @@ const articles = [
     icon: BookOpen,
     title: "My Articles on Medium",
     description: "Technical writings and personal insights on engineering, development, and innovation.",
-    link: "https://medium.com/@enkd",
+    link: "https://medium.com/@kdiyorbek133",
     linkText: "Read on Medium",
   },
   {
     type: "Academic",
     icon: GraduationCap,
-    title: "Published in American Journals of Education and Learning",
+    title: "Published in American Journal of Education and Learning",
     description: "Academic research and scholarly contributions to the field of education and learning methodologies.",
-    link: "#",
+    link: "https://advancedscienti.com/index.php/AJEL/article/view/1609",
     linkText: "View Publication",
+  },
+  {
+    type: "Social",
+    icon: BookOpen,
+    title: "I write here",
+    description: "I share interesting thoughts, reflections, experiences, opportunities",
+    link: "https://t.me/enkdblog",
+    linkText: "Read on Telegram",
   },
 ];
 
