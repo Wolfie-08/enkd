@@ -60,7 +60,7 @@ const Navigation = () => {
             onClick={() => navigate('/')}
           >
             <Code className="h-5 w-5 text-primary" />
-            <span className="text-sm font-bold text-foreground hidden sm:inline">Wolfie_e</span>
+            <span className="text-sm font-bold text-foreground hidden sm:inline">Enkd</span>
           </motion.div>
 
           {/* Desktop Navigation */}

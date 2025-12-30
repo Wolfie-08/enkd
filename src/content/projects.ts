@@ -39,7 +39,7 @@ export const projects: Project[] = [
     status: "In Development",
     color: "from-cyan-400 to-blue-500",
     version: "v1.0",
-    links: { live: "https://mubl-bootcamp.vercel.app/" },
+    links: { live: "https://bootcamp.mubl.uz" },
     slug: "mubl-bootcamp",
     caseStudy: {
       problem: [

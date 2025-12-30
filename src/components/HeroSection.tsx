@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Download } from 'lucide-react';
 import profilePhoto from '@/assets/profile-photo.png';
-import heroBgVideo from '@/assets/hero-bg.mp4';
 import { Button } from './ui/button';
 
 const HeroSection = () => {
@@ -11,23 +10,8 @@ const HeroSection = () => {
   return (
     <section 
       id="home"
-      className="min-h-screen relative overflow-hidden"
+      className="min-h-screen relative overflow-hidden bg-background"
     >
-      {/* Video Background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover scale-[1.8]"
-        style={{ objectPosition: 'center center' }}
-      >
-        <source src={heroBgVideo} type="video/mp4" />
-      </video>
-      
-      {/* Overlay for readability */}
-      <div className="absolute inset-0 bg-black/30" />
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
           
@@ -36,24 +20,24 @@ const HeroSection = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-6"
+            className="space-y-7 scale-110 origin-left"
           >
             <div>
-              <h1 className="text-5xl md:text-6xl font-bold mb-2 text-white">
+              <h1 className="text-6xl md:text-7xl font-bold mb-2 text-foreground">
                 Diyorbek
               </h1>
-              <p className="text-lg text-white/80">
+              <p className="text-xl text-muted-foreground">
                 Mechanical engineering student at{' '}
                 <a 
                   href="https://newuu.uz" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="underline transition-colors text-blue-400 hover:text-blue-300"
+                  className="underline transition-colors text-primary hover:text-primary/80"
                 >
                   NewUU
                 </a>
               </p>
-              <p className="text-lg italic text-white/60">
+              <p className="text-xl italic text-muted-foreground/60">
                 Turning ideas into real, working products.
               </p>
             </div>
@@ -63,7 +47,7 @@ const HeroSection = () => {
               {tags.map((tag) => (
                 <span 
                   key={tag}
-                  className="px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm bg-white/10 border border-white/20 text-white/90"
+                  className="px-5 py-2.5 rounded-full text-base font-medium backdrop-blur-sm bg-muted/50 border border-border text-foreground/90"
                 >
                   {tag}
                 </span>
@@ -76,7 +60,7 @@ const HeroSection = () => {
                 <Button 
                   size="lg"
                   variant="glossy"
-                  className="font-semibold px-8"
+                  className="font-semibold px-8 text-base"
                 >
                   View Projects
                 </Button>
@@ -88,9 +72,9 @@ const HeroSection = () => {
                 <Button 
                   size="lg"
                   variant="glossyDark"
-                  className="font-semibold px-6 gap-2"
+                  className="font-semibold px-6 gap-2 text-base"
                 >
-                  <Download className="w-4 h-4" />
+                  <Download className="w-5 h-5" />
                   Portfolio
                 </Button>
               </a>
@@ -101,9 +85,9 @@ const HeroSection = () => {
                 <Button 
                   size="lg"
                   variant="glossyLight"
-                  className="font-semibold px-6 gap-2"
+                  className="font-semibold px-6 gap-2 text-base"
                 >
-                  <Download className="w-4 h-4" />
+                  <Download className="w-5 h-5" />
                   Resume
                 </Button>
               </a>
@@ -115,11 +99,11 @@ const HeroSection = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative max-w-[80%] mx-auto"
+            className="relative max-w-[85%] mx-auto scale-110 origin-center"
           >
-            <div className="relative rounded-3xl overflow-hidden backdrop-blur-sm p-3 shadow-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20">
+            <div className="relative rounded-3xl overflow-hidden backdrop-blur-sm p-3 shadow-2xl bg-gradient-to-br from-muted/30 to-muted/10 border border-border">
               {/* Decorative elements */}
-              <div className="absolute top-4 left-4 w-16 h-16 border-2 rounded-full border-blue-400/30" />
+              <div className="absolute top-4 left-4 w-16 h-16 border-2 rounded-full border-primary/30" />
               <div className="absolute bottom-4 right-4 w-20 h-20 border-2 rounded-full border-purple-400/30" />
               
               {/* Floating animated circle - bottom left */}
@@ -134,7 +118,7 @@ const HeroSection = () => {
                   repeat: Infinity, 
                   ease: "easeInOut" 
                 }}
-                className="absolute -bottom-3 -left-3 w-14 h-14 rounded-full z-10 border-2 border-cyan-400"
+                className="absolute -bottom-3 -left-3 w-14 h-14 rounded-full z-10 border-2 border-primary"
               />
               
               {/* Image */}
@@ -145,7 +129,7 @@ const HeroSection = () => {
                   className="w-full h-auto object-cover"
                 />
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent" />
               </div>
             </div>
           </motion.div>
