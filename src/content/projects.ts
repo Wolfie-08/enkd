@@ -36,7 +36,7 @@ export const projects: Project[] = [
       "A hands-on intensive designed for students to develop technical and creative skills in robotics, 3D modeling & printing, and strategic project development. Students will form teams and present final projects.",
     tags: ["3D Printing", "AI", "Robotics", "Education", "Workshop"],
     icon: Cpu,
-    status: "In Development",
+    status: "Live",
     color: "from-cyan-400 to-blue-500",
     version: "v1.0",
     links: { live: "https://bootcamp.mubl.uz" },
