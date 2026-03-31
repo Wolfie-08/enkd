@@ -22,6 +22,7 @@ const defaultSongs: Song[] = [
   { id: "4", title: "Vagabond", artist: "Wolfmother", src: "/audio/vagabond1.m4a", cover: "/images/covers/vagabond1.jpg" },
   { id: "5", title: "Army Dreamers", artist: "Kate Bush", src: "/audio/dreamers.m4a", cover: "/images/covers/dreamers.jpg" },
   { id: "6", title: "Ordinary", artist: "Alex Warren", src: "/audio/ordinary.m4a", cover: "/images/covers/ordinary.jpg" },
+  { id: "7", title: "Let It Happen", artist: "Tame Impala", src: "/audio/let_it_happen.m4a", cover: "/images/covers/let_it_happen.jpg" },
 ];
 
 const MusicPlayer = () => {
@@ -126,8 +127,8 @@ const MusicPlayer = () => {
         dataArrayRef.current.forEach((value) => {
           const barHeight = value * 0.7;
           const gradient = ctx.createLinearGradient(0, 0, 0, canvasRef.current.height);
-          gradient.addColorStop(0, "#1db954");
-          gradient.addColorStop(1, "#191414");
+          gradient.addColorStop(0, "#f59e0b");
+          gradient.addColorStop(1, "#78350f");
           ctx.fillStyle = gradient;
           ctx.fillRect(x, canvasRef.current.height - barHeight, barWidth, barHeight);
           x += barWidth + 1;
@@ -274,7 +275,7 @@ const MusicPlayer = () => {
         <div className="max-h-64 overflow-y-auto mt-6">
           <h4 className="text-white/80 text-sm font-medium mb-3 flex justify-between">
             Up Next
-            <button className="text-green-400 hover:text-green-300">
+            <button className="text-primary hover:text-orange-300">
               <PlusCircle className="w-4 h-4" />
             </button>
           </h4>

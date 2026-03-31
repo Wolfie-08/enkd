@@ -1,4 +1,4 @@
-import { Globe, BookOpen, Bot, Sun, Code, Rocket, Cpu } from "lucide-react";
+import { Globe, BookOpen, Bot, Sun, Code, Rocket, Cpu, Gauge } from "lucide-react";
 
 export type CaseStudy = {
   problem: string[];
@@ -24,12 +24,107 @@ export type Project = {
   version: string;
   links: { github?: string; live?: string; demo?: string };
   slug: string;
+  image?: string;
+  imageAlt?: string;
   caseStudy?: CaseStudy;
 };
 
 const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 export const projects: Project[] = [
+  {
+    title: "Hogwarts Research Community",
+    description:
+      "Premium academic community platform for students interested in research, innovation, and solving real-world problems, with public pages, member workflows, and admin tools in one product.",
+    tags: ["Next.js", "TypeScript", "Supabase", "Research", "Community", "Education"],
+    icon: BookOpen,
+    status: "Live",
+    color: "from-amber-400 to-orange-500",
+    version: "v1.0",
+    links: { live: "https://hogwarts.enkd.uz" },
+    slug: slugify("Hogwarts Research Community"),
+    caseStudy: {
+      problem: [
+        "Student researchers need more than a brochure site; they need a platform that explains the community, supports participation, and gives progress visibility.",
+        "Opportunities like challenges, resources, webinars, and member recognition are easy to fragment across chats, forms, and spreadsheets.",
+        "Admins need a manageable system for applications, content, and member-facing workflows without maintaining separate tools."
+      ],
+      approach: [
+        "Built a unified platform that combines a premium public-facing brand experience with a member workspace and admin surface.",
+        "Structured the product around real community actions: learning through resources, practicing through challenges, and belonging through visible progress and recognition.",
+        "Used an academic visual language with gold-accent branding and clear information architecture to make the community feel credible from the first visit."
+      ],
+      iterations: [
+        "Mapped the experience into public, member, and admin journeys instead of treating the site as a single landing page.",
+        "Refined the content model to support challenges, resources, webinars, badges, submissions, and notifications with room to grow.",
+        "Added Supabase-backed production paths while preserving mock-data browsing so the UI stays useful even before full environment setup."
+      ],
+      technical: {
+        stack: ["Next.js 16", "TypeScript", "Tailwind CSS", "shadcn/ui", "Supabase"],
+        details: [
+          "App Router architecture with distinct public, member, and admin surfaces inside a single codebase.",
+          "Supabase Auth, Postgres, and Storage for profiles, challenges, submissions, resources, badges, and notifications.",
+          "Typed content/query helpers and markdown rendering to keep the content model maintainable as the community scales."
+        ]
+      },
+      outcomes: {
+        results: [
+          "Turned the community into a product with a clear identity instead of a collection of disconnected pages and forms.",
+          "Created a stronger foundation for member onboarding, structured practice, and public recognition.",
+          "Made the platform ready for both demo-mode exploration and production-backed community operations."
+        ]
+      }
+    }
+  },
+  {
+    title: "MUBL Engineering Club",
+    description:
+      "Official website for the student-led engineering club at New Uzbekistan University, showcasing projects, events, achievements, and a clear path for new members to join.",
+    tags: ["React", "TypeScript", "Engineering", "Robotics", "Community", "Education"],
+    icon: Rocket,
+    status: "Live",
+    color: "from-sky-400 to-cyan-500",
+    version: "v1.0",
+    links: { live: "https://mubl.uz" },
+    slug: slugify("MUBL Engineering Club"),
+    caseStudy: {
+      problem: [
+        "Engineering clubs often do strong technical work but struggle to present it coherently to students, partners, and competition audiences.",
+        "Recruitment, achievements, events, and project output were easier to understand internally than from the outside.",
+        "The club needed a digital home that communicates momentum and standards, not just a static information page."
+      ],
+      approach: [
+        "Designed the site around the club's actual operating rhythm: projects, competitions, events, achievements, and member onboarding.",
+        "Positioned MUBL as a serious student engineering community with clear messaging around hands-on work, mentorship, and public outcomes.",
+        "Built a responsive, content-led experience that helps visitors quickly understand what the club builds and how to get involved."
+      ],
+      iterations: [
+        "Sharpened the homepage narrative around research, building, publishing, and leadership rather than generic club language.",
+        "Expanded the structure to include dedicated sections for achievements, projects, resources, partner outreach, and applications.",
+        "Refined visual hierarchy and content blocks so the site supports both recruitment and external credibility."
+      ],
+      technical: {
+        stack: ["React", "TypeScript", "Vite", "Tailwind CSS", "shadcn/ui"],
+        details: [
+          "Modular Vite app with reusable sections for hero, about, events, projects, achievements, and join flows.",
+          "Tailwind- and component-driven design system used to keep the experience consistent across marketing and club-content pages.",
+          "Built for fast iteration on club updates while preserving a polished front door for public visitors."
+        ]
+      },
+      outcomes: {
+        results: [
+          "Gave MUBL a clearer public identity as a student-led engineering club that builds real systems and competes seriously.",
+          "Made projects, events, and club achievements easier to browse for both prospective members and external collaborators.",
+          "Created a better recruitment funnel by connecting brand storytelling directly to the join flow."
+        ],
+        metrics: [
+          { label: "Active members", value: "50+" },
+          { label: "Projects built", value: "15+" },
+          { label: "Competition wins", value: "5+" }
+        ]
+      }
+    }
+  },
   {
     title: "MUBL Bootcamp",
     description:
@@ -70,6 +165,57 @@ export const projects: Project[] = [
           "Currently in development phase with v1.0 launch planned.",
           "Building partnerships with local makerspaces and tech communities.",
           "Preparing comprehensive curriculum for diverse skill levels."
+        ]
+      }
+    }
+  },
+  {
+    title: "CanSat Live Dashboard",
+    description:
+      "Real-time mission dashboard for CanSat telemetry, built with Grafana, InfluxDB, and a Python bridge that turns live packets into operator-friendly charts, alerts, and maps.",
+    tags: ["Grafana", "InfluxDB", "Python", "Telemetry", "CanSat", "Aerospace"],
+    icon: Gauge,
+    status: "Completed",
+    color: "from-violet-500 to-emerald-400",
+    version: "v1.0",
+    links: {},
+    slug: slugify("CanSat Live Dashboard"),
+    image: "/images/projects/cansat-live-dashboard.jpg",
+    imageAlt: "CanSat Live Dashboard showing mission telemetry, battery voltage, packet loss, GPS map, and flight charts in Grafana.",
+    caseStudy: {
+      problem: [
+        "During CanSat tests and launches, operators need one surface for phase, battery, altitude, pressure, orientation, UV, and GPS instead of reading raw telemetry lines.",
+        "Incoming packets are useful only after parsing, structuring, and storing them in a time-series backend that supports fast live queries.",
+        "The team needed a monitoring setup that works during flight and remains useful afterwards for review and debugging."
+      ],
+      approach: [
+        "Built a telemetry pipeline where a Python bridge receives and normalizes incoming flight data before writing timestamped measurements into InfluxDB.",
+        "Designed a Grafana dashboard around actual mission decisions: filters for team, device, and mission, plus high-priority views for mission phase, voltage, packet loss, map position, and sensor trends.",
+        "Kept the system modular so packet parsing, field naming, and dashboard panels can evolve without rebuilding the whole observability flow."
+      ],
+      iterations: [
+        "Started with raw telemetry logging and basic time-series panels to validate the field schema and packet parsing.",
+        "Split mission, team, and device metadata into queryable tags so operators can filter and compare test runs quickly.",
+        "Added derived views such as acceleration magnitude and GPS mapping to make the dashboard more useful during live operations."
+      ],
+      technical: {
+        stack: ["Grafana", "InfluxDB", "Python", "Telemetry Pipeline", "LoRa/ESP32 data feed"],
+        details: [
+          "Python bridge parses inbound telemetry packets and writes structured, timestamped measurements into InfluxDB.",
+          "Grafana refreshes on a short interval and exposes live panels for mission phase, battery voltage, packet loss, GPS position, altitude, temperature, pressure, roll, pitch, yaw, UV, and acceleration.",
+          "The time-series model separates tags from numeric fields so filtering stays fast across missions, devices, and post-flight analysis sessions."
+        ]
+      },
+      outcomes: {
+        results: [
+          "Turned raw flight telemetry into a readable mission console that supports both live monitoring and post-flight review.",
+          "Reduced operator friction by keeping the most important mission signals on a single dashboard instead of scattered tools and logs.",
+          "Created a reusable aerospace telemetry foundation for future CanSat tests, demos, and dashboard extensions."
+        ],
+        metrics: [
+          { label: "Refresh cadence", value: "5s" },
+          { label: "Core dashboard views", value: "8+" },
+          { label: "Telemetry path", value: "Python -> InfluxDB -> Grafana" }
         ]
       }
     }
@@ -178,7 +324,7 @@ export const projects: Project[] = [
   {
     title: "Learn Through Fun",
     description:
-      "Co-Founder & Web Developer - Interactive STEM education platform for students in Uzbekistan. Discover hands-on projects, virtual experiments, and join a community of curious minds.",
+      "Founder & Web Developer - Interactive STEM education platform for students in Uzbekistan. Discover hands-on projects, virtual experiments, and join a community of curious minds.",
     tags: ["Education", "STEM", "Interactive", "React", "Community"],
     icon: BookOpen,
     status: "Live",
@@ -442,4 +588,3 @@ export const projects: Project[] = [
     }
   }
 ];
-

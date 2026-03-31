@@ -54,6 +54,16 @@ export default function ProjectDetail() {
           )}
         </div>
 
+        {project.image && (
+          <figure className="mb-10 overflow-hidden rounded-2xl border border-border bg-card/80 shadow-xl shadow-black/5">
+            <img
+              src={project.image}
+              alt={project.imageAlt ?? `${project.title} preview`}
+              className="w-full object-cover"
+            />
+          </figure>
+        )}
+
         {project.caseStudy ? (
           <div className="space-y-6">
             <section className="rounded-xl border border-border p-6 bg-card text-card-foreground">

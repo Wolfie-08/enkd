@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { CheckCircle, Circle, ArrowRight, Calendar, Users, Code, Zap } from 'lucide-react';
+import { CheckCircle, Circle, ArrowRight, Calendar, Users, Zap } from 'lucide-react';
 
 const TimelineSection = () => {
   const [ref, inView] = useInView({
@@ -22,8 +22,8 @@ const TimelineSection = () => {
         'Basic user interactions'
       ],
       icon: CheckCircle,
-      color: 'text-green-400',
-      bgColor: 'bg-green-400/10'
+      color: 'text-amber-500',
+      bgColor: 'bg-amber-500/10'
     },
     {
       version: 'V2',
@@ -38,8 +38,8 @@ const TimelineSection = () => {
         'User-generated recommendations'
       ],
       icon: Users,
-      color: 'text-green-400',
-      bgColor: 'bg-green-400/10'
+      color: 'text-amber-500',
+      bgColor: 'bg-amber-500/10'
     },
     {
       version: 'V3',
@@ -70,8 +70,8 @@ const TimelineSection = () => {
         'Smart scheduling'
       ],
       icon: ArrowRight,
-      color: 'text-muted-foreground',
-      bgColor: 'bg-muted/10'
+      color: 'text-stone-500 dark:text-stone-300',
+      bgColor: 'bg-stone-500/10'
     },
     {
       version: 'V5',
@@ -86,8 +86,8 @@ const TimelineSection = () => {
         'Travel planning assistant'
       ],
       icon: ArrowRight,
-      color: 'text-muted-foreground',
-      bgColor: 'bg-muted/10'
+      color: 'text-stone-500 dark:text-stone-300',
+      bgColor: 'bg-stone-500/10'
     },
     {
       version: 'V6',
@@ -102,8 +102,8 @@ const TimelineSection = () => {
         'City experience guide'
       ],
       icon: ArrowRight,
-      color: 'text-muted-foreground',
-      bgColor: 'bg-muted/10'
+      color: 'text-stone-500 dark:text-stone-300',
+      bgColor: 'bg-stone-500/10'
     }
   ];
 
@@ -188,10 +188,10 @@ const TimelineSection = () => {
                       </span>
                       <span className={`px-2 py-1 text-xs rounded-full font-semibold ${
                         item.status === 'completed' 
-                          ? 'bg-green-500/20 text-green-400' 
+                          ? 'bg-amber-500/15 text-amber-700 dark:text-amber-300' 
                           : item.status === 'current'
-                          ? 'bg-blue-500/20 text-blue-400'
-                          : 'bg-orange-500/20 text-orange-400'
+                          ? 'bg-primary/15 text-primary'
+                          : 'bg-stone-500/15 text-stone-700 dark:text-stone-300'
                       }`}>
                         {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
                       </span>
@@ -217,8 +217,8 @@ const TimelineSection = () => {
                         className="flex items-center space-x-2"
                       >
                         <div className={`w-2 h-2 rounded-full ${
-                          item.status === 'completed' ? 'bg-green-400' :
-                          item.status === 'current' ? 'bg-blue-400' : 'bg-muted-foreground'
+                          item.status === 'completed' ? 'bg-amber-500' :
+                          item.status === 'current' ? 'bg-primary' : 'bg-stone-400'
                         }`}></div>
                         <span className="text-sm text-muted-foreground">
                           {feature}
@@ -240,7 +240,7 @@ const TimelineSection = () => {
           className="mt-16 text-center"
         >
           <div className="card-glow rounded-xl p-8">
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-2xl font-bold text-foreground mb-4">
               The Vision
             </h3>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">

@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Download } from 'lucide-react';
-import profilePhoto from '@/assets/profile-photo.png';
 import { Button } from './ui/button';
+import { HeroGeometricBackground } from './ui/shape-landing-hero';
+import MusicPlayerCard from './ui/music-player-card';
 
 const HeroSection = () => {
   const tags = ['mechanics', 'robotics', 'developer', 'designer'];
@@ -12,6 +13,10 @@ const HeroSection = () => {
       id="home"
       className="min-h-screen relative overflow-hidden bg-background"
     >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,hsl(var(--primary)/0.12),transparent_35%),linear-gradient(180deg,hsl(var(--accent)/0.55),transparent_45%,hsl(var(--background))_100%)] dark:bg-[radial-gradient(circle_at_top,hsl(var(--primary)/0.18),transparent_35%),linear-gradient(180deg,hsl(var(--background))_0%,transparent_45%,hsl(var(--background))_100%)]" />
+      <HeroGeometricBackground className="opacity-70 dark:opacity-90" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-transparent to-background pointer-events-none" />
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
           
@@ -94,44 +99,14 @@ const HeroSection = () => {
             </div>
           </motion.div>
 
-          {/* Right Side - Image Card */}
+          {/* Right Side - Audio Player */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative max-w-[85%] mx-auto scale-110 origin-center"
+            className="relative w-full max-w-md mx-auto"
           >
-            <div className="relative rounded-3xl overflow-hidden backdrop-blur-sm p-3 shadow-2xl bg-gradient-to-br from-muted/30 to-muted/10 border border-border">
-              {/* Decorative elements */}
-              <div className="absolute top-4 left-4 w-16 h-16 border-2 rounded-full border-primary/30" />
-              <div className="absolute bottom-4 right-4 w-20 h-20 border-2 rounded-full border-purple-400/30" />
-              
-              {/* Floating animated circle - bottom left */}
-              <motion.div
-                animate={{ 
-                  y: [0, -15, 0],
-                  x: [0, 8, 0],
-                  scale: [1, 1.1, 1]
-                }}
-                transition={{ 
-                  duration: 4, 
-                  repeat: Infinity, 
-                  ease: "easeInOut" 
-                }}
-                className="absolute -bottom-3 -left-3 w-14 h-14 rounded-full z-10 border-2 border-primary"
-              />
-              
-              {/* Image */}
-              <div className="relative rounded-2xl overflow-hidden">
-                <img 
-                  src={profilePhoto} 
-                  alt="Diyorbek - Mechanical Engineering Student"
-                  className="w-full h-auto object-cover"
-                />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent" />
-              </div>
-            </div>
+            <MusicPlayerCard className="mx-auto" />
           </motion.div>
 
         </div>
