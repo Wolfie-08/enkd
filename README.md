@@ -1,73 +1,56 @@
-# Welcome to your Lovable project
+# Diyorbek Komilov Portfolio
 
-## Project info
+Personal portfolio website built with React, TypeScript, Vite, Tailwind CSS, and shadcn/ui.
 
-**URL**: https://lovable.dev/projects/2b8e00f9-03fe-45d8-8a44-83686313fd85
+## Stack
 
-## How can I edit this code?
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui
+- Framer Motion
+- React Router
 
-There are several ways of editing your application.
+## Local Development
 
-**Use Lovable**
+Requirements:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/2b8e00f9-03fe-45d8-8a44-83686313fd85) and start prompting.
+- Node.js
+- npm
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Run locally:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The dev server starts on the default Vite port unless overridden.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Build
 
-**Use GitHub Codespaces**
+Create a production build with:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```sh
+npm run build
+```
 
-## What technologies are used for this project?
+Preview the production build locally with:
 
-This project is built with:
+```sh
+npm run preview
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Project Structure
 
-## How can I deploy this project?
+- `src/components` – page sections and shared UI composition
+- `src/components/ui` – shadcn/ui primitives and custom UI components
+- `src/content` – structured portfolio content such as projects
+- `src/pages` – route-level pages
+- `public` – static assets such as audio, PDFs, and images
 
-Simply open [Lovable](https://lovable.dev/projects/2b8e00f9-03fe-45d8-8a44-83686313fd85) and click on Share -> Publish.
+## Notes
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- Project and case study content is managed in `src/content/projects.ts`.
+- Static assets used by the hero music player live under `public/audio` and `public/images/covers`.
