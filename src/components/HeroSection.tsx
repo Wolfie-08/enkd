@@ -71,8 +71,9 @@ const HeroSection = () => {
                 </Button>
               </Link>
               <a 
-                href="/Portfolio.pdf" 
-                download
+                href="https://canva.link/zjx3tfeuu40lgkr"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Button 
                   size="lg"
