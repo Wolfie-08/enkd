@@ -11,10 +11,11 @@ const Footer = () => {
   ];
 
   const connectLinks = [
-    { name: "@kdiyor_17", href: "https://t.me/kdiyor_17", icon: Send },
-    { name: "@kwolfie_17", href: "https://www.instagram.com/kwolfie_17/", icon: Instagram },
+    { name: "@kdiyor_18", href: "https://t.me/kdiyor_17", icon: Send },
+    { name: "@kwolfie_18", href: "https://www.instagram.com/kwolfie_18/", icon: Instagram },
     { name: "@Enkd127", href: "https://x.com/Enkd127", icon: Twitter },
     { name: "diyorbek-k", href: "https://www.linkedin.com/in/diyorbek-k/", icon: Linkedin },
+    { name: "diyorbek@enkd.uz", href: "mailto:diyorbek@enkd.uz", icon: Email },
   ];
 
 
