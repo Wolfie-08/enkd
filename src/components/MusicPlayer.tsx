@@ -204,7 +204,7 @@ const MusicPlayer = () => {
             className="flex items-center gap-3 hover:opacity-80 transition-opacity"
           >
             <div className="w-8 h-8 rounded-full bg-[#1db954] flex items-center justify-center">
-              <img src="/lovable-uploads/db3350e4-2750-416f-b423-1570826edd6d.png" alt="Spotify" className="w-6 h-6" />
+              <svg viewBox="0 0 24 24" className="w-5 h-5 fill-black" aria-label="Spotify"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3c-.2.4-.7.5-1 .3-2.8-1.7-6.4-2.1-10.6-1.2-.4.1-.8-.2-.9-.6-.1-.4.2-.8.6-.9 4.6-1 8.5-.6 11.7 1.3.3.3.4.8.2 1.1zm1.5-3.3c-.3.4-.8.6-1.3.3-3.2-2-8.2-2.6-12-1.4-.5.1-1-.1-1.2-.6-.1-.5.1-1 .6-1.2 4.4-1.3 9.8-.7 13.5 1.6.5.3.6.9.4 1.3zm.1-3.4C15.2 8.3 8.9 8.1 5.2 9.2c-.6.2-1.2-.2-1.4-.7-.2-.6.2-1.2.7-1.4 4.3-1.3 11.3-1 15.7 1.6.5.3.7 1 .4 1.5-.3.5-1 .7-1.5.4z"/></svg>
             </div>
             <span className="text-white font-semibold">Spotify</span>
           </a>
