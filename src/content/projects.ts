@@ -47,6 +47,7 @@ export const projects: Project[] = [
     version: "v2.0",
     links: { live: "https://rsef.uz" },
     slug: "rsef",
+    image: "/images/projects/rsef.uz.jpg",
     caseStudy: {
       problem: [
         "A fair spanning five countries needed one place for guidelines, applications, news and results in three languages.",
@@ -95,8 +96,9 @@ export const projects: Project[] = [
     status: "In Development",
     color: "from-rose-400 to-orange-400",
     version: "v0.1",
-    links: {},
-    slug: "hunar"
+    links: { live: "https://hunaruz.vercel.app" },
+    slug: "hunar",
+    image: "/images/projects/hunaruz.vercel.app.jpg",
   },
   {
     title: "Osonqur",
@@ -108,7 +110,8 @@ export const projects: Project[] = [
     color: "from-lime-400 to-emerald-500",
     version: "v1.0",
     links: { live: "https://osonqur.uz" },
-    slug: "osonqur"
+    slug: "osonqur",
+    image: "/images/projects/osonqur.vercel.app.jpg",
   },
   {
     title: "Enkd OS",
@@ -167,6 +170,7 @@ export const projects: Project[] = [
     version: "v1.0",
     links: { live: "https://aquaagro.enkd.uz" },
     slug: "aquaferma",
+    image: "/images/projects/aquaagro.enkd.uz.jpg",
     caseStudy: {
       problem: [
         "Feeding decisions on small fish farms are made by rule of thumb, while the right ration changes with water temperature, oxygen and pH.",
@@ -214,6 +218,7 @@ export const projects: Project[] = [
     version: "v1.0",
     links: { live: "https://parfume.enkd.uz" },
     slug: "parfume-shop",
+    image: "/images/projects/parfume.enkd.uz.jpg",
     caseStudy: {
       problem: [
         "Customers order where they already are, in Telegram, and a share of them use phones that cannot open Mini Apps.",
@@ -247,6 +252,20 @@ export const projects: Project[] = [
     }
   },
   {
+    title: "Sedia Chairs — Telegram Shop",
+    group: "Products & Startups",
+    description:
+      "Furniture storefront inside Telegram for Sedia Chairs: catalog, cart and orders as a Mini App and through bot buttons, with promo banners and discounts, and an admin panel for products and orders. UZ/RU.",
+    tags: ["Python", "aiogram 3", "FastAPI", "Supabase", "Cloudflare R2"],
+    icon: ShoppingBag,
+    status: "Live",
+    color: "from-emerald-400 to-teal-600",
+    version: "v1.0",
+    links: { live: "https://sedia.enkd.uz" },
+    slug: "sedia-chairs",
+    image: "/images/projects/sedia.enkd.uz.jpg",
+  },
+  {
     title: "Hogwarts Research Community",
     group: "Community & Events",
     description:
@@ -258,6 +277,7 @@ export const projects: Project[] = [
     version: "v1.0",
     links: { live: "https://hogwarts.enkd.uz" },
     slug: slugify("Hogwarts Research Community"),
+    image: "/images/projects/hogwarts.enkd.uz.jpg",
     caseStudy: {
       problem: [
         "Student researchers need more than a brochure site; they need a platform that explains the community, supports participation, and gives progress visibility.",
@@ -303,6 +323,7 @@ export const projects: Project[] = [
     version: "v1.0",
     links: { live: "https://mubl.uz" },
     slug: slugify("MUBL Engineering Club"),
+    image: "/images/projects/mubl.uz.jpg",
     caseStudy: {
       problem: [
         "Engineering clubs often do strong technical work but struggle to present it coherently to students, partners, and competition audiences.",
@@ -353,6 +374,7 @@ export const projects: Project[] = [
     version: "v1.0",
     links: { live: "https://bootcamp.mubl.uz" },
     slug: "mubl-bootcamp",
+    image: "/images/projects/bootcamp.mubl.uz.jpg",
     caseStudy: {
       problem: [
         "Students lack access to hands-on technical training in emerging technologies like 3D printing, AI, and robotics.",
@@ -451,6 +473,7 @@ export const projects: Project[] = [
       demo: "https://spacefest.newuu.uz"
     },
     slug: "space-fest-2025",
+    image: "/images/projects/spacefest.newuu.uz.jpg",
     caseStudy: {
       problem: [
         "Need to promote space science and technology awareness in Uzbekistan while celebrating UN's World Space Week (October 4-10)",
@@ -503,6 +526,7 @@ export const projects: Project[] = [
     version: "v1.0",
     links: { demo: "https://t.me/portfolio_kd08" },
     slug: slugify("Solar Tracker"),
+    image: "/images/projects/solar-tracker.jpg",
     caseStudy: {
       problem: [
         "Fixed solar panels lose efficiency as the sun moves across the sky.",
@@ -548,6 +572,7 @@ export const projects: Project[] = [
     version: "v1.0",
     links: { github: "#", live: "/" },
     slug: slugify("Portfolio Website"),
+    image: "/images/projects/enkd.uz.jpg",
     caseStudy: {
       problem: [
         "Needed a fast, expressive portfolio that highlights both engineering and design.",
