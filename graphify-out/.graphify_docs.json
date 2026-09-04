@@ -1,0 +1,12 @@
+{"nodes":[
+{"id":"readme_portfolio_site","label":"Diyorbek Komilov Portfolio","file_type":"concept","source_file":"README.md","source_location":null,"rationale":"Personal portfolio website built with React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui, Framer Motion and React Router."},
+{"id":"readme_content_in_projects_ts","label":"Portfolio Content Lives In projects.ts","file_type":"rationale","source_file":"README.md","source_location":null,"rationale":"Project and case study content is managed in src/content/projects.ts rather than hardcoded into components, so adding a case study is a data edit."},
+{"id":"readme_hero_music_player_assets","label":"Hero Music Player Static Assets","file_type":"concept","source_file":"README.md","source_location":null,"rationale":"Static assets used by the hero music player live under public/audio and public/images/covers."},
+{"id":"readme_structure_convention","label":"Component Structure Convention","file_type":"concept","source_file":"README.md","source_location":null,"rationale":"src/components holds page sections and shared UI composition; src/components/ui holds shadcn/ui primitives and custom UI components; src/pages holds route-level pages; src/content holds structured content."}
+],"edges":[
+{"source":"readme_content_in_projects_ts","target":"src_content_projects_casestudy","relation":"references","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"README.md","source_location":null,"weight":1.0},
+{"source":"readme_portfolio_site","target":"readme_content_in_projects_ts","relation":"conceptually_related_to","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"README.md","source_location":null,"weight":1.0},
+{"source":"readme_portfolio_site","target":"readme_structure_convention","relation":"conceptually_related_to","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"README.md","source_location":null,"weight":1.0},
+{"source":"readme_structure_convention","target":"readme_content_in_projects_ts","relation":"conceptually_related_to","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"README.md","source_location":null,"weight":1.0},
+{"source":"readme_hero_music_player_assets","target":"readme_portfolio_site","relation":"conceptually_related_to","confidence":"EXTRACTED","confidence_score":1.0,"source_file":"README.md","source_location":null,"weight":1.0}
+],"hyperedges":[],"input_tokens":0,"output_tokens":0}

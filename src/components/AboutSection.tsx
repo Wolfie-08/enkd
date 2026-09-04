@@ -8,8 +8,8 @@ const values = [
 ];
 
 const skills = [
-  "React", "TypeScript", "Framer Motion", "TailwindCSS", "Supabase",
-  "Arduino", "CAD", "Prototyping", "Git", "Figma",
+  "Python", "JavaScript", "PostgreSQL", "Docker", "Linux server administration",
+  "Power BI", "ETL pipelines", "Telegram Bot API", "LLM/AI integration",
 ];
 
 const containerVariants = {
