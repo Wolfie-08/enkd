@@ -14,6 +14,7 @@ import PageTransition from '@/components/PageTransition';
 const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [honeypot, setHoneypot] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,15 +34,22 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase.from('contacts').insert({
+      const payload = {
         name: formData.name.trim(),
         email: formData.email.trim(),
         subject: formData.subject.trim(),
         message: formData.message.trim(),
-        consent: true,
-      });
+      };
 
-      if (error) throw error;
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...payload, website: honeypot }),
+      });
+      if (!res.ok) throw new Error(`contact api ${res.status}`);
+
+      // Best-effort copy in Supabase; the email is what matters.
+      await supabase.from('contacts').insert({ ...payload, consent: true });
 
       toast({
         title: "Message sent!",
@@ -88,6 +96,17 @@ const Contact = () => {
               onSubmit={handleSubmit}
               className="space-y-6 bg-card backdrop-blur-sm border border-border rounded-2xl p-6 md:p-8 shadow-lg"
             >
+              {/* Honeypot: hidden from humans, bots fill it and get dropped server-side */}
+              <input
+                type="text"
+                name="website"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                aria-hidden="true"
+              />
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="name" className="flex items-center gap-2 text-foreground">
