@@ -2,7 +2,7 @@
 // Needs RESEND_API_KEY in Vercel env. Locally: `vercel dev` (vite dev has no /api).
 
 const TO = "diyorbek@enkd.uz";
-const FROM = "Portfolio <contact@enkd.uz>"; // enkd.uz must be verified in Resend
+const FROM = "Portfolio <contact@inbox.enkd.uz>"; // inbox.enkd.uz is verified in Resend
 
 const esc = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 
