@@ -1,3 +1,0 @@
-export const bioShort = `Curious engineer and designer exploring how technology can change communities and enhance everyday life.`;
-
-export const bioLong = `I'm a student and builder driven by one question: how can ideas turn into things that genuinely help people? I work at the intersection of engineering, technology, and community—teaching, organizing, and building projects that focus on long-term impact rather than quick wins. I enjoy breaking down complex concepts, experimenting with early-stage ideas, and creating systems that make learning, focus, and connection more accessible. Curious by nature and intentional in action, I'm constantly learning, building, and refining—one meaningful step at a time.`
