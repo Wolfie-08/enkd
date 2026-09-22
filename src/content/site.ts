@@ -259,8 +259,8 @@ export const site = {
 
   meta: {
     home: {
-      title: { en: "Diyorbek Komilov · AI systems for business, Tashkent", uz: "Diyorbek Komilov · Biznes uchun AI tizimlar, Toshkent" },
-      description: { en: "AI systems engineer in Tashkent building AI automation, AI agents, Telegram chatbots, and websites for businesses. Reply within 24 hours.", uz: "Toshkentdagi AI tizimlari muhandisi: bizneslar uchun AI avtomatlashtirish, AI agentlar, Telegram chatbotlar va veb-saytlar. 24 soat ichida javob." },
+      title: { en: "Diyorbek Komilov · AI Systems & Hardware Engineer, Tashkent", uz: "Diyorbek Komilov · AI tizimlar va mexanika muhandisi, Toshkent" },
+      description: { en: "AI systems & hardware engineer in Tashkent building AI automation, AI agents, Telegram chatbots, and websites for businesses. Reply within 24 hours.", uz: "Toshkentdagi AI tizimlari va apparat muhandisi: bizneslar uchun AI avtomatlashtirish, AI agentlar, Telegram chatbotlar va veb-saytlar. 24 soat ichida javob." },
     },
     experience: {
       title: { en: "Experience", uz: "Tajriba" },
