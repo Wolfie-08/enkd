@@ -26,6 +26,7 @@ export const projects: Project[] = [
     group: "work",
     year: "2026 –",
     status: "live",
+    image: "/images/projects/supply-group.jpg",
     stack: ["Python", "aiogram 3", "FastAPI", "PostgreSQL", "Docker", "Power BI", "Supabase", "Cloudflare R2", "LLM"],
     links: {
       extra: [
