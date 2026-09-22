@@ -8,7 +8,6 @@ export type Project = {
   group: Group;
   year?: string;
   status: Status;
-  featured?: boolean;
   image?: string;
   stack?: string[];
   links: { live?: string; demo?: string; extra?: { label: Bi; href: string }[] };
@@ -27,8 +26,6 @@ export const projects: Project[] = [
     group: "work",
     year: "2026 –",
     status: "live",
-    featured: true,
-    image: "/images/projects/parfume.enkd.uz.jpg",
     stack: ["Python", "aiogram 3", "FastAPI", "PostgreSQL", "Docker", "Power BI", "Supabase", "Cloudflare R2", "LLM"],
     links: {
       extra: [
@@ -60,14 +57,13 @@ export const projects: Project[] = [
     group: "products",
     year: "2026",
     status: "live",
-    featured: true,
     image: "/images/projects/aquaagro.enkd.uz.jpg",
     stack: ["FastAPI", "SQLAlchemy", "PostgreSQL 16", "aiogram 3", "React 18", "TypeScript", "Tailwind", "Docker", "Caddy"],
     links: { live: "https://aquaagro.enkd.uz" },
     title: { en: "AquaFerma: feed, finance and risk for fish farms, inside Telegram", uz: "AquaFerma: baliq fermalari uchun yem, moliya va xavf, Telegram ichida" },
     summary: {
-      en: "Telegram Mini App for fish farmers in Uzbekistan: daily feed rations from water readings, per-lake finances, a disease reference and a small shop, with an operator dashboard behind it.",
-      uz: "O‘zbekistondagi baliqchilar uchun Telegram Mini App: suv ko‘rsatkichlaridan kunlik yem me’yori, har bir ko‘l bo‘yicha moliya, kasalliklar ma’lumotnomasi va kichik do‘kon, orqasida operator paneli bilan.",
+      en: "For fish farmers in Uzbekistan: manage each pond, track its finances, prevent feed waste with rations computed from water readings, and get advice from a specialist, all inside Telegram, with an operator dashboard behind it.",
+      uz: "O‘zbekistondagi baliqchilar uchun: har bir ko‘lni boshqarish, moliyasini yuritish, suv ko‘rsatkichlaridan hisoblangan me’yor bilan yem isrofining oldini olish va mutaxassisdan maslahat olish, barchasi Telegram ichida, orqasida operator paneli bilan.",
     },
     built: [
       { en: "Feed calculator: biomass times a base rate from average weight, adjusted for temperature, oxygen, pH and species, split across three meals. Below 3 mg/l oxygen or 8 °C the answer is zero, on purpose.", uz: "Yem kalkulyatori: biomassa × o‘rtacha vazndan olingan bazaviy me’yor, harorat, kislorod, pH va turga qarab tuzatilgan, uch mahalga bo‘lingan. 3 mg/l kislorod yoki 8 °C dan past bo‘lsa javob ataylab nol." },
@@ -86,7 +82,7 @@ export const projects: Project[] = [
     group: "products",
     year: "2025 –",
     status: "building",
-    featured: true,
+    image: "/images/projects/enkd-os.jpg",
     stack: ["Python", "FastMCP", "FastAPI", "Postgres + pgvector", "Redis", "Memgraph", "Cognee", "LiteLLM", "Next.js", "Docker"],
     links: { live: "https://os.enkd.uz" },
     title: { en: "Enkd OS: an AI operating system for a person and a company", uz: "Enkd OS: shaxs va kompaniya uchun AI operatsion tizimi" },
@@ -104,6 +100,33 @@ export const projects: Project[] = [
       { en: "Architecture fixed and in build: event bus, MCP per domain, dual knowledge graph.", uz: "Arxitektura belgilangan va qurilmoqda: hodisa shinasi, har soha uchun MCP, ikki tomonlama bilimlar grafi." },
       { en: "Designed to cut monthly assistant API spend by roughly an order of magnitude by moving to local models.", uz: "Lokal modellarga o‘tish orqali oylik API xarajatini taxminan o‘n barobar kamaytirishga mo‘ljallangan." },
       { en: "Targets an ARM64 build under 4 GB RAM on a Raspberry Pi 5.", uz: "Raspberry Pi 5’da 4 GB RAM’dan kam ARM64 yig‘ilmasini nishonga oladi." },
+    ],
+  },
+  {
+    slug: "f1-telemetry-console",
+    group: "products",
+    year: "2026",
+    status: "live",
+    image: "/images/projects/f1.enkd.uz.jpg",
+    stack: ["React", "Vite", "OpenF1 API", "single-file HTML build"],
+    links: {
+      live: "https://f1.enkd.uz",
+      extra: [{ label: { en: "Source on GitHub", uz: "GitHub’dagi manba" }, href: "https://github.com/Wolfie-08/f1-telemetry-console" }],
+    },
+    title: { en: "F1 Telemetry Console: pit-wall analysis in the browser", uz: "F1 Telemetry Console: brauzerdagi pit-wall tahlili" },
+    summary: {
+      en: "Formula 1 race analysis with no backend: live timing tower, every car on the track map, a season archive you scrub through like video at up to 60×, and lap-vs-lap telemetry with corners detected from the speed trace. One static page on the OpenF1 API.",
+      uz: "Backendsiz Formula 1 poyga tahlili: jonli vaqt minorasi, trek xaritasidagi har bir mashina, videodek 60× gacha tezlikda aylantiriladigan mavsum arxivi va tezlik grafigidan burilishlar aniqlangan aylanma-aylanma telemetriya. OpenF1 API ustidagi bitta statik sahifa.",
+    },
+    built: [
+      { en: "Live mode follows the running session and switches to it fifteen minutes before the start; archive mode covers every weekend since 2023 with play, pause, scrub and 1× to 60× replay.", uz: "Jonli rejim joriy sessiyani kuzatadi va boshlanishidan o‘n besh daqiqa oldin unga o‘tadi; arxiv rejimi 2023-yildan beri har bir hafta oxirini play, pauza, aylantirish va 1× dan 60× gacha replay bilan qamrab oladi." },
+      { en: "Timing tower with tyre compound and age, gaps, sectors with live mini-sector colouring and speed trap; race trace, tyre strategy bars and the race control feed alongside.", uz: "Shina turi va yoshi, oraliqlar, jonli mini-sektor ranglari va tezlik tuzog‘i bilan vaqt minorasi; yonida poyga izi, shina strategiyasi va poyga nazorati lentasi." },
+      { en: "Compare view: two drivers, two laps, speed and pedal traces on a shared distance axis and a cumulative delta curve, with corners found in the data itself.", uz: "Taqqoslash ko‘rinishi: ikki haydovchi, ikki aylanma, umumiy masofa o‘qida tezlik va pedal grafiklari hamda jamlangan delta egri chizig‘i, burilishlar ma’lumotning o‘zidan topilgan." },
+      { en: "Handles OpenF1's blackout during sessions and its per-minute rate limits with a single paced request queue; optional sponsor login mints and refreshes the OAuth token in the browser.", uz: "Sessiya vaqtidagi OpenF1 to‘sig‘i va daqiqalik cheklovlarni bitta tezligi boshqariladigan navbat bilan hal qiladi; ixtiyoriy homiy logini OAuth tokenini brauzerda yaratadi va yangilaydi." },
+    ],
+    outcomes: [
+      { en: "Runs entirely in the browser; the build also emits one self-contained HTML file that works from the filesystem.", uz: "To‘liq brauzerda ishlaydi; yig‘ilma fayl tizimidan ham ochiladigan bitta mustaqil HTML faylni ham chiqaradi." },
+      { en: "Open source on GitHub.", uz: "GitHub’da ochiq manba." },
     ],
   },
   {
@@ -130,17 +153,23 @@ export const projects: Project[] = [
     status: "live",
     image: "/images/projects/osonqur.vercel.app.jpg",
     links: { live: "https://osonqur.uz" },
-    title: { en: "Osonqur: construction management system", uz: "Osonqur: qurilishni boshqarish tizimi" },
-    summary: { en: "Web system for managing construction projects, live at osonqur.uz.", uz: "Qurilish loyihalarini boshqarish uchun veb-tizim, osonqur.uz manzilida ishlamoqda." },
-    built: [{ en: "Construction management web application.", uz: "Qurilishni boshqarish veb-ilovasi." }],
-    outcomes: [{ en: "Live at osonqur.uz.", uz: "osonqur.uz manzilida ishlamoqda." }],
+    stack: ["Web app", "Role-based access"],
+    title: { en: "Osonqur: construction management with role-based access", uz: "Osonqur: rollarga asoslangan qurilishni boshqarish tizimi" },
+    summary: {
+      en: "Construction management system where every role sees and does only its part: the project manager plans and approves, suppliers deliver against orders, drivers log transport, and builders report progress on site.",
+      uz: "Har bir rol faqat o‘z qismini ko‘radigan va bajaradigan qurilishni boshqarish tizimi: loyiha menejeri rejalashtiradi va tasdiqlaydi, postavshiklar buyurtma bo‘yicha yetkazadi, haydovchilar tashishni qayd etadi, quruvchilar obyektdagi jarayonni hisobot qiladi.",
+    },
+    built: [
+      { en: "Role-based access and actions: project manager, supplier, driver, builder, each with its own screens and permissions.", uz: "Rollarga asoslangan kirish va harakatlar: loyiha menejeri, postavshik, haydovchi, quruvchi, har biriga o‘z ekranlari va ruxsatlari bilan." },
+      { en: "Orders, deliveries and site progress recorded by the person doing the work, so the manager sees the real state without phone calls.", uz: "Buyurtma, yetkazib berish va obyektdagi jarayon ishni bajarayotgan odam tomonidan qayd etiladi, shuning uchun menejer real holatni qo‘ng‘iroqsiz ko‘radi." },
+    ],
+    outcomes: [{ en: "Live at osonqur.uz; one shared picture of each project from planning to delivery.", uz: "osonqur.uz manzilida ishlamoqda; rejadan yetkazib berishgacha har bir loyihaning yagona umumiy manzarasi." }],
   },
   {
     slug: "cansat-dashboard",
     group: "hardware",
     year: "2025",
     status: "done",
-    featured: true,
     image: "/images/projects/cansat-live-dashboard.jpg",
     stack: ["Grafana", "InfluxDB", "Python", "LoRa / ESP32 feed"],
     links: {},
@@ -248,5 +277,6 @@ export const projects: Project[] = [
   },
 ];
 
-export const featuredProjects = projects.filter((p) => p.featured);
+const featuredOrder = ["enkd-os", "f1-telemetry-console", "supply-group", "osonqur"];
+export const featuredProjects = featuredOrder.map((slug) => projects.find((p) => p.slug === slug)!);
 export const projectBySlug = (slug: string) => projects.find((p) => p.slug === slug);

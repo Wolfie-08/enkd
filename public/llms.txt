@@ -19,6 +19,7 @@ Contact: https://www.enkd.uz/contact · diyorbek@enkd.uz · Telegram https://t.m
 - https://www.enkd.uz/experience/supply-group — AI and data systems for a four-division retail group.
 - https://www.enkd.uz/experience/aquaferma — Telegram Mini App for fish farms: feed rations, per-lake finance, risk signals.
 - https://www.enkd.uz/experience/enkd-os — Event-driven AI operating system over a knowledge graph, local-first.
+- https://www.enkd.uz/experience/f1-telemetry-console — Browser-only Formula 1 analysis console on the OpenF1 API: live timing, track map, season replay, lap-vs-lap telemetry.
 - https://www.enkd.uz/experience/hunar — Marketplace for Uzbek craft makers (founder, in development).
 - https://www.enkd.uz/experience/osonqur — Construction management system.
 - https://www.enkd.uz/experience/cansat-dashboard — Live telemetry dashboard for a CanSat mission (Python, InfluxDB, Grafana).

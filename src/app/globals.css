@@ -11,7 +11,20 @@
     --dim: 0 0% 40%;
     --line: 0 0% 100% / 0.08;
     --accent: 38 91% 55%;
+    --on-accent: 0 0% 2.7%;
     --radius: 6px;
+  }
+  /* Light theme: Earthy Minimal (cream, dark green, sage, sand, terracotta) */
+  html.light {
+    --background: 43 42% 95%;
+    --surface: 40 34% 90%;
+    --foreground: 120 12% 20%;
+    --muted: 100 16% 38%;
+    --dim: 100 10% 52%;
+    --line: 120 12% 20% / 0.12;
+    --accent: 16 53% 55%;
+    --on-accent: 43 42% 97%;
+    color-scheme: light;
   }
   html { color-scheme: dark; scroll-behavior: smooth; }
   body { @apply bg-background text-foreground antialiased; }
@@ -34,8 +47,8 @@ body::after {
 /* Hero hairline grid, fades downward */
 .hero-grid {
   background-image:
-    linear-gradient(hsl(0 0% 100% / 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(0 0% 100% / 0.05) 1px, transparent 1px);
+    linear-gradient(hsl(var(--foreground) / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--foreground) / 0.06) 1px, transparent 1px);
   background-size: 64px 64px;
   -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 85%);
   mask-image: linear-gradient(to bottom, black 20%, transparent 85%);

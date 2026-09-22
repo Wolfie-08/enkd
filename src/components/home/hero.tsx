@@ -12,7 +12,7 @@ export function Hero({ locale }: { locale: Locale }) {
   return (
     <section className="relative overflow-hidden">
       <div className="hero-grid absolute inset-0 -z-10" aria-hidden="true" />
-      <div className="container grid gap-12 py-20 md:py-28 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <div className="container grid gap-12 py-16 md:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
         <div>
           <p className="font-mono text-xs uppercase tracking-wider text-dim">{site.hero.eyebrow[locale]}</p>
           <h1 className="mt-6 text-5xl md:text-7xl font-semibold leading-[1.02]">
@@ -37,7 +37,15 @@ export function Hero({ locale }: { locale: Locale }) {
               <Link href={localePath(locale, "/experience")}>{site.hero.secondary[locale]}</Link>
             </Button>
           </div>
-          <dl className="mt-14 grid grid-cols-2 gap-x-8 gap-y-4 max-w-md font-mono text-xs uppercase tracking-wider">
+        </div>
+
+        {/* Right column: orb at the top, status row at the bottom, so both columns share a top and a bottom line. */}
+        <div className="flex flex-col justify-between gap-10">
+          <div className="relative mx-auto flex items-center justify-center lg:mx-0 lg:justify-end">
+            <div className="orb-halo absolute size-[380px] md:size-[560px] rounded-full" aria-hidden="true" />
+            <HeroOrb label="Enkd" className="relative size-[280px] md:size-[440px]" />
+          </div>
+          <dl className="grid grid-cols-2 gap-x-8 gap-y-4 font-mono text-xs uppercase tracking-wider lg:grid-cols-4 lg:gap-x-6">
             {site.hero.status.map((s) => (
               <div key={s.label.en} className="border-t border-line pt-3">
                 <dt className="text-dim">{s.label[locale]}</dt>
@@ -45,11 +53,6 @@ export function Hero({ locale }: { locale: Locale }) {
               </div>
             ))}
           </dl>
-        </div>
-
-        <div className="relative mx-auto flex items-center justify-center lg:justify-end">
-          <div className="orb-halo absolute size-[420px] md:size-[600px] rounded-full" aria-hidden="true" />
-          <HeroOrb label="Enkd" className="relative size-[300px] md:size-[520px]" />
         </div>
       </div>
     </section>

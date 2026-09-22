@@ -8,7 +8,23 @@ const TILT = 0.45; // radians
 const SPIN = 0.00022; // radians per ms
 const SCAN_PERIOD = 4200; // ms per sweep
 const SCAN_WIDTH = 0.35; // radians
-const AMBER = [245, 165, 36];
+const FALLBACK = [245, 165, 36];
+
+// Read `--accent` (an hsl triple like "38 91% 55%") and convert to rgb; cached per value.
+let cachedKey = "";
+let cachedRgb = FALLBACK;
+function accentRgb() {
+  const raw = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim();
+  if (raw === cachedKey) return cachedRgb;
+  const m = raw.match(/([\d.]+)\s+([\d.]+)%\s+([\d.]+)%/);
+  if (!m) return FALLBACK;
+  const h = +m[1] / 360, s = +m[2] / 100, l = +m[3] / 100;
+  const q = l < 0.5 ? l * (1 + s) : l + s - l * s, p = 2 * l - q;
+  const f = (t: number) => { t = (t + 1) % 1; return t < 1 / 6 ? p + (q - p) * 6 * t : t < 1 / 2 ? q : t < 2 / 3 ? p + (q - p) * (2 / 3 - t) * 6 : p; };
+  cachedKey = raw;
+  cachedRgb = [f(h + 1 / 3), f(h), f(h - 1 / 3)].map((v) => Math.round(v * 255));
+  return cachedRgb;
+}
 
 // Fibonacci sphere, unit radius: x,y,z triples.
 function spherePoints(n: number) {
@@ -46,6 +62,7 @@ export function HeroOrb({ label, className }: { label: string; className?: strin
       const a = t * SPIN;
       const ca = Math.cos(a), sa = Math.sin(a), ct = Math.cos(TILT), st = Math.sin(TILT);
       const scan = ((t % SCAN_PERIOD) / SCAN_PERIOD) * Math.PI * 2 - Math.PI;
+      const AMBER = accentRgb();
       for (let i = 0; i < DOTS; i++) {
         const x = pts[i * 3], y = pts[i * 3 + 1], z = pts[i * 3 + 2];
         const x1 = x * ca - z * sa;

@@ -8,6 +8,7 @@ import { JsonLd, personLd, serviceLd } from "@/lib/seo";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { AudioPlayer } from "@/components/audio-player";
+import { themeInitScript } from "@/components/theme-toggle";
 import "../globals.css";
 
 const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
@@ -24,7 +25,10 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   if (!isLocale(locale)) notFound();
   const l: Locale = locale;
   return (
-    <html lang={l} className={`dark ${sans.variable} ${mono.variable}`}>
+    <html lang={l} className={`dark ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="font-sans min-h-dvh flex flex-col">
         <JsonLd data={[personLd(), serviceLd(l)]} />
         <Nav locale={l} />

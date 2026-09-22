@@ -5,6 +5,7 @@ import { ThinkingOrb } from "@/components/ui/thinking-orbs";
 import { Button } from "@/components/ui/button";
 import { LanguageSwitch } from "@/components/language-switch";
 import { MuteButton } from "@/components/audio-player";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Nav({ locale }: { locale: Locale }) {
   const links = [
@@ -30,6 +31,7 @@ export function Nav({ locale }: { locale: Locale }) {
         </nav>
         <div className="flex items-center gap-3">
           <LanguageSwitch locale={locale} />
+          <ThemeToggle label={site.nav.theme[locale]} />
           <MuteButton label={site.nav.sound[locale]} />
           <Button asChild size="sm" variant="outline" className="hidden sm:inline-flex font-mono uppercase tracking-wider text-xs">
             <Link href={localePath(locale, "/contact")}>{site.nav.request[locale]}</Link>

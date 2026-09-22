@@ -26,6 +26,7 @@ export const site = {
     contact: { en: "Contact", uz: "Aloqa" },
     request: { en: "Request a solution", uz: "Yechim so‘rash" },
     sound: { en: "Sound", uz: "Ovoz" },
+    theme: { en: "Theme", uz: "Mavzu" },
   },
 
   hero: {
