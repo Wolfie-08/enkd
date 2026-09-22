@@ -31,7 +31,7 @@ export function Nav({ locale }: { locale: Locale }) {
         <div className="flex items-center gap-3">
           <LanguageSwitch locale={locale} />
           <MuteButton label={site.nav.sound[locale]} />
-          <Button asChild size="sm" className="hidden sm:inline-flex font-mono uppercase tracking-wider text-xs">
+          <Button asChild size="sm" variant="outline" className="hidden sm:inline-flex font-mono uppercase tracking-wider text-xs">
             <Link href={localePath(locale, "/contact")}>{site.nav.request[locale]}</Link>
           </Button>
         </div>

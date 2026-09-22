@@ -28,3 +28,5 @@ graphify-out
 .next
 next-env.d.ts
 .vercel
+.playwright-mcp
+*.tsbuildinfo
