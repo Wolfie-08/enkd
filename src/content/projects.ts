@@ -54,6 +54,74 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "business-intelligence",
+    group: "work",
+    year: "2026 –",
+    status: "live",
+    stack: ["Python", "PostgreSQL", "Smartup ERP", "Power BI", "Docker", "LLM"],
+    links: {},
+    title: { en: "Business Intelligence Platform: ERP → Data Warehouse → Power BI → AI", uz: "Biznes tahlil platformasi: ERP → Ma’lumotlar ombori → Power BI → AI" },
+    summary: {
+      en: "Built for a four-division retail business: ERP data synced into one warehouse, reported in Power BI, with an AI layer that answers questions over the same numbers.",
+      uz: "To‘rt yo‘nalishli savdo biznesi uchun qurilgan: ERP ma’lumotlari bitta omborga sinxronlanadi, Power BI’da hisobot qilinadi, AI qatlami esa xuddi shu raqamlar bo‘yicha savollarga javob beradi.",
+    },
+    built: [
+      { en: "Automated ETL from the Smartup ERP into a PostgreSQL warehouse: sales, payments and cash across all divisions.", uz: "Smartup ERP’dan PostgreSQL omboriga avtomatik ETL: barcha yo‘nalishlar bo‘yicha savdo, to‘lovlar va kassa." },
+      { en: "Power BI dashboards for leadership: group sales and receivables.", uz: "Rahbariyat uchun Power BI panellari: guruh savdosi va debitorlik." },
+      { en: "LLM financial assistant over the warehouse. In development.", uz: "Ombor ustida ishlaydigan LLM moliyaviy yordamchi. Ishlab chiqilmoqda." },
+    ],
+    outcomes: [
+      { en: "Reporting effort cut by about 80%: daily, weekly and monthly reports build from the ERP sync instead of manual Excel work.", uz: "Hisobot mehnati taxminan 80% ga kamaydi: kunlik, haftalik va oylik hisobotlar qo‘lda Excel ishi o‘rniga ERP sinxronidan yig‘iladi." },
+    ],
+  },
+  {
+    slug: "warehouse-intelligence",
+    group: "work",
+    year: "2026 –",
+    status: "live",
+    stack: ["PostgreSQL", "Power BI", "Python"],
+    links: {},
+    title: { en: "Warehouse Intelligence: SKU-level inventory, reorder and dead stock", uz: "Ombor tahlili: SKU darajasidagi zaxira, qayta buyurtma va o‘lik zaxira" },
+    summary: {
+      en: "SKU-level inventory visualization with reorder signals and dead-stock detection.",
+      uz: "Qayta buyurtma signallari va o‘lik zaxirani aniqlash bilan SKU darajasidagi zaxira vizualizatsiyasi.",
+    },
+    built: [
+      { en: "Inventory visualized per SKU, across warehouses and divisions.", uz: "Zaxira har bir SKU bo‘yicha, omborlar va yo‘nalishlar kesimida ko‘rsatiladi." },
+      { en: "Reorder signals for items running low.", uz: "Kamayib borayotgan mahsulotlar uchun qayta buyurtma signallari." },
+      { en: "Dead-stock detection for items that stopped selling.", uz: "Sotilmay qolgan mahsulotlar uchun o‘lik zaxirani aniqlash." },
+    ],
+    outcomes:[
+      { en: "Buyers see per SKU what to reorder and what has stopped selling.", uz: "Xaridorlar har bir SKU bo‘yicha nimani qayta buyurtma qilish va nima sotilmay qolganini ko‘radi." },
+    ],
+  },
+  {
+    slug: "commerce-infrastructure",
+    group: "work",
+    year: "2026 –",
+    status: "live",
+    stack: ["Python", "aiogram 3", "FastAPI", "Supabase", "Cloudflare R2"],
+    links: {
+      extra: [
+        { label: { en: "Parfume shop (Telegram)", uz: "Parfume do‘koni (Telegram)" }, href: "https://parfume.enkd.uz" },
+        { label: { en: "Sedia Chairs shop (Telegram)", uz: "Sedia Chairs do‘koni (Telegram)" }, href: "https://sedia.enkd.uz" },
+      ],
+    },
+    title: { en: "Commerce Infrastructure: Telegram storefronts, orders and customers", uz: "Savdo infratuzilmasi: Telegram do‘konlar, buyurtmalar va mijozlar" },
+    summary: {
+      en: "Telegram storefronts, order management and customer systems.",
+      uz: "Telegram do‘konlar, buyurtmalarni boshqarish va mijozlar tizimlari.",
+    },
+    built: [
+      { en: "Self-service Telegram storefronts as a Mini App with a plain-button fallback.", uz: "Oddiy tugmali zaxira varianti bilan Mini App ko‘rinishidagi o‘z-o‘ziga xizmat Telegram do‘konlari." },
+      { en: "Browser admin panel for products, prices, photos and orders; changes appear in Telegram immediately.", uz: "Mahsulot, narx, rasm va buyurtmalar uchun brauzer admin paneli; o‘zgarishlar Telegramda darhol ko‘rinadi." },
+      { en: "Marketing-broadcast and customer-service bots.", uz: "Marketing tarqatmasi va mijozlarga xizmat botlari." },
+    ],
+    outcomes: [
+      { en: "Clients order and pay without a salesperson in the loop.", uz: "Mijozlar sotuvchisiz buyurtma berib to‘laydi." },
+    ],
+  },
+  {
     slug: "aquaferma",
     group: "work",
     year: "2026",

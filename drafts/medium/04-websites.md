@@ -9,7 +9,7 @@ Tags: Web Development, SEO, Nextjs, Uzbekistan, Small Business
 
 *What you get, why search and AI engines need to read it, how long it takes, and what you pay.*
 
-**By Diyorbek Komilov** · Data Engineer · Mechanical Engineer · AI/Automation Engineer, Tashkent
+**By Diyorbek Komilov** · AI Systems Engineer · Automation · Hardware, Tashkent
 **Last updated: 23 September 2026**
 
 ---
@@ -97,6 +97,6 @@ Yes. Form requests can go to Telegram, and a site can share products and orders 
 
 ---
 
-**About the author.** I'm Diyorbek Komilov, a Data Engineer, Mechanical Engineer and AI/Automation Engineer in Tashkent. I build and run the software behind Supply Group LLC, and I take AI automation, AI agent, Telegram chatbot and website projects through Enkd. More work and contact: [www.enkd.uz](https://www.enkd.uz). I reply within 24 hours.
+**About the author.** I'm Diyorbek Komilov, an AI Systems Engineer in Tashkent, working across automation and hardware. I build and run the software behind Supply Group LLC, and I take AI automation, AI agent, Telegram chatbot and website projects through Enkd. More work and contact: [www.enkd.uz](https://www.enkd.uz). I reply within 24 hours.
 
 [**Request a solution →**](https://www.enkd.uz/contact?need=website)

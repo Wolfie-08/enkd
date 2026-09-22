@@ -9,7 +9,7 @@ Tags: Automation, Data Engineering, Business Intelligence, Uzbekistan, Power BI
 
 *What it is, how it works, how long it takes, and what you pay. From someone who runs it in production.*
 
-**By Diyorbek Komilov** · Data Engineer · Mechanical Engineer · AI/Automation Engineer, Tashkent
+**By Diyorbek Komilov** · AI Systems Engineer · Automation · Hardware, Tashkent
 **Last updated: 23 September 2026**
 
 ---
@@ -83,6 +83,6 @@ Yes. At Supply Group one warehouse holds four divisions, and every report can be
 
 ---
 
-**About the author.** I'm Diyorbek Komilov, a Data Engineer, Mechanical Engineer and AI/Automation Engineer in Tashkent. I build and run the software behind Supply Group LLC, and I take AI automation, AI agent, Telegram chatbot and website projects through Enkd. More work and contact: [www.enkd.uz](https://www.enkd.uz). I reply within 24 hours.
+**About the author.** I'm Diyorbek Komilov, an AI Systems Engineer in Tashkent, working across automation and hardware. I build and run the software behind Supply Group LLC, and I take AI automation, AI agent, Telegram chatbot and website projects through Enkd. More work and contact: [www.enkd.uz](https://www.enkd.uz). I reply within 24 hours.
 
 [**Request a solution →**](https://www.enkd.uz/contact?need=automation)
