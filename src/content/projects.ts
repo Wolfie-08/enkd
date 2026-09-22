@@ -277,6 +277,6 @@ export const projects: Project[] = [
   },
 ];
 
-const featuredOrder = ["enkd-os", "f1-telemetry-console", "supply-group", "osonqur"];
+const featuredOrder = ["supply-group", "osonqur", "enkd-os", "f1-telemetry-console"];
 export const featuredProjects = featuredOrder.map((slug) => projects.find((p) => p.slug === slug)!);
 export const projectBySlug = (slug: string) => projects.find((p) => p.slug === slug);
