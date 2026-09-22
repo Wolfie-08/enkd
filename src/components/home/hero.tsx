@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { site } from "@/content/site";
 import { localePath, type Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
-import { ThinkingOrb } from "@/components/ui/thinking-orbs";
+import { HeroOrb } from "@/components/home/hero-orb";
 
 export function Hero({ locale }: { locale: Locale }) {
   const reduce = useReducedMotion();
@@ -49,9 +49,7 @@ export function Hero({ locale }: { locale: Locale }) {
 
         <div className="relative mx-auto flex items-center justify-center lg:justify-end">
           <div className="orb-halo absolute size-[420px] md:size-[600px] rounded-full" aria-hidden="true" />
-          <div className="relative [&_canvas]:!size-[180px] md:[&_canvas]:!size-[260px]">
-            <ThinkingOrb state="composing" size={64} theme="dark" aria-label="Enkd" />
-          </div>
+          <HeroOrb label="Enkd" className="relative size-[300px] md:size-[520px]" />
         </div>
       </div>
     </section>
