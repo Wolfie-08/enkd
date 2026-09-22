@@ -34,14 +34,14 @@ export function personLd() {
     "@type": "Person",
     "@id": personId,
     name: site.name,
-    jobTitle: "Digital Systems Engineer",
+    jobTitle: site.role.en,
     email: `mailto:${site.email}`,
     url: SITE_URL,
     address: { "@type": "PostalAddress", addressLocality: "Tashkent", addressCountry: "UZ" },
     alumniOf: [{ "@type": "CollegeOrUniversity", name: "New Uzbekistan University", url: "https://newuu.uz" }],
     worksFor: { "@type": "Organization", name: "Supply Group LLC" },
-    sameAs: site.socials.map((s) => s.href),
-    knowsAbout: ["AI automation", "AI agents", "Telegram bots", "PostgreSQL", "Power BI", "Mechanical engineering"],
+    sameAs: [...site.socials.map((s) => s.href), "https://github.com/Wolfie-08", "https://medium.com/@kdiyorbek133"],
+    knowsAbout: ["AI automation", "AI agents", "Telegram bots", "PostgreSQL", "Power BI", "Data engineering", "Mechanical engineering"],
   };
 }
 

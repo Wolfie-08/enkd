@@ -10,7 +10,7 @@ export const site = {
   email: "diyorbek@enkd.uz",
   telegram: "https://t.me/kdiyor_18",
   location: { en: "Tashkent, Uzbekistan", uz: "Toshkent, O‘zbekiston" },
-  role: { en: "Mechanical engineer · Digital Systems Engineer", uz: "Mexanika muhandisi · Raqamli tizimlar muhandisi" },
+  role: { en: "Data Engineer · Mechanical Engineer · AI/Automation Engineer", uz: "Ma’lumotlar muhandisi · Mexanika muhandisi · AI/avtomatlashtirish muhandisi" },
   replyTime: { en: "within 24 hours", uz: "24 soat ichida" },
   socials: [
     { label: "Telegram", href: "https://t.me/kdiyor_18" },
@@ -258,7 +258,7 @@ export const site = {
   meta: {
     home: {
       title: { en: "Diyorbek Komilov · AI systems for business, Tashkent", uz: "Diyorbek Komilov · Biznes uchun AI tizimlar, Toshkent" },
-      description: { en: "Mechanical engineer in Tashkent building AI automation, AI agents, Telegram chatbots, and websites for businesses. Reply within 24 hours.", uz: "Toshkentdagi mexanika muhandisi: bizneslar uchun AI avtomatlashtirish, AI agentlar, Telegram chatbotlar va veb-saytlar. 24 soat ichida javob." },
+      description: { en: "Data, mechanical, and AI/automation engineer in Tashkent building AI automation, AI agents, Telegram chatbots, and websites for businesses. Reply within 24 hours.", uz: "Toshkentdagi ma’lumotlar, mexanika va AI/avtomatlashtirish muhandisi: bizneslar uchun AI avtomatlashtirish, AI agentlar, Telegram chatbotlar va veb-saytlar. 24 soat ichida javob." },
     },
     experience: {
       title: { en: "Experience", uz: "Tajriba" },

@@ -94,7 +94,7 @@ export function RequestForm({ locale }: { locale: Locale }) {
           {state === "sending" ? f.sending[locale] : f.submit[locale]}
         </Button>
         <span className="inline-flex size-6 items-center justify-center" aria-hidden="true">
-          <ThinkingOrb state="working" size={20} theme="dark" paused={state !== "sending"} />
+          <ThinkingOrb state="working" size={20} theme="dark" />
         </span>
       </div>
     </form>

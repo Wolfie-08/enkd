@@ -85,7 +85,7 @@ export const projects: Project[] = [
     image: "/images/projects/enkd-os.jpg",
     stack: ["Python", "FastMCP", "FastAPI", "Postgres + pgvector", "Redis", "Memgraph", "Cognee", "LiteLLM", "Next.js", "Docker"],
     links: { live: "https://os.enkd.uz" },
-    title: { en: "Enkd OS: an AI operating system for a person and a company", uz: "Enkd OS: shaxs va kompaniya uchun AI operatsion tizimi" },
+    title: { en: "Enkd OS: an AI operating system for everyone", uz: "Enkd OS: hamma uchun AI operatsion tizimi" },
     summary: {
       en: "Event-driven agents over a knowledge graph, with a Telegram hub and a web dashboard as the interfaces. Local-first, with a human approval gate on every action that touches money or a calendar.",
       uz: "Bilimlar grafi ustida hodisaga asoslangan agentlar, interfeys sifatida Telegram markazi va veb-panel. Avvalo lokal, pul yoki taqvimga tegadigan har bir harakatda inson tasdig‘i bilan.",
