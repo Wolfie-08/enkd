@@ -12,7 +12,6 @@ import "../globals.css";
 const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
-export const dynamicParams = false;
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
