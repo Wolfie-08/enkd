@@ -54,7 +54,7 @@ export const projects: Project[] = [
   },
   {
     slug: "aquaferma",
-    group: "products",
+    group: "work",
     year: "2026",
     status: "live",
     image: "/images/projects/aquaagro.enkd.uz.jpg",
