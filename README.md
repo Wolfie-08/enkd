@@ -1,56 +1,20 @@
-# Diyorbek Komilov Portfolio
+# enkd.uz
 
-Personal portfolio website built with React, TypeScript, Vite, Tailwind CSS, and shadcn/ui.
+Portfolio of Diyorbek Komilov. Next.js 16, App Router, static generation, English at `/` and Uzbek at `/uz`.
 
-## Stack
-
-- React 18
-- TypeScript
-- Vite
-- Tailwind CSS
-- shadcn/ui
-- Framer Motion
-- React Router
-
-## Local Development
-
-Requirements:
-
-- Node.js
-- npm
-
-Run locally:
+## Run
 
 ```sh
 npm install
-npm run dev
-```
-
-The dev server starts on the default Vite port unless overridden.
-
-## Build
-
-Create a production build with:
-
-```sh
+npm run dev        # http://localhost:3000
 npm run build
+npm run check:seo  # after build: asserts metadata and JSON-LD on all routes
 ```
 
-Preview the production build locally with:
+## Content
 
-```sh
-npm run preview
-```
+All copy lives in `src/content/site.ts` and `src/content/projects.ts` as `{ en, uz }` pairs.
 
-## Project Structure
+## Contact API
 
-- `src/components` – page sections and shared UI composition
-- `src/components/ui` – shadcn/ui primitives and custom UI components
-- `src/content` – structured portfolio content such as projects
-- `src/pages` – route-level pages
-- `public` – static assets such as audio, PDFs, and images
-
-## Notes
-
-- Project and case study content is managed in `src/content/projects.ts`.
-- Static assets used by the hero music player live under `public/audio` and `public/images/covers`.
+`POST /api/contact` sends email through Resend. Needs `RESEND_API_KEY` (Vercel env; locally via `vercel dev`).
