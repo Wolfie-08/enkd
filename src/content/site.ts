@@ -13,10 +13,10 @@ export const site = {
   role: { en: "Mechanical engineer · Digital Systems Engineer", uz: "Mexanika muhandisi · Raqamli tizimlar muhandisi" },
   replyTime: { en: "within 24 hours", uz: "24 soat ichida" },
   socials: [
-    { label: "Telegram", handle: "@kdiyor_18", href: "https://t.me/kdiyor_18" },
-    { label: "LinkedIn", handle: "diyorbek-k", href: "https://www.linkedin.com/in/diyorbek-k/" },
-    { label: "X", handle: "@Enkd127", href: "https://x.com/Enkd127" },
-    { label: "Instagram", handle: "@kdiyor_18", href: "https://www.instagram.com/kdiyor_18/" },
+    { label: "Telegram", href: "https://t.me/kdiyor_18" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/diyorbek-k/" },
+    { label: "X", href: "https://x.com/Enkd127" },
+    { label: "Instagram", href: "https://www.instagram.com/kdiyor_18/" },
   ],
 
   nav: {
@@ -30,11 +30,11 @@ export const site = {
   },
 
   hero: {
-    eyebrow: { en: "Tashkent · Mechanical engineer · Available", uz: "Toshkent · Mexanika muhandisi · Buyurtmaga ochiq" },
+    eyebrow: { en: "Data Engineer · Mechanical Engineer · AI/Automation Engineer", uz: "Ma’lumotlar muhandisi · Mexanika muhandisi · AI/avtomatlashtirish muhandisi" },
     h1: { en: "Engineer who builds AI systems for real businesses.", uz: "Real bizneslar uchun AI tizimlarini quradigan muhandis." },
     sub: {
-      en: "Diyorbek Komilov. I build and run the software behind a four-division retail group: Telegram storefronts, an ERP-fed data warehouse, Power BI reporting, and an AI assistant over live company data. Available for AI automation, agents, chatbots, and websites.",
-      uz: "Diyorbek Komilov. To‘rt yo‘nalishli savdo guruhining dasturiy ta’minotini quraman va yuritaman: Telegram do‘konlar, ERP bilan bog‘langan ma’lumotlar ombori, Power BI hisobotlari va kompaniyaning jonli ma’lumotlari ustida ishlaydigan AI yordamchi. AI avtomatlashtirish, agentlar, chatbotlar va veb-saytlar bo‘yicha buyurtmalarga ochiqman.",
+      en: "Diyorbek Komilov. I build and run the software behind a four-division retail group: Telegram storefronts, an ERP-fed data warehouse, Power BI reporting, and an AI assistant over live company data. Services available: AI automation, agents, chatbots, and websites.",
+      uz: "Diyorbek Komilov. To‘rt yo‘nalishli savdo guruhining dasturiy ta’minotini quraman va yuritaman: Telegram do‘konlar, ERP bilan bog‘langan ma’lumotlar ombori, Power BI hisobotlari va kompaniyaning jonli ma’lumotlari ustida ishlaydigan AI yordamchi. Xizmatlar: AI avtomatlashtirish, agentlar, chatbotlar va veb-saytlar.",
     },
     primary: { en: "Request a solution", uz: "Yechim so‘rash" },
     secondary: { en: "See the work", uz: "Ishlarni ko‘rish" },
