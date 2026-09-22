@@ -2,8 +2,8 @@
 
 > Mechanical engineer in Tashkent, Uzbekistan, who builds AI automation, AI agents, Telegram chatbots, and websites for businesses. Digital Systems Engineer at Supply Group LLC. Available for projects and technical co-founder roles. Replies within 24 hours.
 
-Site: https://enkd.uz (English) · https://enkd.uz/uz (Uzbek)
-Contact: https://enkd.uz/contact · diyorbek@enkd.uz · Telegram https://t.me/kdiyor_18
+Site: https://www.enkd.uz (English) · https://www.enkd.uz/uz (Uzbek)
+Contact: https://www.enkd.uz/contact · diyorbek@enkd.uz · Telegram https://t.me/kdiyor_18
 
 ## Services
 - AI automation: ERP/CRM sync into a Postgres warehouse, scheduled reports (cash flow, debtors, sales), alerts to Telegram.
@@ -16,17 +16,17 @@ Contact: https://enkd.uz/contact · diyorbek@enkd.uz · Telegram https://t.me/kd
 - BSc Mechanical Engineering, New Uzbekistan University, 2025 – 2029.
 
 ## Projects
-- https://enkd.uz/experience/supply-group — AI and data systems for a four-division retail group.
-- https://enkd.uz/experience/aquaferma — Telegram Mini App for fish farms: feed rations, per-lake finance, risk signals.
-- https://enkd.uz/experience/enkd-os — Event-driven AI operating system over a knowledge graph, local-first.
-- https://enkd.uz/experience/hunar — Marketplace for Uzbek craft makers (founder, in development).
-- https://enkd.uz/experience/osonqur — Construction management system.
-- https://enkd.uz/experience/cansat-dashboard — Live telemetry dashboard for a CanSat mission (Python, InfluxDB, Grafana).
-- https://enkd.uz/experience/solar-tracker — Two-axis Arduino solar tracker, 22–28% more daily energy than fixed.
-- https://enkd.uz/experience/rsef — Trilingual platform for Central Asia's first large student research fair (CTO).
-- https://enkd.uz/experience/mubl — Engineering club site and six-week STEM bootcamp (co-organizer).
+- https://www.enkd.uz/experience/supply-group — AI and data systems for a four-division retail group.
+- https://www.enkd.uz/experience/aquaferma — Telegram Mini App for fish farms: feed rations, per-lake finance, risk signals.
+- https://www.enkd.uz/experience/enkd-os — Event-driven AI operating system over a knowledge graph, local-first.
+- https://www.enkd.uz/experience/hunar — Marketplace for Uzbek craft makers (founder, in development).
+- https://www.enkd.uz/experience/osonqur — Construction management system.
+- https://www.enkd.uz/experience/cansat-dashboard — Live telemetry dashboard for a CanSat mission (Python, InfluxDB, Grafana).
+- https://www.enkd.uz/experience/solar-tracker — Two-axis Arduino solar tracker, 22–28% more daily energy than fixed.
+- https://www.enkd.uz/experience/rsef — Trilingual platform for Central Asia's first large student research fair (CTO).
+- https://www.enkd.uz/experience/mubl — Engineering club site and six-week STEM bootcamp (co-organizer).
 
 ## Pages
-- https://enkd.uz/experience — work history, education, all projects
-- https://enkd.uz/blog — writing on Medium, an academic journal, Telegram
-- https://enkd.uz/sitemap.xml
+- https://www.enkd.uz/experience — work history, education, all projects
+- https://www.enkd.uz/blog — writing on Medium, an academic journal, Telegram
+- https://www.enkd.uz/sitemap.xml

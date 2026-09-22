@@ -10,4 +10,4 @@ export const localePath = (locale: Locale, path = "/") =>
 
 export const otherLocale = (locale: Locale): Locale => (locale === "en" ? "uz" : "en");
 
-export const SITE_URL = "https://enkd.uz";
+export const SITE_URL = "https://www.enkd.uz";
