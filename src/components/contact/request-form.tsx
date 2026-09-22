@@ -1,7 +1,6 @@
 // src/components/contact/request-form.tsx
 "use client";
-import { useState, type FormEvent } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { site } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
@@ -14,10 +13,13 @@ type State = "idle" | "sending" | "sent" | "error";
 
 export function RequestForm({ locale }: { locale: Locale }) {
   const f = site.contact.form;
-  const initialNeed = useSearchParams().get("need") ?? undefined;
   const [state, setState] = useState<State>("idle");
   const needKeys = f.needs.map((n) => n.key) as string[];
-  const defaultNeed = initialNeed && needKeys.includes(initialNeed) ? initialNeed : "automation";
+  const sel = useRef<HTMLSelectElement>(null);
+  useEffect(() => {
+    const n = new URLSearchParams(window.location.search).get("need");
+    if (n && needKeys.includes(n) && sel.current) sel.current.value = n;
+  }, [needKeys]);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -39,7 +41,7 @@ export function RequestForm({ locale }: { locale: Locale }) {
 
   if (state === "sent") {
     return (
-      <div className="border border-line rounded-lg p-8 bg-surface">
+      <div role="status" className="border border-line rounded-lg p-8 bg-surface">
         <p className="text-xl font-medium">{f.success[locale]}</p>
         <a href={site.telegram} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block font-mono text-xs uppercase tracking-wider text-accent hover:underline">
           {f.successTelegram[locale]} ↗
@@ -72,7 +74,8 @@ export function RequestForm({ locale }: { locale: Locale }) {
           <select
             id="need"
             name="need"
-            defaultValue={defaultNeed}
+            ref={sel}
+            defaultValue="automation"
             className="flex h-10 w-full rounded-md border border-line bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             {f.needs.map((n) => (

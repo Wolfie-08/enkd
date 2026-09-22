@@ -20,8 +20,8 @@ export function Hero({ locale }: { locale: Locale }) {
               <motion.span
                 key={i}
                 className="inline-block mr-[0.25em]"
-                initial={reduce ? false : { opacity: 0, y: "0.4em" }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={reduce ? false : { y: "0.4em" }}
+                animate={{ y: 0 }}
                 transition={{ duration: 0.6, delay: 0.05 * i, ease: [0.22, 1, 0.36, 1] }}
               >
                 {w}

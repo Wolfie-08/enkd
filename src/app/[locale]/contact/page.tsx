@@ -1,6 +1,5 @@
 // src/app/[locale]/contact/page.tsx
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { site } from "@/content/site";
 import { localePath, type Locale } from "@/lib/i18n";
 import { breadcrumbLd, JsonLd, pageMetadata } from "@/lib/seo";
@@ -32,10 +31,7 @@ export default async function ContactPage({ params }: Props) {
           <a href={site.telegram} target="_blank" rel="noopener noreferrer" className="block hover:text-accent">Telegram @kdiyor_18</a>
         </div>
       </div>
-      {/* Suspense: the form reads ?need= with useSearchParams, which needs a boundary in a static page. */}
-      <Suspense fallback={null}>
-        <RequestForm locale={locale} />
-      </Suspense>
+      <RequestForm locale={locale} />
     </main>
   );
 }

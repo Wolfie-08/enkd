@@ -1,12 +1,12 @@
 // src/app/api/contact/route.ts
 // POST /api/contact → email via Resend to diyorbek@enkd.uz. Needs RESEND_API_KEY.
 
+import { site } from "@/content/site";
+
 const TO = "diyorbek@enkd.uz";
 const FROM = "Portfolio <contact@inbox.enkd.uz>"; // inbox.enkd.uz is verified in Resend
-const NEEDS = ["automation", "agent", "chatbot", "website", "cofounder", "other"] as const;
-const NEED_LABEL: Record<(typeof NEEDS)[number], string> = {
-  automation: "AI automation", agent: "AI agent", chatbot: "AI chatbot", website: "Website", cofounder: "Technical co-founder", other: "Other",
-};
+const NEEDS = site.contact.form.needs.map((n) => n.key) as string[];
+const NEED_LABEL = Object.fromEntries(site.contact.form.needs.map((n) => [n.key, n.label.en])) as Record<string, string>;
 
 const esc = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 
@@ -30,12 +30,12 @@ export async function POST(req: Request): Promise<Response> {
   const website = field("website", 100); // honeypot: real users never fill this
 
   if (website) return Response.json({ ok: true }); // silently drop bots
-  if (!(NEEDS as readonly string[]).includes(need)) return Response.json({ error: "need must be one of " + NEEDS.join(", ") }, { status: 400 });
+  if (!NEEDS.includes(need)) return Response.json({ error: "need must be one of " + NEEDS.join(", ") }, { status: 400 });
   if (!name || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return Response.json({ error: "name, valid email and message are required" }, { status: 400 });
   }
 
-  const needLabel = NEED_LABEL[need as (typeof NEEDS)[number]];
+  const needLabel = NEED_LABEL[need];
   const r = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
@@ -43,7 +43,7 @@ export async function POST(req: Request): Promise<Response> {
       from: FROM,
       to: [TO],
       reply_to: email,
-      subject: `[enkd.uz] ${needLabel} — ${name}`,
+      subject: `[enkd.uz] ${needLabel} — ${name.replace(/[\r\n]+/g, " ")}`,
       text: `From: ${name} <${email}>\nCompany: ${company || "-"}\nNeed: ${needLabel}\n\n${message}`,
       html: `<p><b>${esc(name)}</b> &lt;${esc(email)}&gt;</p><p>Company: ${esc(company) || "-"}<br>Need: ${esc(needLabel)}</p><p style="white-space:pre-wrap">${esc(message)}</p>`,
     }),

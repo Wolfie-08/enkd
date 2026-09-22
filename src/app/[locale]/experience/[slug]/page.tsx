@@ -51,7 +51,9 @@ export default async function ProjectPage({ params }: Props) {
 
       {p.image && (
         <figure className="mt-10 overflow-hidden rounded-lg border border-line">
-          <img src={p.image} alt={p.title[locale]} className="w-full object-cover" />
+          <div className="aspect-[16/10] overflow-hidden">
+            <img src={p.image} alt={p.title[locale]} className="size-full object-cover" />
+          </div>
         </figure>
       )}
 
@@ -62,12 +64,12 @@ export default async function ProjectPage({ params }: Props) {
         </ul>
       </section>
 
-      {p.stack && (
+      {p.stack?.length ? (
         <section className="mt-10 grid gap-4 md:grid-cols-[200px_1fr]">
           <h2 className={`${mono} text-dim`}>{t.stack[locale]}</h2>
           <p className={`${mono} text-muted-foreground`}>{p.stack.join(" · ")}</p>
         </section>
-      )}
+      ) : null}
 
       <section className="mt-10 grid gap-4 md:grid-cols-[200px_1fr]">
         <h2 className={`${mono} text-dim`}>{t.outcomes[locale]}</h2>

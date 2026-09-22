@@ -9,7 +9,7 @@ const slugs = [...src.matchAll(/slug: "([a-z0-9-]+)"/g)].map((m) => m[1]);
 const pages = ["/", "/experience", "/blog", "/contact", ...slugs.map((s) => `/experience/${s}`)];
 const routes = [...pages, ...pages.map((p) => (p === "/" ? "/uz" : `/uz${p}`))];
 
-const server = spawn("npx", ["next", "start", "-p", String(PORT)], { stdio: "ignore" });
+const server = spawn("npx", ["next", "start", "-p", String(PORT)], { stdio: "ignore", detached: true });
 const wait = async () => {
   for (let i = 0; i < 40; i++) {
     try { await fetch(BASE); return; } catch { await new Promise((r) => setTimeout(r, 500)); }
@@ -61,7 +61,7 @@ try {
     if (res.status !== 200) failures.push(`${f}: HTTP ${res.status}`);
   }
 } finally {
-  server.kill();
+  try { process.kill(-server.pid); } catch {}
 }
 
 if (failures.length) {

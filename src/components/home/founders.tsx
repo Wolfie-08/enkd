@@ -13,7 +13,7 @@ export function Founders({ locale }: { locale: Locale }) {
           <p className="mt-4 text-lg text-foreground max-w-2xl">{site.founders.text[locale]}</p>
         </div>
         <Button asChild variant="outline" className="font-mono uppercase tracking-wider text-xs">
-          <Link href={`${localePath(locale, "/contact")}?need=cofounder`}>{site.founders.cta[locale]}</Link>
+          <Link href={`${localePath(locale, "/contact")}?need=cofounder`} prefetch={false}>{site.founders.cta[locale]}</Link>
         </Button>
       </Reveal>
     </section>

@@ -14,7 +14,7 @@ export function Faq({ locale }: { locale: Locale }) {
           <details key={f.q.en} className="group py-5">
             <summary className="flex items-center justify-between gap-6 text-lg font-medium">
               {f.q[locale]}
-              <span className="font-mono text-dim transition-transform group-open:rotate-45">+</span>
+              <span aria-hidden="true" className="font-mono text-dim transition-transform group-open:rotate-45">+</span>
             </summary>
             <p className="mt-3 text-muted-foreground">{f.a[locale]}</p>
           </details>

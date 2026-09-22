@@ -31,5 +31,5 @@ export default {
       letterSpacing: { tightest: "-0.03em" },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [],
 } satisfies Config;
