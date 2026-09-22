@@ -170,9 +170,9 @@ export const site = {
         role: { en: "Digital Systems Engineer", uz: "Raqamli tizimlar muhandisi" },
         period: { en: "Jul 2026 – present", uz: "2026 iyul – hozir" },
         points: [
-          { en: "Three production Telegram bots (storefront, marketing broadcast, customer service) live across four divisions.", uz: "To‘rt yo‘nalishda ishlab turgan uchta Telegram bot: do‘kon, marketing tarqatmasi, mijozlarga xizmat." },
+          { en: "Three production Telegram bots across four divisions: a self-service storefront where clients browse the live warehouse catalogue, order and pay without a salesperson in the loop, plus marketing-broadcast and customer-service bots.", uz: "To‘rt yo‘nalishda uchta ishlab turgan Telegram bot: mijozlar jonli ombor katalogini ko‘rib, sotuvchisiz buyurtma berib to‘laydigan o‘z-o‘ziga xizmat do‘koni, hamda marketing tarqatmasi va mijozlarga xizmat botlari." },
           { en: "PostgreSQL data warehouse with automated ETL from the Smartup ERP: sales, payments, cash, all divisions.", uz: "Smartup ERP’dan avtomatik ETL bilan PostgreSQL ma’lumotlar ombori: savdo, to‘lovlar, kassa, barcha yo‘nalishlar." },
-          { en: "Power BI dashboards for leadership; automated daily cash-flow and debtor reporting.", uz: "Rahbariyat uchun Power BI panellari; kunlik pul oqimi va qarzdorlar hisobotini avtomatlashtirish." },
+          { en: "Power BI dashboards for leadership; reporting effort cut by about 80%, with daily, weekly and monthly reports built from the ERP sync instead of manual Excel work.", uz: "Rahbariyat uchun Power BI panellari; hisobot mehnati taxminan 80% ga kamaydi, kunlik, haftalik va oylik hisobotlar qo‘lda Excel ishi o‘rniga ERP sinxronidan yig‘iladi." },
           { en: "Dockerized Linux server hosting 17 production services with health monitoring and alerting.", uz: "17 ta ishlab turgan xizmatni joylashtirgan Docker’li Linux server, monitoring va ogohlantirish bilan." },
           { en: "LLM financial assistant over live company data, in development.", uz: "Kompaniyaning jonli ma’lumotlari ustida ishlaydigan LLM moliyaviy yordamchi, ishlab chiqilmoqda." },
         ],
@@ -245,7 +245,7 @@ export const site = {
   },
 
   footer: {
-    tagline: { en: "Engineered, not templated.", uz: "Shablon emas, muhandislik." },
+    tagline: { en: "Engineered to make your life easier.", uz: "Hayotingizni osonlashtirish uchun yaratilgan." },
     rights: { en: "All rights reserved.", uz: "Barcha huquqlar himoyalangan." },
   },
 
