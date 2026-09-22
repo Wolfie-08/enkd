@@ -7,6 +7,7 @@ import { isLocale, locales, SITE_URL, type Locale } from "@/lib/i18n";
 import { JsonLd, personLd, serviceLd } from "@/lib/seo";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
+import { AudioPlayer } from "@/components/audio-player";
 import "../globals.css";
 
 const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
@@ -29,6 +30,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
         <Nav locale={l} />
         <div className="flex-1">{children}</div>
         <Footer locale={l} />
+        <AudioPlayer />
         <Analytics />
       </body>
     </html>
