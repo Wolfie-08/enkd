@@ -3,7 +3,7 @@ import { projects } from "@/content/projects";
 import { localePath, SITE_URL } from "@/lib/i18n";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = ["/", "/experience", "/blog", "/contact", ...projects.map((p) => `/experience/${p.slug}`)];
+  const paths = ["/", "/experience", "/blog", "/contact", "/faq", ...projects.map((p) => `/experience/${p.slug}`)];
   const now = new Date();
   return paths.flatMap((path) =>
     (["en", "uz"] as const).map((locale) => ({

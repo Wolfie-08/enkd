@@ -24,6 +24,7 @@ export const site = {
     experience: { en: "Experience", uz: "Tajriba" },
     blog: { en: "Blog", uz: "Blog" },
     contact: { en: "Contact", uz: "Aloqa" },
+    faq: { en: "FAQ", uz: "Savol-javob" },
     request: { en: "Request a solution", uz: "Yechim so‘rash" },
     sound: { en: "Sound", uz: "Ovoz" },
     theme: { en: "Theme", uz: "Mavzu" },
@@ -117,6 +118,7 @@ export const site = {
 
   faq: {
     heading: { en: "Questions businesses ask", uz: "Bizneslar beradigan savollar" },
+    all: { en: "All questions", uz: "Barcha savollar" },
     items: [
       {
         q: { en: "What does Enkd do?", uz: "Enkd nima bilan shug‘ullanadi?" },
@@ -271,6 +273,10 @@ export const site = {
     contact: {
       title: { en: "Request a solution", uz: "Yechim so‘rash" },
       description: { en: "Request AI automation, an AI agent, a Telegram chatbot, or a website from Diyorbek Komilov in Tashkent. Reply within 24 hours.", uz: "Toshkentdagi Diyorbek Komilovdan AI avtomatlashtirish, AI agent, Telegram chatbot yoki veb-sayt so‘rang. 24 soat ichida javob." },
+    },
+    faq: {
+      title: { en: "FAQ: AI automation, agents, Telegram bots, websites", uz: "Savol-javob: AI avtomatlashtirish, agentlar, Telegram botlar, saytlar" },
+      description: { en: "Answers on cost, timelines, data safety and results for AI automation, AI agents, Telegram shop bots and business websites, from an engineer in Tashkent.", uz: "Toshkentdagi muhandisdan AI avtomatlashtirish, AI agentlar, Telegram do‘kon botlari va biznes saytlari narxi, muddati, ma’lumotlar xavfsizligi va natijalari haqida javoblar." },
     },
   },
 } as const;

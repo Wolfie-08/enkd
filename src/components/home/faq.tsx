@@ -1,5 +1,6 @@
+import Link from "next/link";
 import { site } from "@/content/site";
-import type { Locale } from "@/lib/i18n";
+import { localePath, type Locale } from "@/lib/i18n";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 
@@ -20,6 +21,7 @@ export function Faq({ locale }: { locale: Locale }) {
           </details>
         ))}
       </div>
+      <Link href={localePath(locale, "/faq")} className="mt-8 inline-block font-mono text-xs uppercase tracking-wider hover:text-accent">{site.faq.all[locale]} →</Link>
     </section>
   );
 }

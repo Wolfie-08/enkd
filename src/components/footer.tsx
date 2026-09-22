@@ -24,6 +24,7 @@ export function Footer({ locale }: { locale: Locale }) {
           <ul className="space-y-2 text-muted-foreground">
             <li><Link href={localePath(locale, "/experience")} className="hover:text-foreground">{site.nav.experience[locale]}</Link></li>
             <li><Link href={localePath(locale, "/blog")} className="hover:text-foreground">{site.nav.blog[locale]}</Link></li>
+            <li><Link href={localePath(locale, "/faq")} className="hover:text-foreground">{site.nav.faq[locale]}</Link></li>
             <li><Link href={localePath(locale, "/contact")} className="hover:text-foreground">{site.nav.contact[locale]}</Link></li>
             <li><a href="/Diyorbek_Komilov_CV.pdf" className="hover:text-foreground">CV (PDF)</a></li>
           </ul>

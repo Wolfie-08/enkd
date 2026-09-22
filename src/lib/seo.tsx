@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_URL, localePath, type Locale } from "@/lib/i18n";
+import { SITE_URL, localePath, type Bi, type Locale } from "@/lib/i18n";
 import { site } from "@/content/site";
 import type { Project } from "@/content/projects";
 
@@ -71,11 +71,11 @@ export function websiteLd(locale: Locale) {
   return { "@context": "https://schema.org", "@type": "WebSite", url: SITE_URL, name: site.brand, inLanguage: locale, publisher: { "@id": personId } };
 }
 
-export function faqLd(locale: Locale) {
+export function faqLd(locale: Locale, items: readonly { q: Bi; a: Bi }[] = site.faq.items) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: site.faq.items.map((f) => ({
+    mainEntity: items.map((f) => ({
       "@type": "Question",
       name: f.q[locale],
       acceptedAnswer: { "@type": "Answer", text: f.a[locale] },
