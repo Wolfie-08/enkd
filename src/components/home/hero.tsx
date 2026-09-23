@@ -7,7 +7,7 @@ import { localePath, type Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
 
-// three.js is ~600 KB: load the moon after first paint, with the empty stage as placeholder.
+// three.js is ~600 KB: load the moon after first paint.
 const LunarScene = dynamic(() => import("@/components/ui/lunar-gravity-card").then((m) => m.LunarScene), { ssr: false });
 
 export function Hero({ locale }: { locale: Locale }) {
@@ -15,7 +15,7 @@ export function Hero({ locale }: { locale: Locale }) {
   const h = site.hero;
   const mono = "font-mono text-xs uppercase tracking-wider";
   return (
-    <section>
+    <section className="overflow-x-clip">
       <div className="container grid gap-12 pt-12 pb-16 md:pt-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
         <div>
           <p className="inline-flex items-center gap-2 rounded-full border border-line bg-card/50 px-3.5 py-1.5 text-sm text-foreground backdrop-blur">
@@ -50,13 +50,13 @@ export function Hero({ locale }: { locale: Locale }) {
           </div>
         </div>
 
-        {/* Interactive moon on a fixed charcoal stage (same in both themes). */}
-        <figure className="stage relative overflow-hidden rounded-2xl border border-line shadow-xl shadow-foreground/10">
+        {/* Interactive moon, straight on the page background. */}
+        <figure>
           <div className="relative aspect-square" role="img" aria-label={h.figureLabel[locale]}>
-            <div className="absolute inset-[18%] rounded-full bg-accent/10 blur-3xl" aria-hidden="true" />
-            <LunarScene className="absolute inset-0" />
+            {/* Canvas bleeds past the column so the ring isn't cut at a hard edge; the section clips sideways overflow. */}
+            <LunarScene className="absolute -inset-[14%] h-auto w-auto" />
           </div>
-          <figcaption className="absolute inset-x-0 bottom-0 flex items-center gap-2 px-5 py-4 text-xs text-[#f2f1ef]/70">
+          <figcaption className="mt-2 flex items-center justify-center gap-2 text-xs text-muted-foreground">
             <MousePointerClick className="size-3.5 shrink-0 text-accent" aria-hidden="true" />
             {h.figure[locale]}
           </figcaption>
@@ -65,9 +65,9 @@ export function Hero({ locale }: { locale: Locale }) {
 
       {/* Title block: the facts a recruiter scans first. */}
       <div className="container pb-16">
-        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line lg:grid-cols-4">
+        <dl className="grid grid-cols-2 gap-x-8 gap-y-6 lg:grid-cols-4">
           {h.specs.map((s) => (
-            <div key={s.label.en} className="bg-card/70 p-5 backdrop-blur">
+            <div key={s.label.en} className="border-t border-line pt-4">
               <dt className={`${mono} text-ink`}>{s.label[locale]}</dt>
               <dd className="mt-2 text-sm font-medium">{s.value[locale]}</dd>
             </div>

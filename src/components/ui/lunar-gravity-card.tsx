@@ -313,8 +313,10 @@ export function LunarScene({ className }: { className?: string }) {
   return (
     <div ref={wrapRef} className={cn("h-full w-full", className)}>
       <Canvas camera={{ position: [0, 3.6, 10.2], fov: 45 }} dpr={[1, 2]} frameloop={inView ? "always" : "never"} gl={{ alpha: true }}>
-        <ambientLight intensity={0.12} />
-        <directionalLight position={[8, 5, 5]} intensity={2.2} color="#fff6ec" />
+        {/* Fully lit face: strong ambient, key light near the camera, soft fill from the left, warm rim behind. */}
+        <ambientLight intensity={0.9} />
+        <directionalLight position={[3, 4, 10]} intensity={1.6} color="#fff6ec" />
+        <directionalLight position={[-8, 2, 4]} intensity={0.7} color="#f2f1ef" />
         <directionalLight position={[-5, -3, -5]} intensity={0.35} color="#e37830" />
 
         {finePointer && <OrbitControls enableZoom={false} enablePan={false} autoRotate={false} />}

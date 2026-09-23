@@ -13,8 +13,8 @@ export function Record({ locale }: { locale: Locale }) {
       <Reveal>
         <SectionHeading title={site.record.heading[locale]} />
       </Reveal>
-      <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-2">
-        <Reveal className="bg-card/70 backdrop-blur p-6 md:p-8">
+      <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+        <Reveal className="border-t border-line pt-6">
           <p className={`${mono} text-dim`}>{x.work[locale]}</p>
           <ol className="mt-6 space-y-8">
             {x.jobs.map((j) => (
@@ -29,7 +29,7 @@ export function Record({ locale }: { locale: Locale }) {
             ))}
           </ol>
         </Reveal>
-        <Reveal className="bg-card/70 backdrop-blur p-6 md:p-8" delay={0.08}>
+        <Reveal className="border-t border-line pt-6" delay={0.08}>
           <p className={`${mono} text-dim`}>{x.education[locale]}</p>
           <ol className="mt-6 space-y-8">
             {x.edu.map((e) => (

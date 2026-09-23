@@ -26,7 +26,7 @@ export default async function BlogPage({ params }: Props) {
       <div className="grid gap-5 md:grid-cols-3">
         {b.links.map((l, i) => (
           <Reveal key={l.href} delay={i * 0.08}>
-            <a href={l.href} target="_blank" rel="noopener noreferrer" className="group block h-full rounded-2xl border border-line bg-card/50 p-6 backdrop-blur-md hover:border-accent/50 hover:shadow-xl hover:shadow-accent/10 transition-colors">
+            <a href={l.href} target="_blank" rel="noopener noreferrer" className="group block h-full border-t border-line pt-6">
               <p className="font-mono text-xs uppercase tracking-wider text-dim">0{i + 1}</p>
               <h2 className="mt-3 text-xl font-semibold group-hover:text-ink transition-colors">{l.title[locale]}</h2>
               <p className="mt-2 text-sm text-muted-foreground">{l.text[locale]}</p>

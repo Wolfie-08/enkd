@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 export function Founders({ locale }: { locale: Locale }) {
   return (
     <section className="container py-10">
-      <Reveal className="rounded-3xl border border-line bg-card/60 p-8 shadow-xl shadow-foreground/5 backdrop-blur-md md:p-12 grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+      <Reveal className="border-t border-line pt-10 grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
         <div>
           <p className="text-sm font-medium text-ink">{site.founders.heading[locale]}</p>
           <p className="mt-4 text-lg text-foreground max-w-2xl">{site.founders.text[locale]}</p>

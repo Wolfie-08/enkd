@@ -9,7 +9,7 @@ export function Hire({ locale }: { locale: Locale }) {
   const linkedin = site.socials.find((s) => s.label === "LinkedIn")!.href;
   return (
     <section className="container py-14 md:py-20">
-      <Reveal className="relative overflow-hidden rounded-3xl border border-line bg-card/60 p-8 shadow-xl shadow-foreground/5 backdrop-blur-md md:p-14">
+      <Reveal className="border-t border-line pt-14 md:pt-20">
                 <h2 className="max-w-3xl text-4xl md:text-6xl font-semibold text-balance">{site.hire.heading[locale]}</h2>
         <p className="mt-4 max-w-xl text-lg text-muted-foreground">{site.hire.text[locale]}</p>
         <div className="mt-10 flex flex-wrap gap-3">

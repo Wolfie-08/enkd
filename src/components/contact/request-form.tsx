@@ -41,7 +41,7 @@ export function RequestForm({ locale }: { locale: Locale }) {
 
   if (state === "sent") {
     return (
-      <div role="status" className="rounded-3xl border border-line bg-card/60 p-8 backdrop-blur-md">
+      <div role="status" className="border-t border-line pt-8">
         <p className="text-xl font-medium">{f.success[locale]}</p>
         <a href={site.telegram} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block font-mono text-xs uppercase tracking-wider text-ink hover:underline">
           {f.successTelegram[locale]} ↗
@@ -52,7 +52,7 @@ export function RequestForm({ locale }: { locale: Locale }) {
 
   const field = "bg-background border-line focus-visible:ring-accent";
   return (
-    <form onSubmit={onSubmit} className="space-y-6 rounded-3xl border border-line bg-card/60 p-6 shadow-xl shadow-foreground/5 backdrop-blur-md md:p-8">
+    <form onSubmit={onSubmit} className="space-y-6">
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="space-y-2">
