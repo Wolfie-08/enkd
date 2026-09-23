@@ -7,6 +7,7 @@ import { isLocale, locales, SITE_URL, type Locale } from "@/lib/i18n";
 import { JsonLd, personLd } from "@/lib/seo";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
+import { AudioPlayer } from "@/components/audio-player";
 import { themeInitScript } from "@/components/theme-toggle";
 import "../globals.css";
 
@@ -33,6 +34,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
         <Nav locale={l} />
         <div className="flex-1">{children}</div>
         <Footer locale={l} />
+        <AudioPlayer />
         <Analytics />
       </body>
     </html>

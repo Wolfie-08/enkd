@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { LanguageSwitch } from "@/components/language-switch";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MobileMenu } from "@/components/mobile-menu";
+import { MuteButton } from "@/components/audio-player";
 
 export function Nav({ locale }: { locale: Locale }) {
   const links = [
@@ -32,6 +33,7 @@ export function Nav({ locale }: { locale: Locale }) {
         </nav>
         <div className="flex items-center gap-3">
           <LanguageSwitch locale={locale} />
+          <MuteButton label={site.nav.sound[locale]} />
           <ThemeToggle label={site.nav.theme[locale]} />
           <Button asChild size="sm" className="hidden rounded-full px-4 md:inline-flex">
             <a href={site.resume}>{site.nav.resume[locale]} ↓</a>

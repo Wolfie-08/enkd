@@ -31,6 +31,7 @@ export const site = {
     resume: { en: "Resume", uz: "Rezyume" },
     menu: { en: "Menu", uz: "Menyu" },
     theme: { en: "Theme", uz: "Mavzu" },
+    sound: { en: "Sound", uz: "Ovoz" },
   },
 
   hero: {
