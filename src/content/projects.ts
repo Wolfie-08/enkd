@@ -348,7 +348,7 @@ export const projects: Project[] = [
   },
 ];
 
-const featuredOrder = ["solar-tracker", "cansat-dashboard", "f1-telemetry-console", "supply-group"];
+const featuredOrder = ["f1-telemetry-console", "hunar", "rsef", "mubl"];
 export const featuredProjects = featuredOrder.map((slug) => projects.find((p) => p.slug === slug)!);
 // "2026 –" reads as an open range: append "now" so the dash isn't left dangling.
 export const yearLabel = (p: Project, locale: Locale) => (p.year?.endsWith("–") ? `${p.year} ${present[locale]}` : p.year);

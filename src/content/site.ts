@@ -126,8 +126,8 @@ export const site = {
   },
 
   selectedWork: {
-    heading: { en: "Engineering projects", uz: "Muhandislik loyihalari" },
-    intro: { en: "Hardware first, then the telemetry and data systems built around it.", uz: "Avval apparat, keyin uning atrofida qurilgan telemetriya va ma’lumot tizimlari." },
+    heading: { en: "Selected projects", uz: "Tanlangan loyihalar" },
+    intro: { en: "Live products I built end to end, each with a demo you can open.", uz: "Boshidan oxirigacha o‘zim qurgan, ishlab turgan mahsulotlar; har birining ochsa bo‘ladigan demosi bor." },
     all: { en: "All projects", uz: "Barcha loyihalar" },
   },
 
@@ -265,6 +265,8 @@ export const site = {
     links: { en: "Links", uz: "Havolalar" },
     live: { en: "Live", uz: "Sayt" },
     demo: { en: "Demo", uz: "Demo" },
+    liveDemo: { en: "Live demo", uz: "Jonli demo" },
+    caseStudy: { en: "Case study", uz: "Batafsil" },
     back: { en: "All projects", uz: "Barcha loyihalar" },
     prev: { en: "Previous", uz: "Oldingi" },
     next: { en: "Next", uz: "Keyingi" },

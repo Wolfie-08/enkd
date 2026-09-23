@@ -6,16 +6,19 @@ import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { ProjectCard } from "@/components/experience/project-card";
 
+const spans = ["md:col-span-7", "md:col-span-5", "md:col-span-5", "md:col-span-7"];
+
 export function SelectedWork({ locale }: { locale: Locale }) {
   return (
     <section id="work" className="container scroll-mt-24 py-14 md:py-20">
       <Reveal>
         <SectionHeading index="01 / Projects" title={site.selectedWork.heading[locale]} intro={site.selectedWork.intro[locale]} />
       </Reveal>
-      <div className="grid gap-6 sm:grid-cols-2">
+      {/* Offset rows (7/5, then 5/7) so the four cards don't read as a uniform tile wall. Single column below md. */}
+      <div className="grid gap-6 md:grid-cols-12">
         {featuredProjects.map((p, i) => (
-          <Reveal key={p.slug} delay={i * 0.08} className="h-full">
-            <ProjectCard locale={locale} project={p} index={`0${i + 2}`} />
+          <Reveal key={p.slug} delay={i * 0.08} className={`h-full ${spans[i % spans.length]}`}>
+            <ProjectCard locale={locale} project={p} />
           </Reveal>
         ))}
       </div>
