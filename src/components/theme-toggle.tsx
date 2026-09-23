@@ -9,8 +9,8 @@ type Theme = "dark" | "light";
 // layout applies the stored choice before first paint.
 const listeners = new Set<() => void>();
 const subscribe = (l: () => void) => { listeners.add(l); return () => { listeners.delete(l); }; };
-const get = (): Theme => (document.documentElement.classList.contains("light") ? "light" : "dark");
-const getServer = (): Theme => "dark";
+const get = (): Theme => (document.documentElement.classList.contains("dark") ? "dark" : "light");
+const getServer = (): Theme => "light";
 
 function set(theme: Theme) {
   const el = document.documentElement;
@@ -37,5 +37,5 @@ export function ThemeToggle({ label }: { label: string }) {
   );
 }
 
-// Runs before hydration so a stored light preference never flashes dark.
-export const themeInitScript = `(function(){try{var t=localStorage.getItem("${KEY}");if(t==="light"){var c=document.documentElement.classList;c.remove("dark");c.add("light");}}catch(e){}})();`;
+// Light (paper) is the default. Runs before hydration so a stored dark preference never flashes light.
+export const themeInitScript = `(function(){try{var t=localStorage.getItem("${KEY}");if(t==="dark"){var c=document.documentElement.classList;c.remove("light");c.add("dark");}}catch(e){}})();`;

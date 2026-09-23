@@ -9,22 +9,21 @@ export function Hire({ locale }: { locale: Locale }) {
   const linkedin = site.socials.find((s) => s.label === "LinkedIn")!.href;
   return (
     <section className="container py-14 md:py-20">
-      <Reveal className="ticks border border-line bg-surface p-8 md:p-14">
-        <p className={`${mono} text-accent`}>04 / {site.nav.contact[locale]}</p>
-        <h2 className="mt-6 max-w-3xl text-4xl md:text-6xl font-semibold text-balance">{site.hire.heading[locale]}</h2>
+      <Reveal className="relative overflow-hidden rounded-3xl border border-line bg-card/60 p-8 shadow-xl shadow-foreground/5 backdrop-blur-md md:p-14">
+                <h2 className="max-w-3xl text-4xl md:text-6xl font-semibold text-balance">{site.hire.heading[locale]}</h2>
         <p className="mt-4 max-w-xl text-lg text-muted-foreground">{site.hire.text[locale]}</p>
         <div className="mt-10 flex flex-wrap gap-3">
-          <Button asChild size="lg" className={mono}>
+          <Button asChild size="lg" className="rounded-full px-6">
             <a href={`mailto:${site.email}`}>{site.email}</a>
           </Button>
-          <Button asChild size="lg" variant="outline" className={`${mono} bg-background`}>
+          <Button asChild size="lg" variant="outline" className="rounded-full bg-card/40 px-6 hover:bg-card hover:text-foreground">
             <a href={site.resume}>{site.hero.resume[locale]} ↓</a>
           </Button>
-          <Button asChild size="lg" variant="outline" className={`${mono} bg-background`}>
+          <Button asChild size="lg" variant="outline" className="rounded-full bg-card/40 px-6 hover:bg-card hover:text-foreground">
             <a href={linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           </Button>
         </div>
-        <Link href={localePath(locale, "/contact")} className={`${mono} mt-8 inline-block text-muted-foreground hover:text-accent`}>
+        <Link href={localePath(locale, "/contact")} className={`${mono} mt-8 inline-block text-muted-foreground hover:text-ink`}>
           {site.contact.heading[locale]} →
         </Link>
       </Reveal>

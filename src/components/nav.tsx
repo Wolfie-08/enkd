@@ -15,7 +15,7 @@ export function Nav({ locale }: { locale: Locale }) {
     { href: localePath(locale, "/contact"), label: site.nav.contact[locale] },
   ];
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-background/85 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-line/70 bg-background/70 backdrop-blur-md">
       <div className="container flex h-14 items-center justify-between gap-4">
         <Link href={localePath(locale)} className="flex items-center gap-2 font-mono text-sm tracking-wider uppercase">
           <span className="inline-flex size-6 items-center justify-center" aria-hidden="true">
@@ -33,7 +33,7 @@ export function Nav({ locale }: { locale: Locale }) {
         <div className="flex items-center gap-3">
           <LanguageSwitch locale={locale} />
           <ThemeToggle label={site.nav.theme[locale]} />
-          <Button asChild size="sm" className="hidden md:inline-flex font-mono uppercase tracking-wider text-xs">
+          <Button asChild size="sm" className="hidden rounded-full px-4 md:inline-flex">
             <a href={site.resume}>{site.nav.resume[locale]} ↓</a>
           </Button>
           <MobileMenu label={site.nav.menu[locale]} links={[...links, { href: site.resume, label: `${site.nav.resume[locale]} (PDF)` }]} />

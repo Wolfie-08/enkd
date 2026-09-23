@@ -22,10 +22,10 @@ export default async function ExperiencePage({ params }: Props) {
         { name: site.nav.home[locale], url: localePath(locale) },
         { name: x.heading[locale], url: localePath(locale, "/experience") },
       ])} />
-      <SectionHeading index="Experience" title={x.heading[locale]} intro={x.intro[locale]} />
+      <SectionHeading title={x.heading[locale]} intro={x.intro[locale]} />
       <Timeline locale={locale} />
       <div className="mt-24 border-t border-line pt-16">
-        <SectionHeading index="04 / Projects" title={x.projects[locale]} />
+        <SectionHeading title={x.projects[locale]} />
         <ProjectGrid locale={locale} />
       </div>
     </main>

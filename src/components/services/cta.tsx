@@ -10,7 +10,7 @@ export function Cta({ locale }: { locale: Locale }) {
       <Reveal className="text-center max-w-2xl mx-auto">
         <h2 className="text-3xl md:text-5xl font-semibold">{site.cta.heading[locale]}</h2>
         <p className="mt-4 text-muted-foreground">{site.cta.text[locale]}</p>
-        <Button asChild size="lg" className="mt-8 font-mono uppercase tracking-wider text-xs">
+        <Button asChild size="lg" className="mt-8 rounded-full px-6">
           <Link href={`${localePath(locale, "/contact")}?need=automation`} prefetch={false}>{site.cta.button[locale]}</Link>
         </Button>
       </Reveal>

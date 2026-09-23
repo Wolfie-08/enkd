@@ -8,7 +8,7 @@ export function Faq({ locale }: { locale: Locale }) {
   return (
     <section className="container py-20 md:py-28">
       <Reveal>
-        <SectionHeading index="02 / FAQ" title={site.faq.heading[locale]} />
+        <SectionHeading title={site.faq.heading[locale]} />
       </Reveal>
       <div className="max-w-3xl divide-y divide-line border-y border-line">
         {site.faq.items.map((f) => (
@@ -21,7 +21,7 @@ export function Faq({ locale }: { locale: Locale }) {
           </details>
         ))}
       </div>
-      <Link href={localePath(locale, "/services/faq")} className="mt-8 inline-block font-mono text-xs uppercase tracking-wider hover:text-accent">{site.faq.all[locale]} →</Link>
+      <Link href={localePath(locale, "/services/faq")} className="mt-8 inline-block font-mono text-xs uppercase tracking-wider hover:text-ink">{site.faq.all[locale]} →</Link>
     </section>
   );
 }

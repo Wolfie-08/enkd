@@ -2,71 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Palette: #f2f1ef paper, #2c2c2c charcoal, #83664b earth, #6b6e71 slate, #e37830 orange.
+  Orange is for fills, large numbers, rings and glows only: as small text it is ~3:1 on paper,
+  so small accent text uses --ink (earth on paper, a lighter orange tint on charcoal).
+  Tokens are bare HSL triples so Tailwind can apply opacity (bg-card/30, border-border/50).
+*/
 @layer base {
-  /* Dark theme: graphite drawing board, papaya signal orange */
   :root {
-    --background: 220 14% 5%;
-    --surface: 220 12% 8%;
-    --foreground: 40 18% 93%;
-    --muted: 220 8% 64%;
-    --dim: 220 6% 44%;
-    --line: 40 18% 93% / 0.1;
-    --accent: 24 100% 56%;
-    --on-accent: 220 14% 5%;
-    --radius: 3px;
-  }
-  /* Light theme: drafting paper, ink, same orange a shade deeper for contrast */
-  html.light {
-    --background: 42 30% 95%;
-    --surface: 42 24% 91%;
-    --foreground: 222 32% 13%;
-    --muted: 222 12% 36%;
-    --dim: 222 8% 52%;
-    --line: 222 32% 13% / 0.14;
-    --accent: 20 92% 46%;
-    --on-accent: 42 30% 97%;
+    --background: 40 11% 94%;   /* #f2f1ef */
+    --surface: 40 9% 90%;
+    --card: 40 20% 98%;
+    --foreground: 0 0% 17%;     /* #2c2c2c */
+    --muted: 210 3% 43%;        /* #6b6e71, 4.6:1 on paper */
+    --dim: 210 3% 43%;
+    --line: 36 8% 82%;
+    --primary: 0 0% 17%;
+    --on-primary: 40 11% 94%;
+    --accent: 24 76% 54%;       /* #e37830 */
+    --on-accent: 0 0% 17%;
+    --ink: 29 27% 40%;          /* #83664b, 4.7:1 on paper */
+    --radius: 16px;
     color-scheme: light;
   }
-  html { color-scheme: dark; scroll-behavior: smooth; }
-  /* Drafting grid over the whole page: 24px minor, 120px major */
-  body {
-    @apply bg-background text-foreground antialiased;
-    background-image:
-      linear-gradient(hsl(var(--foreground) / 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--foreground) / 0.045) 1px, transparent 1px),
-      linear-gradient(hsl(var(--foreground) / 0.022) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--foreground) / 0.022) 1px, transparent 1px);
-    background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  html.dark {
+    --background: 0 0% 17%;     /* #2c2c2c */
+    --surface: 0 0% 20%;
+    --card: 0 0% 23%;
+    --foreground: 40 11% 94%;
+    --muted: 40 4% 72%;
+    --dim: 210 3% 64%;          /* lightened #6b6e71 so it clears 4.5:1 on charcoal */
+    --line: 0 0% 29%;
+    --primary: 40 11% 94%;
+    --on-primary: 0 0% 17%;
+    --accent: 24 76% 54%;
+    --on-accent: 0 0% 17%;
+    --ink: 24 82% 68%;          /* orange tint, readable as small text on charcoal */
+    color-scheme: dark;
   }
-  ::selection { background: hsl(var(--accent) / 0.35); }
+  html { scroll-behavior: smooth; }
+  body { @apply bg-background text-foreground antialiased; }
+  ::selection { background: hsl(var(--accent) / 0.3); }
   :focus-visible { outline: 2px solid hsl(var(--accent)); outline-offset: 2px; }
   h1, h2, h3 { @apply tracking-tightest; }
 }
 
-/* Corner registration ticks, like the crop marks on a drawing sheet */
-.ticks { position: relative; }
-.ticks::before,
-.ticks::after {
+/* Two soft glows fixed behind the page, so glass cards have something to blur. */
+body::before {
   content: "";
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-color: hsl(var(--accent));
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   pointer-events: none;
-  z-index: 1;
-}
-.ticks::before { top: -1px; left: -1px; border-top: 1px solid; border-left: 1px solid; }
-.ticks::after { bottom: -1px; right: -1px; border-bottom: 1px solid; border-right: 1px solid; }
-
-/* Dashed centre lines behind a figure */
-.crosshair {
   background:
-    linear-gradient(90deg, transparent calc(50% - 0.5px), hsl(var(--foreground) / 0.12) calc(50% - 0.5px), hsl(var(--foreground) / 0.12) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-    linear-gradient(transparent calc(50% - 0.5px), hsl(var(--foreground) / 0.12) calc(50% - 0.5px), hsl(var(--foreground) / 0.12) calc(50% + 0.5px), transparent calc(50% + 0.5px));
+    radial-gradient(40rem 32rem at 85% -5%, hsl(var(--accent) / 0.14), transparent 70%),
+    radial-gradient(36rem 30rem at -5% 45%, hsl(var(--ink) / 0.12), transparent 70%);
 }
 
-/* Radial glow behind the orb */
-.orb-halo { background: radial-gradient(circle, hsl(var(--accent) / 0.16) 0%, transparent 65%); }
+/* Fixed dark stage for the 3D moon, the same in both themes. */
+.stage { background: radial-gradient(circle at 60% 40%, #3a3431 0%, #2c2c2c 55%, #232323 100%); color: #f2f1ef; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

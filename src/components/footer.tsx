@@ -15,9 +15,9 @@ export function Footer({ locale }: { locale: Locale }) {
     <footer className="border-t border-line bg-background">
       <div className="container py-12 grid gap-10 md:grid-cols-3 text-sm">
         <div className="space-y-3">
-          <p className="font-mono uppercase tracking-wider text-xs text-accent">{site.name}</p>
+          <p className="font-mono uppercase tracking-wider text-xs text-ink">{site.name}</p>
           <p className="text-muted-foreground max-w-xs">{site.footer.tagline[locale]}</p>
-          <a href={`mailto:${site.email}`} className="block hover:text-accent transition-colors">{site.email}</a>
+          <a href={`mailto:${site.email}`} className="block hover:text-ink transition-colors">{site.email}</a>
         </div>
         <div className="space-y-3">
           <p className="font-mono uppercase tracking-wider text-xs text-dim">{site.nav.experience[locale]}</p>

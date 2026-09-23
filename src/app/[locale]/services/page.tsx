@@ -29,7 +29,7 @@ export default async function ServicesPage({ params }: Props) {
         ]),
       ]} />
       <header className="container pt-16 pb-12 md:pt-24 md:pb-16">
-        <p className="font-mono text-xs uppercase tracking-wider text-accent">{site.servicesPage.eyebrow[locale]}</p>
+        <p className="text-sm font-medium text-ink">{site.servicesPage.eyebrow[locale]}</p>
         <h1 className="mt-6 max-w-4xl text-5xl md:text-7xl font-semibold leading-[1.02] text-balance">{site.services.heading[locale]}</h1>
         <p className="mt-6 max-w-xl text-lg text-muted-foreground">{site.services.intro[locale]}</p>
       </header>

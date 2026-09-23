@@ -27,7 +27,7 @@ export default async function FaqPage({ params }: Props) {
       ]} />
       <p className="font-mono text-xs uppercase tracking-wider text-dim">
         <Link href={localePath(locale, "/services")} className="hover:text-foreground">{site.nav.services[locale]}</Link>
-        <span className="mx-2">/</span><span className="text-accent">{site.nav.faq[locale]}</span>
+        <span className="mx-2">/</span><span className="text-ink">{site.nav.faq[locale]}</span>
       </p>
       <h1 className="mt-4 text-4xl md:text-6xl font-semibold leading-[1.05]">{faqPage.heading[locale]}</h1>
       <p className="mt-6 text-lg text-muted-foreground">{faqPage.intro[locale]}</p>
@@ -36,7 +36,7 @@ export default async function FaqPage({ params }: Props) {
         <p className="text-dim">{faqPage.contents[locale]}</p>
         <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
           {faqGroups.map((g) => (
-            <li key={g.id}><a href={`#${g.id}`} className="hover:text-accent">{g.title[locale]} ({g.items.length})</a></li>
+            <li key={g.id}><a href={`#${g.id}`} className="hover:text-ink">{g.title[locale]} ({g.items.length})</a></li>
           ))}
         </ul>
       </nav>
@@ -44,7 +44,7 @@ export default async function FaqPage({ params }: Props) {
       {faqGroups.map((g, i) => (
         <section key={g.id} id={g.id} className="mt-16 scroll-mt-24">
           <h2 className="text-2xl md:text-3xl font-semibold">
-            <span className="font-mono text-sm text-accent mr-3">{String(i + 1).padStart(2, "0")}</span>
+            <span className="font-mono text-sm text-ink mr-3">{String(i + 1).padStart(2, "0")}</span>
             {g.title[locale]}
           </h2>
           <div className="mt-6 divide-y divide-line border-y border-line">
@@ -52,7 +52,7 @@ export default async function FaqPage({ params }: Props) {
               const id = faqId(f);
               return (
                 <div key={id} id={id} className="py-5 scroll-mt-24">
-                  <h3 className="text-lg font-medium"><a href={`#${id}`} className="hover:text-accent">{f.q[locale]}</a></h3>
+                  <h3 className="text-lg font-medium"><a href={`#${id}`} className="hover:text-ink">{f.q[locale]}</a></h3>
                   <p className="mt-2 text-muted-foreground">{f.a[locale]}</p>
                 </div>
               );
@@ -62,7 +62,7 @@ export default async function FaqPage({ params }: Props) {
       ))}
 
       <p className="mt-16 font-mono text-xs uppercase tracking-wider">
-        <Link href={localePath(locale, "/contact")} className="hover:text-accent">{faqPage.cta[locale]} →</Link>
+        <Link href={localePath(locale, "/contact")} className="hover:text-ink">{faqPage.cta[locale]} →</Link>
       </p>
     </main>
   );

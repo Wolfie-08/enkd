@@ -9,8 +9,8 @@ export default function NotFound() {
       <h1 className="mt-4 text-4xl font-semibold">{site.notFound.title.en}</h1>
       <p className="mt-2 text-muted-foreground">{site.notFound.text.en} · {site.notFound.text.uz}</p>
       <div className="mt-8 flex gap-6 font-mono text-xs uppercase tracking-wider">
-        <Link href="/" className="hover:text-accent">{site.notFound.home.en}</Link>
-        <Link href="/uz" className="hover:text-accent">{site.notFound.home.uz}</Link>
+        <Link href="/" className="hover:text-ink">{site.notFound.home.en}</Link>
+        <Link href="/uz" className="hover:text-ink">{site.notFound.home.uz}</Link>
       </div>
     </main>
   );

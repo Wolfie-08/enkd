@@ -27,8 +27,8 @@ export default async function ContactPage({ params }: Props) {
         <p className="mt-6 text-lg text-muted-foreground max-w-md">{c.intro[locale]}</p>
         <div className="mt-10 font-mono text-xs uppercase tracking-wider space-y-2">
           <p className="text-dim">{c.direct[locale]}</p>
-          <a href={`mailto:${site.email}`} className="block hover:text-accent">{site.email}</a>
-          <a href={site.telegram} target="_blank" rel="noopener noreferrer" className="block hover:text-accent">Telegram @kdiyor_18</a>
+          <a href={`mailto:${site.email}`} className="block hover:text-ink">{site.email}</a>
+          <a href={site.telegram} target="_blank" rel="noopener noreferrer" className="block hover:text-ink">Telegram @kdiyor_18</a>
         </div>
       </div>
       <RequestForm locale={locale} />

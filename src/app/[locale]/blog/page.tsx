@@ -22,13 +22,13 @@ export default async function BlogPage({ params }: Props) {
         { name: site.nav.home[locale], url: localePath(locale) },
         { name: b.heading[locale], url: localePath(locale, "/blog") },
       ])} />
-      <SectionHeading index="Blog" title={b.heading[locale]} intro={b.intro[locale]} />
+      <SectionHeading title={b.heading[locale]} intro={b.intro[locale]} />
       <div className="grid gap-5 md:grid-cols-3">
         {b.links.map((l, i) => (
           <Reveal key={l.href} delay={i * 0.08}>
-            <a href={l.href} target="_blank" rel="noopener noreferrer" className="group block h-full border border-line rounded-lg p-6 bg-surface hover:border-foreground/30 transition-colors">
+            <a href={l.href} target="_blank" rel="noopener noreferrer" className="group block h-full rounded-2xl border border-line bg-card/50 p-6 backdrop-blur-md hover:border-accent/50 hover:shadow-xl hover:shadow-accent/10 transition-colors">
               <p className="font-mono text-xs uppercase tracking-wider text-dim">0{i + 1}</p>
-              <h2 className="mt-3 text-xl font-semibold group-hover:text-accent transition-colors">{l.title[locale]}</h2>
+              <h2 className="mt-3 text-xl font-semibold group-hover:text-ink transition-colors">{l.title[locale]}</h2>
               <p className="mt-2 text-sm text-muted-foreground">{l.text[locale]}</p>
               <p className="mt-6 font-mono text-xs uppercase tracking-wider text-muted-foreground">{l.action[locale]} ↗</p>
             </a>

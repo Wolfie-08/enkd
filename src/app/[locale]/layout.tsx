@@ -24,7 +24,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   if (!isLocale(locale)) notFound();
   const l: Locale = locale;
   return (
-    <html lang={l} className={`dark ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang={l} className={`light ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>

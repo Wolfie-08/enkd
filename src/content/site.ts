@@ -45,7 +45,8 @@ export const site = {
     },
     resume: { en: "Resume (PDF)", uz: "Rezyume (PDF)" },
     contact: { en: "Get in touch", uz: "Bog‘lanish" },
-    figure: { en: "Fig. 01 · Point-cloud sphere, 2,600 pts", uz: "1-rasm · Nuqtali sfera, 2 600 nuqta" },
+    figure: { en: "Click the moon to form its ring.", uz: "Halqa hosil qilish uchun Oyni bosing." },
+    figureLabel: { en: "Interactive 3D moon with an asteroid ring", uz: "Asteroid halqali interaktiv 3D Oy" },
     specs: [
       { label: { en: "Study", uz: "Ta’lim" }, value: { en: "BSc Mechanical Eng., Year 2", uz: "Mexanika muhandisligi, 2-kurs" } },
       { label: { en: "A Levels", uz: "A Levels" }, value: { en: "A A A · Physics, Maths, CS", uz: "A A A · Fizika, matematika, informatika" } },

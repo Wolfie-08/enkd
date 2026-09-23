@@ -50,7 +50,7 @@ export default async function ProjectPage({ params }: Props) {
       <p className="mt-6 text-lg text-muted-foreground">{p.summary[locale]}</p>
 
       {p.image && (
-        <figure className="mt-10 overflow-hidden rounded-lg border border-line">
+        <figure className="mt-10 overflow-hidden rounded-2xl border border-line shadow-xl shadow-foreground/5">
           <div className="aspect-[16/10] overflow-hidden">
             <img src={p.image} alt={p.title[locale]} className="size-full object-cover" />
           </div>
@@ -79,11 +79,11 @@ export default async function ProjectPage({ params }: Props) {
             {p.outcomes.map((o) => <li key={o.en} className="flex gap-3"><span className="text-dim">—</span>{o[locale]}</li>)}
           </ul>
           {p.metrics && (
-            <dl className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-px bg-line border border-line rounded-lg overflow-hidden">
+            <dl className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-px overflow-hidden rounded-2xl border border-line bg-line">
               {p.metrics.map((m) => (
-                <div key={m.label.en} className="bg-background p-4">
+                <div key={m.label.en} className="bg-card/70 backdrop-blur p-4">
                   <dt className={`${mono} text-dim`}>{m.label[locale]}</dt>
-                  <dd className="mt-2 text-2xl font-semibold">{m.value}</dd>
+                  <dd className="mt-2 text-2xl font-semibold text-accent">{m.value}</dd>
                 </div>
               ))}
             </dl>
@@ -95,9 +95,9 @@ export default async function ProjectPage({ params }: Props) {
         <section className="mt-10 grid gap-4 md:grid-cols-[200px_1fr]">
           <h2 className={`${mono} text-dim`}>{t.links[locale]}</h2>
           <ul className={`${mono} flex flex-wrap gap-x-6 gap-y-2`}>
-            {p.links.live && <li><a href={p.links.live} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">{t.live[locale]} ↗</a></li>}
-            {p.links.demo && <li><a href={p.links.demo} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">{t.demo[locale]} ↗</a></li>}
-            {p.links.extra?.map((e) => <li key={e.href}><a href={e.href} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-accent">{e.label[locale]} ↗</a></li>)}
+            {p.links.live && <li><a href={p.links.live} target="_blank" rel="noopener noreferrer" className="text-ink hover:underline">{t.live[locale]} ↗</a></li>}
+            {p.links.demo && <li><a href={p.links.demo} target="_blank" rel="noopener noreferrer" className="text-ink hover:underline">{t.demo[locale]} ↗</a></li>}
+            {p.links.extra?.map((e) => <li key={e.href}><a href={e.href} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-ink">{e.label[locale]} ↗</a></li>)}
           </ul>
         </section>
       )}

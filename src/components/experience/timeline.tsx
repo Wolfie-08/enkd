@@ -35,7 +35,7 @@ export function Timeline({ locale }: { locale: Locale }) {
               <div>
                 <h3 className="text-xl font-semibold">{e.title[locale]}</h3>
                 <p className="text-muted-foreground">
-                  {e.url ? <a href={e.url} target="_blank" rel="noopener noreferrer" className="hover:text-accent">{e.org}</a> : e.org}
+                  {e.url ? <a href={e.url} target="_blank" rel="noopener noreferrer" className="hover:text-ink">{e.org}</a> : e.org}
                 </p>
                 <p className="mt-2 text-sm text-muted-foreground">{e.note[locale]}</p>
               </div>

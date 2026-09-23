@@ -11,15 +11,15 @@ export function Record({ locale }: { locale: Locale }) {
   return (
     <section className="container py-14 md:py-20">
       <Reveal>
-        <SectionHeading index="02 / Record" title={site.record.heading[locale]} />
+        <SectionHeading title={site.record.heading[locale]} />
       </Reveal>
-      <div className="grid gap-px border border-line bg-line md:grid-cols-2">
-        <Reveal className="bg-background p-6 md:p-8">
+      <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-2">
+        <Reveal className="bg-card/70 backdrop-blur p-6 md:p-8">
           <p className={`${mono} text-dim`}>{x.work[locale]}</p>
           <ol className="mt-6 space-y-8">
             {x.jobs.map((j) => (
               <li key={j.org}>
-                <p className={`${mono} text-accent`}>{j.period[locale]}</p>
+                <p className={`${mono} text-ink`}>{j.period[locale]}</p>
                 <h3 className="mt-2 text-xl font-semibold">{j.role[locale]}</h3>
                 <p className="text-muted-foreground">{j.org}</p>
                 <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
@@ -29,15 +29,15 @@ export function Record({ locale }: { locale: Locale }) {
             ))}
           </ol>
         </Reveal>
-        <Reveal className="bg-background p-6 md:p-8" delay={0.08}>
+        <Reveal className="bg-card/70 backdrop-blur p-6 md:p-8" delay={0.08}>
           <p className={`${mono} text-dim`}>{x.education[locale]}</p>
           <ol className="mt-6 space-y-8">
             {x.edu.map((e) => (
               <li key={e.org}>
-                <p className={`${mono} text-accent`}>{e.period}</p>
+                <p className={`${mono} text-ink`}>{e.period}</p>
                 <h3 className="mt-2 text-xl font-semibold">{e.title[locale]}</h3>
                 <p className="text-muted-foreground">
-                  {e.url ? <a href={e.url} target="_blank" rel="noopener noreferrer" className="hover:text-accent">{e.org}</a> : e.org}
+                  {e.url ? <a href={e.url} target="_blank" rel="noopener noreferrer" className="hover:text-ink">{e.org}</a> : e.org}
                 </p>
                 <p className="mt-2 text-sm text-muted-foreground">{e.note[locale]}</p>
               </li>
@@ -49,7 +49,7 @@ export function Record({ locale }: { locale: Locale }) {
           </ul>
         </Reveal>
       </div>
-      <Link href={localePath(locale, "/experience")} className={`${mono} mt-8 inline-block text-muted-foreground hover:text-accent`}>
+      <Link href={localePath(locale, "/experience")} className={`${mono} mt-8 inline-block text-muted-foreground hover:text-ink`}>
         {site.record.link[locale]} →
       </Link>
     </section>

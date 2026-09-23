@@ -41,9 +41,9 @@ export function RequestForm({ locale }: { locale: Locale }) {
 
   if (state === "sent") {
     return (
-      <div role="status" className="border border-line rounded-lg p-8 bg-surface">
+      <div role="status" className="rounded-3xl border border-line bg-card/60 p-8 backdrop-blur-md">
         <p className="text-xl font-medium">{f.success[locale]}</p>
-        <a href={site.telegram} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block font-mono text-xs uppercase tracking-wider text-accent hover:underline">
+        <a href={site.telegram} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block font-mono text-xs uppercase tracking-wider text-ink hover:underline">
           {f.successTelegram[locale]} ↗
         </a>
       </div>
@@ -52,7 +52,7 @@ export function RequestForm({ locale }: { locale: Locale }) {
 
   const field = "bg-background border-line focus-visible:ring-accent";
   return (
-    <form onSubmit={onSubmit} className="space-y-6 border border-line rounded-lg p-6 md:p-8 bg-surface">
+    <form onSubmit={onSubmit} className="space-y-6 rounded-3xl border border-line bg-card/60 p-6 shadow-xl shadow-foreground/5 backdrop-blur-md md:p-8">
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="space-y-2">
@@ -90,7 +90,7 @@ export function RequestForm({ locale }: { locale: Locale }) {
       </div>
       {state === "error" && <p role="alert" className="text-sm text-destructive">{f.error[locale]}</p>}
       <div className="flex items-center gap-4">
-        <Button type="submit" size="lg" disabled={state === "sending"} className="font-mono uppercase tracking-wider text-xs">
+        <Button type="submit" size="lg" disabled={state === "sending"} className="rounded-full px-6">
           {state === "sending" ? f.sending[locale] : f.submit[locale]}
         </Button>
         <span className="inline-flex size-6 items-center justify-center" aria-hidden="true">

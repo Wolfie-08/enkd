@@ -1,20 +1,24 @@
 "use client";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import { MousePointerClick } from "lucide-react";
 import { site } from "@/content/site";
 import { localePath, type Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
-import { HeroOrb } from "@/components/home/hero-orb";
+import dynamic from "next/dynamic";
+
+// three.js is ~600 KB: load the moon after first paint, with the empty stage as placeholder.
+const LunarScene = dynamic(() => import("@/components/ui/lunar-gravity-card").then((m) => m.LunarScene), { ssr: false });
 
 export function Hero({ locale }: { locale: Locale }) {
   const reduce = useReducedMotion();
   const h = site.hero;
   const mono = "font-mono text-xs uppercase tracking-wider";
   return (
-    <section className="border-b border-line">
+    <section>
       <div className="container grid gap-12 pt-12 pb-16 md:pt-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
         <div>
-          <p className={`${mono} inline-flex items-center gap-2 border border-line bg-background px-3 py-1.5 text-foreground`}>
+          <p className="inline-flex items-center gap-2 rounded-full border border-line bg-card/50 px-3.5 py-1.5 text-sm text-foreground backdrop-blur">
             <span className="relative flex size-2" aria-hidden="true">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60 motion-reduce:animate-none" />
               <span className="relative inline-flex size-2 rounded-full bg-accent" />
@@ -37,31 +41,34 @@ export function Hero({ locale }: { locale: Locale }) {
           <p className="mt-8 max-w-xl text-xl md:text-2xl leading-snug text-balance">{h.lead[locale]}</p>
           <p className="mt-4 max-w-xl text-muted-foreground">{h.sub[locale]}</p>
           <div className="mt-10 flex flex-wrap gap-3">
-            <Button asChild size="lg" className={mono}>
+            <Button asChild size="lg" className="rounded-full px-6">
               <a href={site.resume}>{h.resume[locale]} ↓</a>
             </Button>
-            <Button asChild size="lg" variant="outline" className={`${mono} bg-background`}>
+            <Button asChild size="lg" variant="outline" className="rounded-full bg-card/40 px-6 backdrop-blur hover:bg-card hover:text-foreground">
               <Link href={localePath(locale, "/contact")}>{h.contact[locale]}</Link>
             </Button>
           </div>
         </div>
 
-        {/* Orb drawn as a figure on the sheet: frame, centre lines, caption. */}
-        <figure className="ticks border border-line bg-background/60">
-          <div className="crosshair relative flex aspect-square items-center justify-center overflow-hidden">
-            <div className="orb-halo absolute inset-[8%] rounded-full" aria-hidden="true" />
-            <HeroOrb label={h.figure[locale]} className="relative size-[86%]" />
+        {/* Interactive moon on a fixed charcoal stage (same in both themes). */}
+        <figure className="stage relative overflow-hidden rounded-2xl border border-line shadow-xl shadow-foreground/10">
+          <div className="relative aspect-square" role="img" aria-label={h.figureLabel[locale]}>
+            <div className="absolute inset-[18%] rounded-full bg-accent/10 blur-3xl" aria-hidden="true" />
+            <LunarScene className="absolute inset-0" />
           </div>
-          <figcaption className={`${mono} border-t border-line px-4 py-3 text-dim`}>{h.figure[locale]}</figcaption>
+          <figcaption className="absolute inset-x-0 bottom-0 flex items-center gap-2 px-5 py-4 text-xs text-[#f2f1ef]/70">
+            <MousePointerClick className="size-3.5 shrink-0 text-accent" aria-hidden="true" />
+            {h.figure[locale]}
+          </figcaption>
         </figure>
       </div>
 
       {/* Title block: the facts a recruiter scans first. */}
       <div className="container pb-16">
-        <dl className="grid grid-cols-2 gap-px border border-line bg-line lg:grid-cols-4">
+        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line lg:grid-cols-4">
           {h.specs.map((s) => (
-            <div key={s.label.en} className="bg-background p-4">
-              <dt className={`${mono} text-dim`}>{s.label[locale]}</dt>
+            <div key={s.label.en} className="bg-card/70 p-5 backdrop-blur">
+              <dt className={`${mono} text-ink`}>{s.label[locale]}</dt>
               <dd className="mt-2 text-sm font-medium">{s.value[locale]}</dd>
             </div>
           ))}
