@@ -6,8 +6,9 @@ import { localePath, otherLocale, type Locale } from "@/lib/i18n";
 
 export function LanguageSwitch({ locale }: { locale: Locale }) {
   const pathname = usePathname() ?? "/";
-  // Strip the /uz prefix to get the locale-neutral path.
-  const path = pathname === "/uz" ? "/" : pathname.startsWith("/uz/") ? pathname.slice(3) : pathname;
+  // Strip the locale prefix to get the locale-neutral path. On the server EN renders
+  // under the internal /en rewrite (see proxy.ts), so /en must be stripped too.
+  const path = pathname.replace(/^\/(en|uz)(?=\/|$)/, "") || "/";
   const other = otherLocale(locale);
   return (
     <div className="font-mono text-xs uppercase tracking-wider flex items-center gap-1">
