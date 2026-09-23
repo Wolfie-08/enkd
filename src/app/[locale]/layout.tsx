@@ -4,10 +4,9 @@ import { notFound } from "next/navigation";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { isLocale, locales, SITE_URL, type Locale } from "@/lib/i18n";
-import { JsonLd, personLd, serviceLd } from "@/lib/seo";
+import { JsonLd, personLd } from "@/lib/seo";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
-import { AudioPlayer } from "@/components/audio-player";
 import { themeInitScript } from "@/components/theme-toggle";
 import "../globals.css";
 
@@ -30,11 +29,10 @@ export default async function LocaleLayout({ children, params }: { children: Rea
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="font-sans min-h-dvh flex flex-col">
-        <JsonLd data={[personLd(), serviceLd(l)]} />
+        <JsonLd data={personLd()} />
         <Nav locale={l} />
         <div className="flex-1">{children}</div>
         <Footer locale={l} />
-        <AudioPlayer />
         <Analytics />
       </body>
     </html>

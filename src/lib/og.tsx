@@ -9,7 +9,7 @@ export function ogImage(title: string, subtitle: string) {
       <div
         style={{
           width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between",
-          padding: 72, background: "#070707", color: "#f5f5f5", fontFamily: "sans-serif",
+          padding: 72, background: "#0b0c0f", color: "#f5f5f5", fontFamily: "sans-serif",
         }}
       >
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 24, letterSpacing: 4, color: "#666" }}>
@@ -20,8 +20,8 @@ export function ogImage(title: string, subtitle: string) {
           <div style={{ fontSize: title.length > 60 ? 48 : 64, fontWeight: 600, lineHeight: 1.05, letterSpacing: -2 }}>{title}</div>
           <div style={{ fontSize: 28, color: "#a3a3a3" }}>{subtitle}</div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 24, color: "#f5a524" }}>
-          <div style={{ width: 16, height: 16, borderRadius: 999, background: "#f5a524" }} />
+        <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 24, color: "#ff7a1f" }}>
+          <div style={{ width: 16, height: 16, borderRadius: 999, background: "#ff7a1f" }} />
           Diyorbek Komilov · enkd.uz
         </div>
       </div>

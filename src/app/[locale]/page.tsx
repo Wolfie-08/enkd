@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
 import type { Locale } from "@/lib/i18n";
-import { faqLd, JsonLd, pageMetadata, websiteLd } from "@/lib/seo";
+import { JsonLd, pageMetadata, websiteLd } from "@/lib/seo";
 import { Hero } from "@/components/home/hero";
-import { Marquee } from "@/components/marquee";
-import { Services } from "@/components/home/services";
 import { SelectedWork } from "@/components/home/selected-work";
-import { Now } from "@/components/home/now";
-import { Founders } from "@/components/home/founders";
-import { Faq } from "@/components/home/faq";
-import { Cta } from "@/components/home/cta";
+import { Record } from "@/components/home/record";
+import { Toolkit } from "@/components/home/toolkit";
+import { Hire } from "@/components/home/hire";
 
 type Props = { params: Promise<{ locale: Locale }> };
 
@@ -22,15 +19,12 @@ export default async function Home({ params }: Props) {
   const { locale } = await params;
   return (
     <main>
-      <JsonLd data={[websiteLd(locale), faqLd(locale)]} />
+      <JsonLd data={websiteLd(locale)} />
       <Hero locale={locale} />
-      <Marquee items={site.marquee} />
-      <Services locale={locale} />
       <SelectedWork locale={locale} />
-      <Now locale={locale} />
-      <Founders locale={locale} />
-      <Faq locale={locale} />
-      <Cta locale={locale} />
+      <Record locale={locale} />
+      <Toolkit locale={locale} />
+      <Hire locale={locale} />
     </main>
   );
 }

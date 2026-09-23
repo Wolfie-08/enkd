@@ -41,7 +41,7 @@ export function personLd() {
     alumniOf: [{ "@type": "CollegeOrUniversity", name: "New Uzbekistan University", url: "https://newuu.uz" }],
     worksFor: { "@type": "Organization", name: "Supply Group LLC" },
     sameAs: [...site.socials.map((s) => s.href), "https://github.com/Wolfie-08", "https://medium.com/@kdiyorbek133"],
-    knowsAbout: ["AI automation", "AI agents", "Telegram bots", "PostgreSQL", "Power BI", "Data engineering", "Mechanical engineering"],
+    knowsAbout: ["Mechanical engineering", "Embedded systems", "Arduino", "Telemetry", "Data engineering", "PostgreSQL", "Power BI", "AI automation"],
   };
 }
 

@@ -1,4 +1,4 @@
-// src/app/[locale]/faq/page.tsx
+// src/app/[locale]/services/faq/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/content/site";
@@ -10,7 +10,7 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return pageMetadata({ locale, path: "/faq", title: site.meta.faq.title[locale], description: site.meta.faq.description[locale] });
+  return pageMetadata({ locale, path: "/services/faq", title: site.meta.faq.title[locale], description: site.meta.faq.description[locale] });
 }
 
 export default async function FaqPage({ params }: Props) {
@@ -21,10 +21,14 @@ export default async function FaqPage({ params }: Props) {
         faqLd(locale, faqGroups.flatMap((g) => g.items)),
         breadcrumbLd([
           { name: site.nav.home[locale], url: localePath(locale) },
-          { name: site.nav.faq[locale], url: localePath(locale, "/faq") },
+          { name: site.nav.services[locale], url: localePath(locale, "/services") },
+          { name: site.nav.faq[locale], url: localePath(locale, "/services/faq") },
         ]),
       ]} />
-      <p className="font-mono text-xs uppercase tracking-wider text-dim">{site.nav.faq[locale]}</p>
+      <p className="font-mono text-xs uppercase tracking-wider text-dim">
+        <Link href={localePath(locale, "/services")} className="hover:text-foreground">{site.nav.services[locale]}</Link>
+        <span className="mx-2">/</span><span className="text-accent">{site.nav.faq[locale]}</span>
+      </p>
       <h1 className="mt-4 text-4xl md:text-6xl font-semibold leading-[1.05]">{faqPage.heading[locale]}</h1>
       <p className="mt-6 text-lg text-muted-foreground">{faqPage.intro[locale]}</p>
 
@@ -40,7 +44,7 @@ export default async function FaqPage({ params }: Props) {
       {faqGroups.map((g, i) => (
         <section key={g.id} id={g.id} className="mt-16 scroll-mt-24">
           <h2 className="text-2xl md:text-3xl font-semibold">
-            <span className="font-mono text-sm text-dim mr-3">{String(i + 1).padStart(2, "0")}</span>
+            <span className="font-mono text-sm text-accent mr-3">{String(i + 1).padStart(2, "0")}</span>
             {g.title[locale]}
           </h2>
           <div className="mt-6 divide-y divide-line border-y border-line">

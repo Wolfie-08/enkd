@@ -9,5 +9,5 @@ export function generateStaticParams() {
 }
 export default async function Image({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
-  return ogImage(site.name, site.role[locale]);
+  return ogImage(site.meta.services.title[locale], site.meta.services.description[locale]);
 }

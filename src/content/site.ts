@@ -10,7 +10,8 @@ export const site = {
   email: "diyorbek@enkd.uz",
   telegram: "https://t.me/kdiyor_18",
   location: { en: "Tashkent, Uzbekistan", uz: "Toshkent, O‘zbekiston" },
-  role: { en: "AI Systems Engineer · Automation · Hardware", uz: "AI tizimlari muhandisi · Avtomatlashtirish · Apparat" },
+  role: { en: "Mechanical Engineering Student · Hardware & Data Systems", uz: "Mexanika muhandisligi talabasi · Apparat va ma’lumot tizimlari" },
+  resume: "/Diyorbek_Komilov_CV.pdf",
   replyTime: { en: "within 24 hours", uz: "24 soat ichida" },
   socials: [
     { label: "Telegram", href: "https://t.me/kdiyor_18" },
@@ -25,26 +26,56 @@ export const site = {
     blog: { en: "Blog", uz: "Blog" },
     contact: { en: "Contact", uz: "Aloqa" },
     faq: { en: "FAQ", uz: "Savol-javob" },
-    request: { en: "Request a solution", uz: "Yechim so‘rash" },
-    sound: { en: "Sound", uz: "Ovoz" },
+    work: { en: "Projects", uz: "Loyihalar" },
+    services: { en: "Services", uz: "Xizmatlar" },
+    resume: { en: "Resume", uz: "Rezyume" },
+    menu: { en: "Menu", uz: "Menyu" },
     theme: { en: "Theme", uz: "Mavzu" },
   },
 
   hero: {
-    eyebrow: { en: "AI Systems Engineer · Automation · Hardware", uz: "AI tizimlari muhandisi · Avtomatlashtirish · Apparat" },
-    h1: { en: "Engineer who builds AI systems for real businesses.", uz: "Real bizneslar uchun AI tizimlarini quradigan muhandis." },
-    sub: {
-      en: "Diyorbek Komilov. I build and run the software behind a four-division retail group: Telegram storefronts, an ERP-fed data warehouse, Power BI reporting, and an AI assistant over live company data. Services available: AI automation, agents, chatbots, and websites.",
-      uz: "Diyorbek Komilov. To‘rt yo‘nalishli savdo guruhining dasturiy ta’minotini quraman va yuritaman: Telegram do‘konlar, ERP bilan bog‘langan ma’lumotlar ombori, Power BI hisobotlari va kompaniyaning jonli ma’lumotlari ustida ishlaydigan AI yordamchi. Xizmatlar: AI avtomatlashtirish, agentlar, chatbotlar va veb-saytlar.",
+    open: { en: "Open to engineering internships", uz: "Muhandislik amaliyotiga ochiqman" },
+    lead: {
+      en: "Mechanical engineering student. I build hardware that measures the real world, and the software that makes sense of the data.",
+      uz: "Mexanika muhandisligi talabasi. Real dunyoni o‘lchaydigan apparat va shu ma’lumotni tushunarli qiladigan dasturiy ta’minot quraman.",
     },
-    primary: { en: "Request a solution", uz: "Yechim so‘rash" },
-    secondary: { en: "See the work", uz: "Ishlarni ko‘rish" },
-    status: [
-      { label: { en: "Focus", uz: "Yo‘nalish" }, value: { en: "AI + hardware", uz: "AI + apparat" } },
-      { label: { en: "Base", uz: "Manzil" }, value: { en: "Tashkent, remote OK", uz: "Toshkent, masofaviy ham" } },
-      { label: { en: "Availability", uz: "Bandlik" }, value: { en: "Open", uz: "Ochiq" } },
-      { label: { en: "Reply", uz: "Javob" }, value: { en: "within 24h", uz: "24 soat ichida" } },
+    sub: {
+      en: "Second year at New Uzbekistan University. A two-axis solar tracker, CanSat flight telemetry, an F1 telemetry console, and production data systems for a retail group.",
+      uz: "Yangi O‘zbekiston universiteti, ikkinchi kurs. Ikki o‘qli quyosh kuzatuvchi, CanSat parvoz telemetriyasi, F1 telemetriya konsoli va savdo guruhi uchun ishlab turgan ma’lumot tizimlari.",
+    },
+    resume: { en: "Resume (PDF)", uz: "Rezyume (PDF)" },
+    contact: { en: "Get in touch", uz: "Bog‘lanish" },
+    figure: { en: "Fig. 01 · Point-cloud sphere, 2,600 pts", uz: "1-rasm · Nuqtali sfera, 2 600 nuqta" },
+    specs: [
+      { label: { en: "Study", uz: "Ta’lim" }, value: { en: "BSc Mechanical Eng., Year 2", uz: "Mexanika muhandisligi, 2-kurs" } },
+      { label: { en: "A Levels", uz: "A Levels" }, value: { en: "A A A · Physics, Maths, CS", uz: "A A A · Fizika, matematika, informatika" } },
+      { label: { en: "Focus", uz: "Yo‘nalish" }, value: { en: "Motorsport · aerospace · energy", uz: "Motorsport · aerokosmik · energetika" } },
+      { label: { en: "Base", uz: "Manzil" }, value: { en: "Tashkent, Uzbekistan", uz: "Toshkent, O‘zbekiston" } },
     ],
+  },
+
+  record: {
+    heading: { en: "Experience and education", uz: "Tajriba va ta’lim" },
+    link: { en: "Full experience", uz: "To‘liq tajriba" },
+  },
+
+  toolkit: {
+    heading: { en: "Toolkit", uz: "Asboblar" },
+    intro: { en: "What I have actually used on the projects above.", uz: "Yuqoridagi loyihalarda haqiqatda ishlatganlarim." },
+    groups: [
+      { title: { en: "Hardware", uz: "Apparat" }, items: ["Arduino C/C++", "ESP32 · LoRa", "LDR sensors · servos", "3D-printed mounts", "CAD"] },
+      { title: { en: "Data & telemetry", uz: "Ma’lumot va telemetriya" }, items: ["Python", "InfluxDB", "Grafana", "PostgreSQL", "Power BI"] },
+      { title: { en: "Software", uz: "Dasturiy ta’minot" }, items: ["TypeScript", "React · Next.js", "FastAPI", "Docker", "Linux servers"] },
+    ],
+  },
+
+  hire: {
+    heading: { en: "Hiring engineering interns?", uz: "Muhandis amaliyotchi qidiryapsizmi?" },
+    text: { en: "Send me the role and the team. I reply within 24 hours.", uz: "Lavozim va jamoa haqida yozing. 24 soat ichida javob beraman." },
+  },
+
+  servicesPage: {
+    eyebrow: { en: "Enkd · for businesses", uz: "Enkd · bizneslar uchun" },
   },
 
   services: {
@@ -94,17 +125,10 @@ export const site = {
     ] satisfies Service[],
   },
 
-  marquee: ["Python", "FastAPI", "PostgreSQL", "Docker", "Power BI", "Telegram Bot API", "aiogram", "Next.js", "React", "TypeScript", "Supabase", "Redis", "LLM integration", "MCP", "Grafana", "InfluxDB", "Arduino", "CAD"],
-
-  selectedWork: { heading: { en: "Selected work", uz: "Tanlangan ishlar" }, all: { en: "All projects", uz: "Barcha loyihalar" } },
-
-  now: {
-    heading: { en: "Now", uz: "Hozir" },
-    text: {
-      en: "Digital Systems Engineer at Supply Group, a four-division retail group in Tashkent. Second-year Mechanical Engineering student at New Uzbekistan University.",
-      uz: "Toshkentdagi to‘rt yo‘nalishli Supply Group savdo guruhida Raqamli tizimlar muhandisi. Yangi O‘zbekiston universitetida mexanika muhandisligi bo‘yicha ikkinchi kurs talabasi.",
-    },
-    link: { en: "Full experience", uz: "To‘liq tajriba" },
+  selectedWork: {
+    heading: { en: "Engineering projects", uz: "Muhandislik loyihalari" },
+    intro: { en: "Hardware first, then the telemetry and data systems built around it.", uz: "Avval apparat, keyin uning atrofida qurilgan telemetriya va ma’lumot tizimlari." },
+    all: { en: "All projects", uz: "Barcha loyihalar" },
   },
 
   founders: {
@@ -207,22 +231,23 @@ export const site = {
   },
 
   contact: {
-    heading: { en: "Request a solution", uz: "Yechim so‘rash" },
-    intro: { en: "Tell me what runs by hand today, or what you want to build. I reply within 24 hours.", uz: "Bugun nima qo‘lda qilinayotganini yoki nimani qurmoqchi ekaningizni yozing. 24 soat ichida javob beraman." },
+    heading: { en: "Get in touch", uz: "Bog‘lanish" },
+    intro: { en: "An internship, a project, or a question about my work. I reply within 24 hours.", uz: "Amaliyot, loyiha yoki ishlarim haqida savol. 24 soat ichida javob beraman." },
     direct: { en: "Or write directly", uz: "Yoki to‘g‘ridan-to‘g‘ri yozing" },
     form: {
       name: { en: "Name", uz: "Ism" },
       email: { en: "Email", uz: "Email" },
-      company: { en: "Company (optional)", uz: "Kompaniya (ixtiyoriy)" },
-      need: { en: "What do you need?", uz: "Nima kerak?" },
+      company: { en: "Company or university (optional)", uz: "Kompaniya yoki universitet (ixtiyoriy)" },
+      need: { en: "What is it about?", uz: "Nima haqida?" },
       message: { en: "Message", uz: "Xabar" },
-      messagePlaceholder: { en: "What runs by hand today? What should it do instead?", uz: "Bugun nima qo‘lda qilinadi? Uning o‘rniga nima bo‘lishi kerak?" },
-      submit: { en: "Send request", uz: "So‘rov yuborish" },
+      messagePlaceholder: { en: "The role, the project, or the question.", uz: "Lavozim, loyiha yoki savol." },
+      submit: { en: "Send message", uz: "Xabar yuborish" },
       sending: { en: "Sending", uz: "Yuborilmoqda" },
       success: { en: "Got it. I reply within 24 hours.", uz: "Qabul qilindi. 24 soat ichida javob beraman." },
       successTelegram: { en: "Faster on Telegram", uz: "Telegramda tezroq" },
       error: { en: "Something went wrong. Email me directly or try again.", uz: "Xatolik yuz berdi. To‘g‘ridan-to‘g‘ri email yozing yoki qayta urinib ko‘ring." },
       needs: [
+        { key: "internship", label: { en: "Internship or role", uz: "Amaliyot yoki lavozim" } },
         { key: "automation", label: { en: "AI automation", uz: "AI avtomatlashtirish" } },
         { key: "agent", label: { en: "AI agent", uz: "AI agent" } },
         { key: "chatbot", label: { en: "AI chatbot", uz: "AI chatbot" } },
@@ -247,7 +272,7 @@ export const site = {
   },
 
   footer: {
-    tagline: { en: "Engineered to make your life easier.", uz: "Hayotingizni osonlashtirish uchun yaratilgan." },
+    tagline: { en: "Mechanical engineering student building hardware and data systems.", uz: "Apparat va ma’lumot tizimlarini quradigan mexanika muhandisligi talabasi." },
     rights: { en: "All rights reserved.", uz: "Barcha huquqlar himoyalangan." },
   },
 
@@ -259,8 +284,12 @@ export const site = {
 
   meta: {
     home: {
-      title: { en: "Diyorbek Komilov · AI Systems & Hardware Engineer, Tashkent", uz: "Diyorbek Komilov · AI tizimlar va mexanika muhandisi, Toshkent" },
-      description: { en: "AI systems & hardware engineer in Tashkent building AI automation, AI agents, Telegram chatbots, and websites for businesses. Reply within 24 hours.", uz: "Toshkentdagi AI tizimlar va mexanika muhandisi: bizneslar uchun AI avtomatlashtirish, AI agentlar, Telegram chatbotlar va veb-saytlar. 24 soat ichida javob." },
+      title: { en: "Diyorbek Komilov · Mechanical Engineering Student, Hardware & Data Systems", uz: "Diyorbek Komilov · Mexanika muhandisligi talabasi, apparat va ma’lumot tizimlari" },
+      description: { en: "Second-year mechanical engineering student at New Uzbekistan University, open to engineering internships. Two-axis solar tracker, CanSat telemetry, F1 telemetry console.", uz: "Yangi O‘zbekiston universiteti mexanika muhandisligi ikkinchi kurs talabasi, muhandislik amaliyotiga ochiq. Ikki o‘qli quyosh kuzatuvchi, CanSat telemetriyasi, F1 telemetriya konsoli." },
+    },
+    services: {
+      title: { en: "Services: AI automation, agents, Telegram bots, websites", uz: "Xizmatlar: AI avtomatlashtirish, agentlar, Telegram botlar, saytlar" },
+      description: { en: "Enkd builds AI automation, AI agents, Telegram chatbots and websites for businesses in Tashkent and remotely. Reply within 24 hours.", uz: "Enkd Toshkent va masofadan bizneslar uchun AI avtomatlashtirish, AI agentlar, Telegram chatbotlar va veb-saytlar quradi. 24 soat ichida javob." },
     },
     experience: {
       title: { en: "Experience", uz: "Tajriba" },
@@ -271,8 +300,8 @@ export const site = {
       description: { en: "Articles and publications by Diyorbek Komilov on Medium, in an academic journal, and on Telegram.", uz: "Diyorbek Komilovning Medium, ilmiy jurnal va Telegramdagi maqolalari va nashrlari." },
     },
     contact: {
-      title: { en: "Request a solution", uz: "Yechim so‘rash" },
-      description: { en: "Request AI automation, an AI agent, a Telegram chatbot, or a website from Diyorbek Komilov in Tashkent. Reply within 24 hours.", uz: "Toshkentdagi Diyorbek Komilovdan AI avtomatlashtirish, AI agent, Telegram chatbot yoki veb-sayt so‘rang. 24 soat ichida javob." },
+      title: { en: "Contact", uz: "Aloqa" },
+      description: { en: "Contact Diyorbek Komilov about engineering internships, projects or collaboration. Email, Telegram or the form; reply within 24 hours.", uz: "Muhandislik amaliyoti, loyiha yoki hamkorlik bo‘yicha Diyorbek Komilov bilan bog‘laning. Email, Telegram yoki forma; 24 soat ichida javob." },
     },
     faq: {
       title: { en: "FAQ: AI automation, agents, Telegram bots, websites", uz: "Savol-javob: AI avtomatlashtirish, agentlar, Telegram botlar, saytlar" },

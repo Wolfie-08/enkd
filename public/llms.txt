@@ -1,11 +1,11 @@
 # Diyorbek Komilov / Enkd
 
-> Diyorbek Komilov: AI Systems Engineer · Automation · Hardware in Tashkent, Uzbekistan. Services available: AI automation, AI agents, Telegram chatbots, and websites for businesses. Digital Systems Engineer at Supply Group LLC. Open to projects and technical co-founder roles. Replies within 24 hours.
+> Diyorbek Komilov: second-year Mechanical Engineering student at New Uzbekistan University (Tashkent, Uzbekistan), open to engineering internships. Builds hardware (two-axis solar tracker, CanSat telemetry) and the data systems around it. Digital Systems Engineer at Supply Group LLC. Business services (AI automation, agents, Telegram bots, websites) are offered separately under Enkd at https://www.enkd.uz/services. Replies within 24 hours.
 
 Site: https://www.enkd.uz (English) · https://www.enkd.uz/uz (Uzbek)
 Contact: https://www.enkd.uz/contact · diyorbek@enkd.uz · Telegram https://t.me/kdiyor_18
 
-## Services
+## Services (https://www.enkd.uz/services)
 - AI automation: ERP/CRM sync into a Postgres warehouse, scheduled reports (cash flow, debtors, sales), alerts to Telegram.
 - AI agents: natural-language assistants over live company data, tool use with approval gates, deployed on the client's server, local models where they fit.
 - AI chatbots: sales and support inside Telegram; storefront, cart, orders as a Mini App with plain-button fallback; admin panel; Uzbek and Russian.
@@ -14,6 +14,7 @@ Contact: https://www.enkd.uz/contact · diyorbek@enkd.uz · Telegram https://t.m
 ## Experience
 - Digital Systems Engineer, Supply Group LLC (four-division retail group), Jul 2026 – present: three production Telegram bots, PostgreSQL warehouse with Smartup ERP ETL, Power BI dashboards, automated cash-flow reporting, Dockerized Linux server with 17 services, LLM financial assistant.
 - BSc Mechanical Engineering, New Uzbekistan University, 2025 – 2029.
+- Cambridge A Levels, Khiva Presidential School, 2025: AAA in Physics, Mathematics, Computer Science.
 
 ## Projects
 - https://www.enkd.uz/experience/supply-group — AI and data systems for a four-division retail group.
@@ -29,6 +30,7 @@ Contact: https://www.enkd.uz/contact · diyorbek@enkd.uz · Telegram https://t.m
 
 ## Pages
 - https://www.enkd.uz/experience — work history, education, all projects
-- https://www.enkd.uz/faq — questions and answers on cost, timelines, data safety and results, grouped by service
+- https://www.enkd.uz/services — business services offered under Enkd
+- https://www.enkd.uz/services/faq — questions and answers on cost, timelines, data safety and results, grouped by service
 - https://www.enkd.uz/blog — writing on Medium, an academic journal, Telegram
 - https://www.enkd.uz/sitemap.xml

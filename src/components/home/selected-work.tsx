@@ -8,14 +8,14 @@ import { ProjectCard } from "@/components/experience/project-card";
 
 export function SelectedWork({ locale }: { locale: Locale }) {
   return (
-    <section className="container py-20 md:py-28">
+    <section id="work" className="container scroll-mt-24 py-14 md:py-20">
       <Reveal>
-        <SectionHeading index="02 / Work" title={site.selectedWork.heading[locale]} />
+        <SectionHeading index="01 / Projects" title={site.selectedWork.heading[locale]} intro={site.selectedWork.intro[locale]} />
       </Reveal>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-6 sm:grid-cols-2">
         {featuredProjects.map((p, i) => (
-          <Reveal key={p.slug} delay={i * 0.08}>
-            <ProjectCard locale={locale} project={p} index={`0${i + 1}`} />
+          <Reveal key={p.slug} delay={i * 0.08} className="h-full">
+            <ProjectCard locale={locale} project={p} index={`0${i + 2}`} />
           </Reveal>
         ))}
       </div>

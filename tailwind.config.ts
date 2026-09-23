@@ -2,6 +2,8 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: "class",
+  // hover: styles only on devices that can hover, so a tapped card doesn't stay amber on phones.
+  future: { hoverOnlyWhenSupported: true },
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     container: { center: true, padding: "1.25rem", screens: { "2xl": "1200px" } },

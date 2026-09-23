@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { site } from "@/content/site";
-import { projectBySlug, projects } from "@/content/projects";
+import { projectBySlug, projects, yearLabel } from "@/content/projects";
 import { localePath, locales, type Locale } from "@/lib/i18n";
 import { breadcrumbLd, JsonLd, pageMetadata, projectLd } from "@/lib/seo";
 
@@ -43,7 +43,7 @@ export default async function ProjectPage({ params }: Props) {
       <p className={`${mono} text-dim`}>
         <Link href={localePath(locale, "/experience")} className="hover:text-foreground">{t.back[locale]}</Link>
         <span className="mx-2">/</span>{site.experience.groups[p.group][locale]}
-        {p.year && <><span className="mx-2">/</span>{p.year}</>}
+        {p.year && <><span className="mx-2">/</span>{yearLabel(p, locale)}</>}
         <span className="mx-2">/</span>{t.status[p.status][locale]}
       </p>
       <h1 className="mt-6 text-4xl md:text-6xl font-semibold leading-[1.05]">{p.title[locale]}</h1>
@@ -54,6 +54,7 @@ export default async function ProjectPage({ params }: Props) {
           <div className="aspect-[16/10] overflow-hidden">
             <img src={p.image} alt={p.title[locale]} className="size-full object-cover" />
           </div>
+          {p.imageNote && <figcaption className={`${mono} border-t border-line px-4 py-2 text-dim`}>{p.imageNote[locale]}</figcaption>}
         </figure>
       )}
 

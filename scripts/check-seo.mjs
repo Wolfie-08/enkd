@@ -6,7 +6,7 @@ const PORT = 3998;
 const BASE = `http://localhost:${PORT}`;
 const src = readFileSync(new URL("../src/content/projects.ts", import.meta.url), "utf8");
 const slugs = [...src.matchAll(/slug: "([a-z0-9-]+)"/g)].map((m) => m[1]);
-const pages = ["/", "/experience", "/blog", "/contact", "/faq", ...slugs.map((s) => `/experience/${s}`)];
+const pages = ["/", "/experience", "/blog", "/contact", "/services", "/services/faq", ...slugs.map((s) => `/experience/${s}`)];
 const routes = [...pages, ...pages.map((p) => (p === "/" ? "/uz" : `/uz${p}`))];
 
 const server = spawn("npx", ["next", "start", "-p", String(PORT)], { stdio: "ignore", detached: true });

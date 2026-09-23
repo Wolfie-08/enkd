@@ -1,4 +1,4 @@
-import type { Bi } from "@/lib/i18n";
+import type { Bi, Locale } from "@/lib/i18n";
 
 export type Group = "work" | "products" | "hardware" | "community";
 export type Status = "live" | "building" | "done";
@@ -9,6 +9,7 @@ export type Project = {
   year?: string;
   status: Status;
   image?: string;
+  imageNote?: Bi;
   stack?: string[];
   links: { live?: string; demo?: string; extra?: { label: Bi; href: string }[] };
   title: Bi;
@@ -27,7 +28,8 @@ export const projects: Project[] = [
     year: "2026 –",
     status: "live",
     image: "/images/projects/supply-group.jpg",
-    stack: ["Python", "aiogram 3", "FastAPI", "PostgreSQL", "Docker", "Power BI", "Supabase", "Cloudflare R2", "LLM"],
+    imageNote: { en: "Demo data · seeded, not company figures", uz: "Demo ma’lumot · sun’iy, kompaniya raqamlari emas" },
+    stack: ["PostgreSQL", "Power BI", "aiogram 3", "Python", "FastAPI", "Docker", "Supabase", "Cloudflare R2", "LLM"],
     links: {
       extra: [
         { label: { en: "Parfume shop (Telegram)", uz: "Parfume do‘koni (Telegram)" }, href: "https://parfume.enkd.uz" },
@@ -36,8 +38,8 @@ export const projects: Project[] = [
     },
     title: { en: "Supply Group: AI and data systems for a four-division retail group", uz: "Supply Group: to‘rt yo‘nalishli savdo guruhi uchun AI va ma’lumotlar tizimlari" },
     summary: {
-      en: "As Digital Systems Engineer I build and run the software behind Supply Group LLC, a private retail group with four divisions: Telegram storefronts, an ERP-fed data warehouse, Power BI reporting, and an AI assistant over live company data.",
-      uz: "Raqamli tizimlar muhandisi sifatida to‘rt yo‘nalishli xususiy savdo guruhi Supply Group LLC dasturiy ta’minotini quraman va yuritaman: Telegram do‘konlar, ERP bilan bog‘langan ma’lumotlar ombori, Power BI hisobotlari va kompaniyaning jonli ma’lumotlari ustida ishlaydigan AI yordamchi.",
+      en: "Smartup ERP synced into one Postgres warehouse, Power BI on top for leadership, and Telegram bots selling from the same data. Reports that took days of Excel now build themselves, about 80% less effort. The dashboard shown uses seeded data.",
+      uz: "Smartup ERP bitta Postgres omboriga sinxronlanadi, ustida rahbariyat uchun Power BI, xuddi shu ma’lumotdan sotadigan Telegram botlar. Kunlab Excel’da tayyorlangan hisobotlar endi o‘zi yig‘iladi, mehnat taxminan 80% kam. Ko‘rsatilgan panel sun’iy ma’lumotda.",
     },
     built: [
       { en: "Three production Telegram bots across all four divisions: a self-service storefront where clients browse the live warehouse catalogue with prices, order and pay without a salesperson in the loop, plus marketing-broadcast and customer-service bots. The storefront runs as a Mini App with a plain-button fallback for phones that cannot open Mini Apps.", uz: "Barcha to‘rt yo‘nalishda uchta ishlab turgan Telegram bot: mijozlar ombordagi jonli katalogni narxlari bilan ko‘rib, sotuvchisiz buyurtma berib to‘laydigan o‘z-o‘ziga xizmat do‘koni, hamda marketing tarqatmasi va mijozlarga xizmat botlari. Do‘kon Mini App sifatida ishlaydi, Mini App ochilmaydigan telefonlar uchun oddiy tugmalar bilan." },
@@ -346,6 +348,9 @@ export const projects: Project[] = [
   },
 ];
 
-const featuredOrder = ["supply-group", "osonqur", "enkd-os", "f1-telemetry-console"];
+const featuredOrder = ["solar-tracker", "cansat-dashboard", "f1-telemetry-console", "supply-group"];
 export const featuredProjects = featuredOrder.map((slug) => projects.find((p) => p.slug === slug)!);
+// "2026 –" reads as an open range: append "now" so the dash isn't left dangling.
+export const yearLabel = (p: Project, locale: Locale) => (p.year?.endsWith("–") ? `${p.year} ${present[locale]}` : p.year);
+const present: Bi = { en: "now", uz: "hozir" };
 export const projectBySlug = (slug: string) => projects.find((p) => p.slug === slug);

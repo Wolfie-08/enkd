@@ -12,10 +12,10 @@ const icons: Record<string, string> = {
 
 export function Footer({ locale }: { locale: Locale }) {
   return (
-    <footer className="border-t border-line mt-24">
+    <footer className="border-t border-line bg-background">
       <div className="container py-12 grid gap-10 md:grid-cols-3 text-sm">
         <div className="space-y-3">
-          <p className="font-mono uppercase tracking-wider text-xs text-dim">{site.brand}</p>
+          <p className="font-mono uppercase tracking-wider text-xs text-accent">{site.name}</p>
           <p className="text-muted-foreground max-w-xs">{site.footer.tagline[locale]}</p>
           <a href={`mailto:${site.email}`} className="block hover:text-accent transition-colors">{site.email}</a>
         </div>
@@ -24,9 +24,8 @@ export function Footer({ locale }: { locale: Locale }) {
           <ul className="space-y-2 text-muted-foreground">
             <li><Link href={localePath(locale, "/experience")} className="hover:text-foreground">{site.nav.experience[locale]}</Link></li>
             <li><Link href={localePath(locale, "/blog")} className="hover:text-foreground">{site.nav.blog[locale]}</Link></li>
-            <li><Link href={localePath(locale, "/faq")} className="hover:text-foreground">{site.nav.faq[locale]}</Link></li>
             <li><Link href={localePath(locale, "/contact")} className="hover:text-foreground">{site.nav.contact[locale]}</Link></li>
-            <li><a href="/Diyorbek_Komilov_CV.pdf" className="hover:text-foreground">CV (PDF)</a></li>
+            <li><a href={site.resume} className="hover:text-foreground">{site.nav.resume[locale]} (PDF)</a></li>
           </ul>
         </div>
         <div className="space-y-3">
