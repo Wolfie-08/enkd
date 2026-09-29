@@ -1,7 +1,7 @@
-// POST /api/studio/agent → streams a short Claude reply for the studio.enkd.uz live demo.
-// Needs ANTHROPIC_API_KEY. Body: { lang: "uz"|"ru"|"en", messages: [{ role, content }] }.
+// POST /api/studio/agent → streams a short Gemini reply for the studio.enkd.uz live demo.
+// Needs GEMINI_API_KEY (GEMINI_MODEL optional). Body: { lang: "uz"|"ru"|"en", messages: [{ role, content }] }.
 
-import Anthropic from "@anthropic-ai/sdk";
+import { GoogleGenAI, type Content } from "@google/genai";
 
 const MAX_CHARS = 500; // per visitor message
 const MAX_TURNS = 3; // visitor messages per conversation
@@ -34,7 +34,7 @@ const LANG = {
   en: "Reply in English unless the visitor clearly writes in Uzbek or Russian; then use their language.",
 } as const;
 
-const client = new Anthropic();
+const MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 
 function limited(ip: string): boolean {
   const now = Date.now();
@@ -46,7 +46,8 @@ function limited(ip: string): boolean {
 }
 
 export async function POST(req: Request): Promise<Response> {
-  if (!process.env.ANTHROPIC_API_KEY) return Response.json({ error: "unconfigured" }, { status: 503 });
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) return Response.json({ error: "unconfigured" }, { status: 503 });
 
   const ip = (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "local";
   if (limited(ip)) return Response.json({ error: "rate_limited" }, { status: 429 });
@@ -59,7 +60,7 @@ export async function POST(req: Request): Promise<Response> {
   }
   const lang = body.lang === "ru" || body.lang === "en" ? body.lang : "uz";
   const raw = Array.isArray(body.messages) ? body.messages : [];
-  const messages: Anthropic.Beta.BetaMessageParam[] = raw
+  const messages = raw
     .filter((m): m is { role: "user" | "assistant"; content: string } =>
       !!m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string")
     .slice(-(MAX_TURNS * 2 - 1))
@@ -70,40 +71,32 @@ export async function POST(req: Request): Promise<Response> {
   }
   if (userTurns > MAX_TURNS) return Response.json({ error: "turn_limit" }, { status: 429 });
 
-  const stream = client.beta.messages.stream({
-    model: "claude-opus-5-5",
-    max_tokens: 1024,
-    output_config: { effort: "low" },
-    // Refusals re-run server-side on Anthropic's recommended fallback model.
-    betas: ["server-side-fallback-2026-07-01"],
-    fallbacks: "default",
-    system: [
-      { type: "text", text: SYSTEM, cache_control: { type: "ephemeral" } },
-      { type: "text", text: LANG[lang] },
-    ],
-    messages,
-  });
-
+  const contents: Content[] = messages.map((m) => ({ role: m.role === "assistant" ? "model" : "user", parts: [{ text: m.content }] }));
+  const abort = new AbortController();
   const encoder = new TextEncoder();
   const out = new ReadableStream<Uint8Array>({
     async start(controller) {
       try {
-        for await (const event of stream) {
-          if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
-            controller.enqueue(encoder.encode(event.delta.text));
-          }
+        const stream = await new GoogleGenAI({ apiKey }).models.generateContentStream({
+          model: MODEL,
+          contents,
+          config: { systemInstruction: `${SYSTEM}\n\n${LANG[lang]}`, maxOutputTokens: 1024, temperature: 0.6, abortSignal: abort.signal },
+        });
+        let any = false;
+        for await (const chunk of stream) {
+          const text = chunk.text;
+          if (text) { any = true; controller.enqueue(encoder.encode(text)); }
         }
-        const final = await stream.finalMessage();
-        if (final.stop_reason === "refusal") controller.enqueue(encoder.encode("\n\u0000refusal"));
+        if (!any) controller.enqueue(encoder.encode("\n\u0000blocked")); // safety block or empty answer
       } catch (err) {
-        console.error("studio agent", err instanceof Anthropic.APIError ? `${err.status} ${err.message}` : err);
+        if (!abort.signal.aborted) console.error("studio agent", err instanceof Error ? err.message : err);
         controller.enqueue(encoder.encode("\n\u0000error"));
       } finally {
         controller.close();
       }
     },
     cancel() {
-      stream.abort();
+      abort.abort();
     },
   });
 
