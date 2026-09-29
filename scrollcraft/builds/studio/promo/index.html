@@ -1,0 +1,1412 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Unbounded";
+        src: url("assets/fonts/unbounded-latin.woff2") format("woff2");
+        font-weight: 200 900;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Geist";
+        src: url("assets/fonts/geist-latin.woff2") format("woff2");
+        font-weight: 100 900;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Geist";
+        src: url("assets/fonts/geist-cyrillic.woff2") format("woff2");
+        font-weight: 100 900;
+        font-display: block;
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      :root {
+        --bg: #eef4f1;
+        --mint: #7fd1b9;
+        --ice: #e4e9f3;
+        --glass: #f8fbfa;
+        --ink: #0f1b1d;
+        --ink2: #4a5b5d;
+        --accent: #e37830;
+        --teal: #1f7a6b;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #eef4f1;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--bg);
+        font-family: "Geist", sans-serif;
+        color: var(--ink);
+      }
+
+      /* ---------- background: mint / ice haze + dot grid ---------- */
+      .bg {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background: var(--bg);
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+      }
+      .blob.b1 {
+        width: 1400px;
+        height: 1100px;
+        left: 900px;
+        top: -420px;
+        background: radial-gradient(closest-side, rgba(127, 209, 185, 0.42), rgba(127, 209, 185, 0));
+      }
+      .blob.b2 {
+        width: 1500px;
+        height: 1200px;
+        left: -520px;
+        top: 380px;
+        background: radial-gradient(closest-side, rgba(228, 233, 243, 1), rgba(228, 233, 243, 0));
+      }
+      .blob.b3 {
+        width: 900px;
+        height: 900px;
+        left: -200px;
+        top: -380px;
+        background: radial-gradient(closest-side, rgba(127, 209, 185, 0.22), rgba(127, 209, 185, 0));
+      }
+      .dots {
+        position: absolute;
+        left: -80px;
+        top: -80px;
+        width: 2080px;
+        height: 1240px;
+        background-image: radial-gradient(rgba(31, 122, 107, 0.18) 1.6px, rgba(31, 122, 107, 0) 2.2px);
+        background-size: 40px 40px;
+        -webkit-mask-image: radial-gradient(ellipse 70% 60% at 62% 45%, #000 20%, rgba(0, 0, 0, 0) 80%);
+        mask-image: radial-gradient(ellipse 70% 60% at 62% 45%, #000 20%, rgba(0, 0, 0, 0) 80%);
+      }
+
+      /* ---------- chrome ---------- */
+      .chrome {
+        position: absolute;
+        inset: 0;
+        z-index: 20;
+        pointer-events: none;
+      }
+      .brand {
+        position: absolute;
+        left: 120px;
+        top: 58px;
+        font-family: "Unbounded", sans-serif;
+        font-weight: 700;
+        font-size: 28px;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        transform-origin: 0 0;
+        white-space: nowrap;
+      }
+      .url {
+        position: absolute;
+        right: 120px;
+        top: 62px;
+        font-size: 26px;
+        font-weight: 500;
+        color: var(--ink2);
+      }
+      .rail {
+        position: absolute;
+        right: 420px;
+        top: 74px;
+        display: flex;
+        gap: 10px;
+      }
+      .seg {
+        position: relative;
+        width: 56px;
+        height: 5px;
+        border-radius: 3px;
+        background: rgba(15, 27, 29, 0.1);
+        overflow: hidden;
+      }
+      .seg i {
+        position: absolute;
+        inset: 0;
+        display: block;
+        background: var(--teal);
+        transform-origin: 0 50%;
+      }
+
+      /* ---------- scenes ---------- */
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+      #s2,
+      #s3,
+      #s4,
+      #s5,
+      #s6 {
+        opacity: 0;
+      }
+      .cam {
+        position: absolute;
+        inset: 0;
+        perspective: 2200px;
+        perspective-origin: 60% 45%;
+      }
+      .glass {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 251, 250, 0.9));
+        border: 1.5px solid rgba(15, 27, 29, 0.07);
+        border-radius: 30px;
+        box-shadow:
+          inset 0 1.5px 0 #ffffff,
+          0 34px 70px -18px rgba(15, 27, 29, 0.16),
+          0 8px 20px rgba(15, 27, 29, 0.07);
+      }
+
+      /* headline column */
+      .col {
+        position: absolute;
+        left: 120px;
+        width: 900px;
+      }
+      .kick {
+        display: inline-block;
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin-bottom: 22px;
+      }
+      .kin {
+        font-family: "Unbounded", sans-serif;
+        font-weight: 700;
+        font-size: 74px;
+        line-height: 1.12;
+        letter-spacing: -0.035em;
+        color: var(--ink);
+      }
+      .ln {
+        display: block;
+        white-space: nowrap;
+      }
+      .w {
+        display: inline-block;
+        overflow: hidden;
+        vertical-align: top;
+        padding: 0.1em 0.02em 0.16em;
+        margin: -0.1em -0.02em -0.16em;
+      }
+      .wi {
+        display: inline-block;
+      }
+      .ok {
+        display: inline-block;
+        margin: 0 0.06em 0 0.02em;
+      }
+      .chips {
+        display: flex;
+        gap: 14px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 24px;
+        border-radius: 999px;
+        font-size: 26px;
+        font-weight: 600;
+        color: var(--teal);
+        background: rgba(127, 209, 185, 0.22);
+        border: 1.5px solid rgba(31, 122, 107, 0.22);
+      }
+
+      /* S1: inbox */
+      .ghost {
+        position: absolute;
+        left: 1440px;
+        top: 60px;
+        width: 420px;
+        height: 840px;
+        border-radius: 30px;
+        overflow: hidden;
+        filter: blur(3px);
+        opacity: 0.75;
+        box-shadow: 0 30px 60px -20px rgba(15, 27, 29, 0.14);
+      }
+      .ghost img {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .chat {
+        position: absolute;
+        left: 1120px;
+        top: 110px;
+        width: 620px;
+        height: 860px;
+      }
+      .chat-hd {
+        position: absolute;
+        left: 36px;
+        right: 36px;
+        top: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .chat-title {
+        font-family: "Unbounded", sans-serif;
+        font-weight: 700;
+        font-size: 40px;
+        letter-spacing: -0.03em;
+      }
+      .unread {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--ink2);
+      }
+      .cnt {
+        position: relative;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #dfe7e4;
+      }
+      .cnt b {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--ink);
+        opacity: 0;
+      }
+      .cnt b.c0 {
+        opacity: 1;
+      }
+      .chat-bd {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 120px;
+        bottom: 26px;
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0px, #000 70px);
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0px, #000 70px);
+      }
+      .stack {
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+      .bub {
+        border-radius: 26px 26px 26px 8px;
+        padding: 14px 24px 16px;
+        transform-origin: 0% 100%;
+        opacity: 0;
+      }
+      .bub.g {
+        height: 104px;
+        background: #e3eae7;
+      }
+      .bn {
+        display: flex;
+        gap: 14px;
+        align-items: baseline;
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--ink2);
+        margin-bottom: 6px;
+        white-space: nowrap;
+      }
+      .bt {
+        font-weight: 500;
+        font-size: 20px;
+        color: #4a5b5d;
+      }
+      .bx {
+        font-size: 27px;
+        font-weight: 450;
+        color: var(--ink);
+        white-space: nowrap;
+      }
+      .bub.o {
+        height: 150px;
+        width: 470px;
+        background: var(--accent);
+        box-shadow: 0 16px 36px -10px rgba(227, 120, 48, 0.35);
+      }
+      .bub.o .bn,
+      .bub.o .bt {
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 22px;
+      }
+      .bub.o .bx {
+        color: #ffffff;
+        white-space: normal;
+        line-height: 1.22;
+        font-weight: 500;
+        font-size: 28px;
+      }
+
+      /* S2: conversation */
+      .conv {
+        position: absolute;
+        left: 1100px;
+        top: 116px;
+        width: 680px;
+        height: 848px;
+      }
+      .conv-hd {
+        position: absolute;
+        left: 34px;
+        right: 34px;
+        top: 30px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding-bottom: 24px;
+        border-bottom: 1.5px solid rgba(15, 27, 29, 0.07);
+      }
+      .av {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: #dcefe8;
+        color: var(--teal);
+        font-weight: 700;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .conv-name {
+        font-size: 30px;
+        font-weight: 600;
+      }
+      .conv-sub {
+        font-size: 22px;
+        color: var(--ink2);
+        margin-top: 2px;
+      }
+      .tg {
+        margin-left: auto;
+        font-size: 22px;
+        padding: 8px 18px;
+      }
+      .conv .bub.o {
+        position: absolute;
+        left: 34px;
+        top: 150px;
+        opacity: 1;
+      }
+      .typing {
+        position: absolute;
+        right: 40px;
+        top: 336px;
+        width: 128px;
+        height: 70px;
+        border-radius: 35px 35px 10px 35px;
+        background: #dcefe8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        transform-origin: 100% 100%;
+        opacity: 0;
+      }
+      .typing span {
+        display: block;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--teal);
+      }
+      .reply {
+        position: absolute;
+        right: 34px;
+        top: 336px;
+        width: 480px;
+        padding: 18px 26px 22px;
+        border-radius: 28px 28px 8px 28px;
+        background: #ffffff;
+        border: 2px solid rgba(31, 122, 107, 0.28);
+        box-shadow: 0 16px 34px -12px rgba(15, 27, 29, 0.14);
+        transform-origin: 100% 100%;
+        opacity: 0;
+      }
+      .ai {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 21px;
+        font-weight: 600;
+        color: var(--teal);
+        margin-bottom: 8px;
+      }
+      .reply .bx {
+        white-space: normal;
+        font-size: 28px;
+        line-height: 1.25;
+        font-weight: 500;
+      }
+      .reply .meta {
+        margin-top: 10px;
+        font-size: 20px;
+        color: var(--ink2);
+        text-align: right;
+      }
+      .inbar {
+        position: absolute;
+        left: 34px;
+        right: 34px;
+        bottom: 32px;
+        height: 84px;
+        border-radius: 42px;
+        background: #eef3f1;
+        display: flex;
+        align-items: center;
+        padding: 0 12px 0 30px;
+        font-size: 24px;
+        color: var(--ink2);
+      }
+      .send {
+        margin-left: auto;
+        width: 62px;
+        height: 62px;
+        border-radius: 50%;
+        background: var(--teal);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* S3: CRM */
+      .crm {
+        position: absolute;
+        left: 900px;
+        top: 200px;
+        width: 1500px;
+        height: 938px;
+        transform-style: preserve-3d;
+      }
+      .crm > img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+        box-shadow:
+          0 40px 80px -24px rgba(15, 27, 29, 0.2),
+          0 8px 20px rgba(15, 27, 29, 0.07);
+        border: 1.5px solid rgba(15, 27, 29, 0.06);
+      }
+      .patch {
+        position: absolute;
+        left: 46px;
+        top: 248px;
+        width: 352px;
+        height: 318px;
+        background: #f8fbfa;
+      }
+      .deal {
+        position: absolute;
+        left: 60px;
+        top: 262px;
+        width: 324px;
+        height: 290px;
+        border-radius: 18px;
+        background: #ffffff;
+        border: 3px solid var(--accent);
+        box-shadow: 0 0 0 7px rgba(227, 120, 48, 0.14), 0 24px 44px -14px rgba(15, 27, 29, 0.22);
+        padding: 20px 22px;
+      }
+      .dchip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--accent);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 4px 10px;
+      }
+      .dname {
+        margin-top: 14px;
+        font-size: 24px;
+        font-weight: 600;
+      }
+      .dsum {
+        margin-top: 8px;
+        font-family: "Unbounded", sans-serif;
+        font-weight: 700;
+        font-size: 31px;
+        letter-spacing: -0.03em;
+      }
+      .ddesc {
+        margin-top: 12px;
+        padding-left: 10px;
+        border-left: 2px solid #d5dedb;
+        font-size: 17px;
+        color: var(--ink2);
+        line-height: 1.3;
+      }
+      .dfoot {
+        position: absolute;
+        left: 22px;
+        right: 20px;
+        bottom: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 17px;
+        color: var(--ink2);
+      }
+      .dtg {
+        background: #dcefe8;
+        color: var(--teal);
+        font-weight: 600;
+        border-radius: 7px;
+        padding: 3px 10px;
+      }
+      .dring {
+        position: absolute;
+        left: 60px;
+        top: 262px;
+        width: 324px;
+        height: 290px;
+        border-radius: 18px;
+        border: 4px solid var(--accent);
+        opacity: 0;
+      }
+
+      /* S4: flow */
+      .flowcam {
+        position: absolute;
+        left: 0;
+        top: 390px;
+        width: 2200px;
+        height: 620px;
+      }
+      .flow {
+        position: absolute;
+        inset: 0;
+        border-radius: 30px;
+        overflow: hidden;
+        background: #f8fbfa;
+        border: 1.5px solid rgba(15, 27, 29, 0.06);
+        box-shadow:
+          0 40px 80px -24px rgba(15, 27, 29, 0.18),
+          0 8px 20px rgba(15, 27, 29, 0.07);
+      }
+      .flow > img {
+        position: absolute;
+        left: 0;
+        top: -431px;
+        width: 2200px;
+        height: 1100px;
+      }
+      .fline {
+        position: absolute;
+        left: 240px;
+        top: 227px;
+        width: 1720px;
+        height: 5px;
+        border-radius: 3px;
+        background: var(--teal);
+        transform-origin: 0 50%;
+      }
+      .fring {
+        position: absolute;
+        top: 62px;
+        width: 299px;
+        height: 509px;
+        border-radius: 24px;
+        border: 4px solid var(--teal);
+        opacity: 0;
+      }
+      .fchk {
+        position: absolute;
+        top: 44px;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: var(--teal);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 14px rgba(15, 27, 29, 0.16);
+        opacity: 0;
+      }
+      .orb {
+        position: absolute;
+        left: 222px;
+        top: 212px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--accent);
+        border: 5px solid #ffffff;
+        box-shadow: 0 6px 16px rgba(227, 120, 48, 0.38);
+        opacity: 0;
+      }
+
+      /* S5: dashboard */
+      .dash {
+        position: absolute;
+        left: 660px;
+        top: 200px;
+        width: 1350px;
+        height: 844px;
+      }
+      .dash img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 28px;
+        opacity: 0;
+      }
+      .dash img.d0 {
+        opacity: 1;
+        box-shadow:
+          0 40px 80px -24px rgba(15, 27, 29, 0.2),
+          0 8px 20px rgba(15, 27, 29, 0.07);
+      }
+      .kpi {
+        position: absolute;
+        left: 120px;
+        top: 440px;
+        width: 580px;
+        padding: 34px 38px 34px;
+      }
+      .klab {
+        font-size: 26px;
+        font-weight: 600;
+        color: var(--ink2);
+      }
+      .knum {
+        display: flex;
+        align-items: baseline;
+        gap: 24px;
+        margin-top: 6px;
+      }
+      .kv {
+        font-family: "Unbounded", sans-serif;
+        font-weight: 700;
+        font-size: 118px;
+        letter-spacing: -0.04em;
+        line-height: 1.05;
+        color: var(--accent);
+        transform-origin: 0% 70%;
+        display: inline-block;
+        min-width: 290px;
+      }
+      .ku {
+        font-size: 34px;
+        font-weight: 600;
+      }
+      .kdelta {
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--teal);
+        margin-top: 4px;
+      }
+      .brs {
+        margin-top: 26px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .br {
+        display: grid;
+        grid-template-columns: 150px 1fr 64px;
+        align-items: center;
+        gap: 16px;
+        font-size: 22px;
+        font-weight: 500;
+      }
+      .br .v {
+        text-align: right;
+        font-weight: 600;
+      }
+      .bar {
+        height: 14px;
+        border-radius: 7px;
+        background: rgba(15, 27, 29, 0.06);
+        position: relative;
+        overflow: hidden;
+      }
+      .bar i {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        display: block;
+        border-radius: 7px;
+        background: var(--mint);
+        transform-origin: 0 50%;
+      }
+      .bar i.top {
+        background: var(--teal);
+      }
+
+      /* S6: end card */
+      #s6 {
+        background: var(--bg);
+      }
+      .endline {
+        position: absolute;
+        left: 128px;
+        top: 368px;
+        width: 170px;
+        height: 5px;
+        border-radius: 3px;
+        background: var(--accent);
+        transform-origin: 0 50%;
+      }
+      .enddot {
+        position: absolute;
+        left: 312px;
+        top: 361px;
+        width: 19px;
+        height: 19px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+      .endhl {
+        position: absolute;
+        left: 124px;
+        top: 420px;
+        font-size: 128px;
+        line-height: 1.08;
+        letter-spacing: -0.04em;
+      }
+      .cta {
+        position: absolute;
+        left: 128px;
+        top: 772px;
+        display: flex;
+        align-items: center;
+        gap: 36px;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        padding: 22px 38px;
+        border-radius: 999px;
+        background: var(--ink);
+        color: #ffffff;
+        font-size: 36px;
+        font-weight: 600;
+        box-shadow: 0 18px 36px -12px rgba(15, 27, 29, 0.35);
+      }
+      .endurl {
+        font-size: 38px;
+        font-weight: 600;
+        color: var(--ink);
+        white-space: nowrap;
+      }
+      .svc {
+        position: absolute;
+        left: 128px;
+        top: 944px;
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        font-size: 30px;
+        color: var(--ink2);
+        white-space: nowrap;
+      }
+      .svc .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--mint);
+      }
+
+      /* transition edge */
+      .edge {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 6px;
+        height: 1080px;
+        background: var(--teal);
+        transform-origin: 0 0;
+        z-index: 15;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="18.6"
+      data-width="1920"
+      data-height="1080"
+    >
+      <svg width="0" height="0" style="position: absolute">
+        <filter id="whip" x="-5%" y="0%" width="110%" height="100%" color-interpolation-filters="sRGB">
+          <feGaussianBlur id="whipdev" stdDeviation="0 0" />
+        </filter>
+      </svg>
+
+      <div class="bg" data-layout-allow-overflow>
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+        <div class="blob b3"></div>
+        <div class="dots"></div>
+      </div>
+
+      <!-- ===== S1 · Xabarlar yoʻqolyaptimi? ===== -->
+      <section class="scene" id="s1">
+        <div class="cam" id="c1">
+          <div class="ghost" id="s1-ghost"><img src="assets/img/inbox.png" alt="" /></div>
+          <div class="chat glass" id="s1-chat">
+            <div class="chat-hd">
+              <div class="chat-title">Xabarlar</div>
+              <div class="unread">
+                javobsiz
+                <div class="cnt">
+                  <b class="c0">0</b><b>1</b><b>2</b><b>3</b><b>4</b><b>5</b><b>6</b>
+                </div>
+              </div>
+            </div>
+            <div class="chat-bd">
+              <div class="stack" id="s1-stack">
+                <div class="bub g"><div class="bn">Sherzod aka <span class="bt">23:02</span></div><div class="bx">Assalomu alaykum, narxi qancha?</div></div>
+                <div class="bub g"><div class="bn">Бахтиёр <span class="bt">23:09</span></div><div class="bx">Доставка до Чиланзара есть?</div></div>
+                <div class="bub g"><div class="bn">Dilnoza <span class="bt">23:11</span></div><div class="bx">Hali ochiqmisiz?</div></div>
+                <div class="bub g"><div class="bn">Rustam, Sergeli <span class="bt">23:13</span></div><div class="bx">Ertaga yetkazib berasizmi?</div></div>
+                <div class="bub g"><div class="bn">Aziza <span class="bt">23:14</span></div><div class="bx">Ulgurji olsam chegirma bormi?</div></div>
+                <div class="bub o"><div class="bn">Hamkor Market <span class="bt">23:14</span></div><div class="bx">Kungaboqar yogʻi 5L, 120 dona kerak. Narxi?</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="col" style="top: 380px">
+            <div class="kick" id="k1">Telegram · Instagram</div>
+            <div class="kin" id="h1"><span class="ln">Xabarlar</span><span class="ln">yoʻqolyaptimi?</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== S2 · AI agent darhol javob beradi ===== -->
+      <section class="scene" id="s2">
+        <div class="cam" id="c2">
+          <div class="conv glass" id="s2-conv">
+            <div class="conv-hd">
+              <div class="av">HM</div>
+              <div>
+                <div class="conv-name">Hamkor Market</div>
+                <div class="conv-sub">mijoz · Yunusobod</div>
+              </div>
+              <div class="chip tg">Telegram</div>
+            </div>
+            <div class="bub o"><div class="bn">Hamkor Market <span class="bt">23:14</span></div><div class="bx">Kungaboqar yogʻi 5L, 120 dona kerak. Narxi?</div></div>
+            <div class="typing" id="s2-typing"><span></span><span></span><span></span></div>
+            <div class="reply" id="s2-reply">
+              <div class="ai">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F7A6B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3" /><path d="M12 8V4" /><circle cx="9" cy="14" r="1" fill="#1F7A6B" /><circle cx="15" cy="14" r="1" fill="#1F7A6B" /></svg>
+                AI agent
+              </div>
+              <div class="bx">Assalomu alaykum! 120 dona — 18,5 mln soʻm. Bugun yetkazamiz.</div>
+              <div class="meta">23:14 · 3 soniyada</div>
+            </div>
+            <div class="inbar">
+              <span id="s2-ph1">AI agent yozmoqda…</span><span id="s2-ph2" style="position: absolute; left: 30px; opacity: 0">Yuborildi · 23:14</span>
+              <div class="send" id="s2-send">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5" /><path d="M5 12l7-7 7 7" /></svg>
+              </div>
+            </div>
+          </div>
+          <div class="col" style="top: 330px">
+            <div class="kick" id="k2">AI agent · 24/7</div>
+            <div class="kin" id="h2"><span class="ln">AI agent darhol</span><span class="ln">javob beradi.</span></div>
+            <div class="chips" id="s2-chips">
+              <div class="chip">24/7</div>
+              <div class="chip">Oʻzbek · Русский</div>
+              <div class="chip">3 soniyada javob</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== S3 · Har bir soʻrov: CRMda bitim ===== -->
+      <section class="scene" id="s3">
+        <div class="cam" id="c3">
+          <div class="crm" id="s3-crm">
+            <img src="assets/img/crm.png" alt="" />
+            <div class="patch"></div>
+            <div class="dring" id="s3-ring"></div>
+            <div class="deal" id="s3-deal">
+              <div class="dchip">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"><rect x="4" y="8" width="16" height="12" rx="3" /><path d="M12 8V4" /></svg>
+                AI agent
+              </div>
+              <div class="dname">Hamkor Market</div>
+              <div class="dsum">18,5 mln soʻm</div>
+              <div class="ddesc">Yunusobod · Kungaboqar yogʻi 5L — 120 dona</div>
+              <div class="dfoot"><span class="dtg">Telegram</span><span>Madina</span></div>
+            </div>
+          </div>
+          <div class="col" style="top: 370px; width: 760px">
+            <div class="kick" id="k3">CRM tizimi</div>
+            <div class="kin" id="h3"><span class="ln">Har bir soʻrov:</span><span class="ln">CRMda bitim.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== S4 · Qolganini tizim bajaradi ===== -->
+      <section class="scene" id="s4">
+        <div class="cam" id="c4">
+          <div class="flowcam" id="s4-flowcam">
+            <div class="flow" id="s4-flow">
+              <img src="assets/img/flow.png" alt="" data-layout-allow-overflow />
+              <div class="fline" id="s4-line"></div>
+              <div class="fring" style="left: 90px"></div>
+              <div class="fring" style="left: 521px"></div>
+              <div class="fring" style="left: 951px"></div>
+              <div class="fring" style="left: 1381px"></div>
+              <div class="fring" style="left: 1811px"></div>
+              <div class="fchk" style="left: 352px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></div>
+              <div class="fchk" style="left: 783px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></div>
+              <div class="fchk" style="left: 1213px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></div>
+              <div class="fchk" style="left: 1643px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></div>
+              <div class="fchk" style="left: 2073px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></div>
+              <div class="orb" id="s4-orb"></div>
+            </div>
+          </div>
+          <div class="col" style="top: 150px; width: 1680px">
+            <div class="kick" id="k4">Avtomatlashtirish · 1C / Smartup</div>
+            <div class="kin" id="h4"><span class="ln">Qolganini tizim bajaradi.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== S5 · Barcha filiallar bitta ekranda ===== -->
+      <section class="scene" id="s5">
+        <div class="cam" id="c5">
+          <div class="dash" id="s5-dash">
+            <img class="d0" src="assets/dashseq/d00.jpg" alt="" />
+            <img class="d1" src="assets/dashseq/d01.jpg" alt="" />
+            <img class="d2" src="assets/dashseq/d02.jpg" alt="" />
+            <img class="d3" src="assets/dashseq/d03.jpg" alt="" />
+            <img class="d4" src="assets/dashseq/d04.jpg" alt="" />
+            <img class="d5" src="assets/dashseq/d05.jpg" alt="" />
+            <img class="d6" src="assets/dashseq/d06.jpg" alt="" />
+            <img class="d7" src="assets/dashseq/d07.jpg" alt="" />
+            <img class="d8" src="assets/dashseq/d08.jpg" alt="" />
+            <img class="d9" src="assets/dashseq/d09.jpg" alt="" />
+            <img class="d10" src="assets/dashseq/d10.jpg" alt="" />
+            <img class="d11" src="assets/dashseq/d11.jpg" alt="" />
+            <img class="d12" src="assets/dashseq/d12.jpg" alt="" />
+            <img class="d13" src="assets/dashseq/d13.jpg" alt="" />
+            <img class="d14" src="assets/dashseq/d14.jpg" alt="" />
+            <img class="d15" src="assets/dashseq/d15.jpg" alt="" />
+            <img class="d16" src="assets/dashseq/d16.jpg" alt="" />
+            <img class="d17" src="assets/dashseq/d17.jpg" alt="" />
+            <img class="d18" src="assets/dashseq/d18.jpg" alt="" />
+            <img class="d19" src="assets/dashseq/d19.jpg" alt="" />
+            <img class="d20" src="assets/dashseq/d20.jpg" alt="" />
+            <img class="d21" src="assets/dashseq/d21.jpg" alt="" />
+            <img class="d22" src="assets/dashseq/d22.jpg" alt="" />
+            <img class="d23" src="assets/dashseq/d23.jpg" alt="" />
+            <img class="d24" src="assets/dashseq/d24.jpg" alt="" />
+            <img class="d25" src="assets/dashseq/d25.jpg" alt="" />
+            <img class="d26" src="assets/dashseq/d26.jpg" alt="" />
+            <img class="d27" src="assets/dashseq/d27.jpg" alt="" />
+            <img class="d28" src="assets/dashseq/d28.jpg" alt="" />
+            <img class="d29" src="assets/dashseq/d29.jpg" alt="" />
+            <img class="d30" src="assets/dashseq/d30.jpg" alt="" />
+            <img class="d31" src="assets/dashseq/d31.jpg" alt="" />
+            <img class="d32" src="assets/dashseq/d32.jpg" alt="" />
+            <img class="d33" src="assets/dashseq/d33.jpg" alt="" />
+            <img class="d34" src="assets/dashseq/d34.jpg" alt="" />
+            <img class="d35" src="assets/dashseq/d35.jpg" alt="" />
+            <img class="d36" src="assets/dashseq/d36.jpg" alt="" />
+            <img class="d37" src="assets/dashseq/d37.jpg" alt="" />
+            <img class="d38" src="assets/dashseq/d38.jpg" alt="" />
+            <img class="d39" src="assets/dashseq/d39.jpg" alt="" />
+            <img class="d40" src="assets/dashseq/d40.jpg" alt="" />
+            <img class="d41" src="assets/dashseq/d41.jpg" alt="" />
+            <img class="d42" src="assets/dashseq/d42.jpg" alt="" />
+            <img class="d43" src="assets/dashseq/d43.jpg" alt="" />
+            <img class="d44" src="assets/dashseq/d44.jpg" alt="" />
+            <img class="d45" src="assets/dashseq/d45.jpg" alt="" />
+            <img class="d46" src="assets/dashseq/d46.jpg" alt="" />
+            <img class="d47" src="assets/dashseq/d47.jpg" alt="" />
+          </div>
+          <div class="col" style="top: 170px">
+            <div class="kick" id="k5">Dashboard · analitika</div>
+            <div class="kin" id="h5"><span class="ln">Barcha filiallar</span><span class="ln">bitta ekranda.</span></div>
+          </div>
+          <div class="kpi glass" id="s5-kpi">
+            <div class="klab">Savdo · bugun</div>
+            <div class="knum"><span class="kv" id="s5-kv">0,0</span><span class="ku">mln soʻm</span></div>
+            <div class="kdelta">+8,4% kechagidan</div>
+            <div class="brs">
+              <div class="br"><span>Chilonzor</span><div class="bar"><i class="top" style="width: 100%"></i></div><span class="v">16,2</span></div>
+              <div class="br"><span>Yunusobod</span><div class="bar"><i style="width: 85.2%"></i></div><span class="v">13,8</span></div>
+              <div class="br"><span>Sergeli</span><div class="bar"><i style="width: 64.2%"></i></div><span class="v">10,4</span></div>
+              <div class="br"><span>Samarqand</span><div class="bar"><i style="width: 50.6%"></i></div><span class="v">8,2</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== S6 · end card ===== -->
+      <section class="scene" id="s6">
+        <div class="bg" data-layout-allow-overflow>
+          <div class="blob b1"></div>
+          <div class="blob b2"></div>
+          <div class="blob b3"></div>
+          <div class="dots"></div>
+        </div>
+        <div class="endline" id="e-line"></div>
+        <div class="enddot" id="e-dot"></div>
+        <div class="kin endhl" id="h6"><span class="ln">Biznesingiz uchun</span><span class="ln">raqamli tizimlar</span></div>
+        <div class="cta">
+          <div class="pill" id="e-pill">
+            Bepul audit
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="M13 6l6 6-6 6" /></svg>
+          </div>
+          <div class="endurl" id="e-url">studio.enkd.uz</div>
+        </div>
+        <div class="svc" id="e-svc">
+          <span>AI chatbotlar</span><i class="dot"></i><span>AI agentlar</span><i class="dot"></i><span>CRM</span><i class="dot"></i><span>Avtomatlashtirish</span><i class="dot"></i><span>Dashboardlar</span><i class="dot"></i><span>Promo videolar</span>
+        </div>
+      </section>
+
+      <div class="edge" id="edge"></div>
+
+      <div class="chrome">
+        <div class="brand" id="brand">enkd studio</div>
+        <div class="rail" id="rail">
+          <div class="seg"><i></i></div>
+          <div class="seg"><i></i></div>
+          <div class="seg"><i></i></div>
+          <div class="seg"><i></i></div>
+          <div class="seg"><i></i></div>
+        </div>
+        <div class="url" id="url">studio.enkd.uz</div>
+      </div>
+
+      <!-- ===== audio ===== -->
+      <hf-audio-group
+        id="sfx"
+        data-volume="1"
+        data-fx-chain="{&quot;version&quot;:1,&quot;nodes&quot;:[{&quot;type&quot;:&quot;highpass&quot;,&quot;id&quot;:&quot;n1&quot;,&quot;label&quot;:&quot;Clear the bed's low end&quot;,&quot;params&quot;:{&quot;frequency&quot;:140,&quot;q&quot;:0.707,&quot;poles&quot;:&quot;2&quot;}},{&quot;type&quot;:&quot;limiter&quot;,&quot;id&quot;:&quot;n2&quot;,&quot;label&quot;:&quot;SFX ceiling&quot;,&quot;params&quot;:{&quot;limit&quot;:-3,&quot;attack&quot;:3,&quot;release&quot;:60,&quot;level_out&quot;:0}}]}"
+      ></hf-audio-group>
+      <audio
+        id="bed"
+        src="assets/audio/bed.wav"
+        data-start="0"
+        data-duration="18.6"
+        data-track-index="20"
+        data-volume="0.62"
+      ></audio>
+      <audio id="sfx-pop-0" src=".media/audio/sfx/sfx_001.mp3" data-start="0.5" data-duration="0.72" data-track-index="21" data-volume="0.6" data-audio-group="sfx"></audio>
+      <audio id="sfx-pop-1" src=".media/audio/sfx/sfx_001.mp3" data-start="0.8" data-duration="0.72" data-track-index="22" data-volume="0.6" data-audio-group="sfx"></audio>
+      <audio id="sfx-pop-2" src=".media/audio/sfx/sfx_001.mp3" data-start="1.1" data-duration="0.72" data-track-index="23" data-volume="0.6" data-audio-group="sfx"></audio>
+      <audio id="sfx-pop-3" src=".media/audio/sfx/sfx_001.mp3" data-start="1.4" data-duration="0.72" data-track-index="24" data-volume="0.6" data-audio-group="sfx"></audio>
+      <audio id="sfx-pop-4" src=".media/audio/sfx/sfx_001.mp3" data-start="1.7" data-duration="0.72" data-track-index="25" data-volume="0.6" data-audio-group="sfx"></audio>
+      <audio id="sfx-pop-5" src=".media/audio/sfx/sfx_001.mp3" data-start="2.0" data-duration="0.72" data-track-index="26" data-volume="0.95" data-audio-group="sfx"></audio>
+      <audio id="sfx-pop-6" src=".media/audio/sfx/sfx_001.mp3" data-start="4.1" data-duration="0.72" data-track-index="27" data-volume="0.8" data-audio-group="sfx"></audio>
+      <audio id="sfx-pop-7" src=".media/audio/sfx/sfx_001.mp3" data-start="7.4" data-duration="0.72" data-track-index="28" data-volume="0.8" data-audio-group="sfx"></audio>
+      <audio id="sfx-pop-8" src=".media/audio/sfx/sfx_001.mp3" data-start="14.1" data-duration="0.72" data-track-index="29" data-volume="0.8" data-audio-group="sfx"></audio>
+      <audio id="sfx-pop-9" src=".media/audio/sfx/sfx_001.mp3" data-start="15.9" data-duration="0.72" data-track-index="30" data-volume="0.8" data-audio-group="sfx"></audio>
+      <audio id="sfx-whoosh-10" src=".media/audio/sfx/sfx_005.mp3" data-start="2.84" data-duration="0.57" data-track-index="31" data-volume="0.8" data-audio-group="sfx"></audio>
+      <audio id="sfx-whoosh-11" src=".media/audio/sfx/sfx_005.mp3" data-start="5.84" data-duration="0.57" data-track-index="32" data-volume="0.8" data-audio-group="sfx"></audio>
+      <audio id="sfx-whoosh-12" src=".media/audio/sfx/sfx_005.mp3" data-start="8.84" data-duration="0.57" data-track-index="33" data-volume="0.8" data-audio-group="sfx"></audio>
+      <audio id="sfx-whoosh-13" src=".media/audio/sfx/sfx_005.mp3" data-start="11.84" data-duration="0.57" data-track-index="34" data-volume="0.8" data-audio-group="sfx"></audio>
+      <audio id="sfx-whoosh-14" src=".media/audio/sfx/sfx_005.mp3" data-start="14.84" data-duration="0.57" data-track-index="35" data-volume="0.8" data-audio-group="sfx"></audio>
+      <audio id="sfx-click-15" src=".media/audio/sfx/sfx_003.mp3" data-start="4.08" data-duration="0.37" data-track-index="36" data-volume="1" data-audio-group="sfx"></audio>
+      <audio id="sfx-click-16" src=".media/audio/sfx/sfx_003.mp3" data-start="9.23" data-duration="0.37" data-track-index="37" data-volume="0.5" data-audio-group="sfx"></audio>
+      <audio id="sfx-click-17" src=".media/audio/sfx/sfx_003.mp3" data-start="9.83" data-duration="0.37" data-track-index="38" data-volume="0.5" data-audio-group="sfx"></audio>
+      <audio id="sfx-click-18" src=".media/audio/sfx/sfx_003.mp3" data-start="10.43" data-duration="0.37" data-track-index="39" data-volume="0.5" data-audio-group="sfx"></audio>
+      <audio id="sfx-click-19" src=".media/audio/sfx/sfx_003.mp3" data-start="11.03" data-duration="0.37" data-track-index="40" data-volume="0.5" data-audio-group="sfx"></audio>
+      <audio id="sfx-click-20" src=".media/audio/sfx/sfx_003.mp3" data-start="11.63" data-duration="0.37" data-track-index="41" data-volume="0.5" data-audio-group="sfx"></audio>
+      <audio id="sfx-riser" src=".media/audio/sfx/sfx_004.mp3" data-start="12.8" data-media-start="0.9" data-duration="2.8" data-track-index="42" data-volume="0.55" data-audio-group="sfx" data-automation="{&quot;version&quot;:1,&quot;lanes&quot;:[{&quot;target&quot;:&quot;volume&quot;,&quot;points&quot;:[{&quot;t&quot;:0,&quot;v&quot;:0.55},{&quot;t&quot;:2.25,&quot;v&quot;:0.55},{&quot;t&quot;:2.8,&quot;v&quot;:0}]}]}"></audio>
+    </div>
+
+    <script>
+      (function () {
+        var W = 1920;
+        var tl = gsap.timeline({ paused: true });
+        var q = function (s) {
+          return document.querySelector(s);
+        };
+        var qa = function (s) {
+          return Array.prototype.slice.call(document.querySelectorAll(s));
+        };
+
+        // ---- split headlines into masked words (per-word reveal) ----
+        qa(".kin .ln").forEach(function (ln) {
+          var words = ln.textContent.trim().split(/\s+/);
+          ln.innerHTML = words
+            .map(function (w) {
+              return '<span class="w"><span class="wi">' + w.replace(/\u02BB/g, '<span class="ok">\u02BB</span>') + "</span></span>";
+            })
+            .join(" ");
+        });
+        function words(sel, t, stagger) {
+          tl.fromTo(
+            sel + " .wi",
+            { yPercent: 120, rotation: 6 },
+            { yPercent: 0, rotation: 0, duration: 0.7, ease: "power4.out", stagger: stagger || 0.07 },
+            t,
+          );
+        }
+        function kicker(sel, t) {
+          tl.fromTo(
+            sel,
+            { clipPath: "inset(0% 100% 0% 0%)" },
+            { clipPath: "inset(0% 0% 0% 0%)", duration: 0.5, ease: "power3.out" },
+            t,
+          );
+        }
+        function pop(el, t, from, dur, ease) {
+          tl.set(el, { opacity: 1 }, t);
+          tl.fromTo(el, { scale: from }, { scale: 1, duration: dur, ease: ease }, t);
+        }
+
+        // ---- transitions (whip = whip-pan-cut spec; mask = diagonal wipe; iris = climax) ----
+        var dev = document.getElementById("whipdev");
+        function setBlur(v) {
+          dev.setAttribute("stdDeviation", v.toFixed(2) + " 0");
+        }
+        function whip(T, a, b) {
+          var d = 0.55,
+            s = T - d / 2,
+            p = { v: 0 };
+          tl.set(b, { opacity: 1 }, s);
+          tl.fromTo(a, { x: 0 }, { x: -W, duration: d, ease: "power3.inOut", immediateRender: false }, s);
+          tl.fromTo(b, { x: W }, { x: 0, duration: d, ease: "power3.inOut", immediateRender: false }, s);
+          tl.set([a, b], { filter: "url(#whip)" }, s);
+          tl.fromTo(
+            p,
+            { v: 0 },
+            { v: 16, duration: d / 2, ease: "power3.in", onUpdate: function () { setBlur(p.v); }, immediateRender: false },
+            s,
+          );
+          tl.to(p, { v: 0, duration: d / 2, ease: "power3.out", onUpdate: function () { setBlur(p.v); } }, s + d / 2);
+          tl.set([a, b], { filter: "none" }, s + d);
+          tl.set(a, { opacity: 0 }, s + d);
+        }
+        var edge = q("#edge");
+        gsap.set(edge, { x: W * 1.2, skewX: -12 });
+        function mask(T, a, b) {
+          var d = 0.5,
+            s = T - d / 2;
+          tl.set(b, { opacity: 1 }, s);
+          tl.fromTo(
+            b,
+            { clipPath: "polygon(112% 0%, 112% 0%, 112% 100%, 100% 100%)" },
+            { clipPath: "polygon(0% 0%, 112% 0%, 112% 100%, -12% 100%)", duration: d, ease: "power3.inOut", immediateRender: false },
+            s,
+          );
+          tl.fromTo(edge, { x: W * 1.12 }, { x: 0, duration: d, ease: "power3.inOut", immediateRender: false }, s);
+          tl.set(edge, { x: W * 1.2 }, s + d);
+          tl.fromTo(a, { x: 0, scale: 1 }, { x: -180, scale: 0.97, duration: d, ease: "power3.inOut", immediateRender: false }, s);
+          tl.set(a, { opacity: 0 }, s + d);
+        }
+
+        // ---- background drift + chrome rail (whole film) ----
+        tl.fromTo(".bg .b1", { x: 0, y: 0 }, { x: -160, y: 60, duration: 18.6, ease: "sine.inOut" }, 0);
+        tl.fromTo(".bg .b2", { x: 0, y: 0 }, { x: 140, y: -50, duration: 18.6, ease: "sine.inOut" }, 0);
+        tl.fromTo(".bg .dots", { x: 0, y: 0 }, { x: -40, y: -24, duration: 18.6, ease: "none" }, 0);
+        qa("#rail .seg i").forEach(function (f, i) {
+          tl.fromTo(f, { scaleX: 0 }, { scaleX: 1, duration: 3, ease: "none" }, i * 3);
+        });
+        tl.fromTo(["#brand", "#rail", "#url"], { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", stagger: 0.06 }, 0.05);
+
+        // ================= S1 (0.0 – 3.0) =================
+        tl.fromTo("#c1", { scale: 1 }, { scale: 1.05, duration: 3.3, ease: "sine.inOut" }, 0);
+        tl.fromTo(
+          "#s1-chat",
+          { x: 260, z: -700, rotationY: -42, rotationX: 10, opacity: 0 },
+          { x: 0, z: 0, rotationY: -14, rotationX: 5, opacity: 1, duration: 1.0, ease: "power3.out" },
+          0,
+        );
+        tl.fromTo("#s1-ghost", { x: 200, z: -1100, rotationY: -30 }, { x: 0, z: -420, rotationY: -22, duration: 1.4, ease: "power2.out" }, 0.05);
+        kicker("#k1", 0.2);
+        words("#h1", 0.3);
+        // messages pile up (chat-message spec: scale .75, .12s power2.out, from sender corner)
+        var bubs = qa("#s1-stack .bub");
+        var offs = [636, 518, 400, 282, 164, 0];
+        var times = [0.6, 0.9, 1.2, 1.5, 1.8, 2.1];
+        gsap.set("#s1-stack", { y: 636 });
+        var cnts = qa("#s1-chat .cnt b");
+        times.forEach(function (t, i) {
+          if (i > 0) tl.fromTo("#s1-stack", { y: offs[i - 1] }, { y: offs[i], duration: 0.28, ease: "power3.out", immediateRender: false }, t);
+          if (i < 5) {
+            tl.set(bubs[i], { opacity: 1 }, t);
+            tl.fromTo(bubs[i], { scale: 0.75 }, { scale: 1, duration: 0.12, ease: "power2.out" }, t);
+          } else {
+            tl.set(bubs[i], { opacity: 1 }, t);
+            tl.fromTo(bubs[i], { scale: 0.5, rotation: -4 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2.2)" }, t);
+          }
+          tl.set(cnts[i], { opacity: 0 }, t);
+          tl.set(cnts[i + 1], { opacity: 1 }, t);
+        });
+        tl.to(bubs.slice(0, 5), { opacity: 0.62, duration: 0.3, ease: "power2.out" }, 2.15);
+
+        // ================= T1 whip 3.0 =================
+        whip(3.0, "#s1", "#s2");
+
+        // ================= S2 (3.0 – 6.0) =================
+        tl.fromTo("#s2-conv", { rotationY: -18, rotationX: 4, z: -40 }, { rotationY: -9, rotationX: 2, z: 30, duration: 3.4, ease: "sine.out" }, 2.75);
+        kicker("#k2", 3.2);
+        words("#h2", 3.3);
+        pop("#s2-typing", 3.35, 0.6, 0.1, "power2.out");
+        qa("#s2-typing span").forEach(function (dot, i) {
+          tl.fromTo(dot, { y: 0 }, { y: -9, duration: 0.15, ease: "sine.inOut", yoyo: true, repeat: 3 }, 3.45 + i * 0.1);
+        });
+tl.set("#s2-typing", { opacity: 0 }, 4.2);
+        tl.set("#s2-ph1", { opacity: 0 }, 4.2);
+        tl.set("#s2-ph2", { opacity: 1 }, 4.2);
+        // send: press-release-spring
+        tl.fromTo("#s2-send", { scale: 1 }, { scale: 0.84, duration: 0.07, ease: "none" }, 4.12);
+        tl.fromTo("#s2-send", { scale: 0.84 }, { scale: 1, duration: 0.35, ease: "back.out(3)", immediateRender: false }, 4.19);
+        pop("#s2-reply", 4.2, 0.75, 0.16, "power2.out");
+        tl.fromTo("#s2-reply", { y: 24 }, { y: 0, duration: 0.3, ease: "power3.out" }, 4.2);
+        tl.fromTo("#s2-chips .chip", { opacity: 0, scale: 0.6, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(2)", stagger: 0.08 }, 4.8);
+
+        // ================= T2 mask 6.0 =================
+        mask(6.0, "#s2", "#s3");
+
+        // ================= S3 (6.0 – 9.0) =================
+        tl.fromTo(
+          "#s3-crm",
+          { x: 200, y: 180, z: -800, rotationX: 40, rotationY: -36, rotationZ: 4 },
+          { x: 0, y: 0, z: 0, rotationX: 12, rotationY: -20, rotationZ: 1, duration: 1.1, ease: "power4.out" },
+          5.85,
+        );
+        kicker("#k3", 6.2);
+        words("#h3", 6.3);
+        tl.fromTo(
+          "#s3-deal",
+          { x: -820, y: 300, z: 320, rotation: -12, rotationY: 24, opacity: 0 },
+          { x: 0, y: 0, z: 1, rotation: 0, rotationY: 0, opacity: 1, duration: 0.55, ease: "power3.out" },
+          6.95,
+        );
+        tl.fromTo("#s3-ring", { opacity: 0.9, scale: 1 }, { opacity: 0, scale: 1.16, duration: 0.6, ease: "power2.out", immediateRender: false }, 7.5);
+        tl.fromTo("#c3", { scale: 1, x: 0, y: 0 }, { scale: 1.1, x: 40, y: -30, duration: 1.8, ease: "sine.inOut" }, 7.5);
+
+        // ================= T3 whip 9.0 =================
+        whip(9.0, "#s3", "#s4");
+
+        // ================= S4 (9.0 – 12.0) =================
+        gsap.set("#s4-flow", { rotationX: 16, rotationY: -6 });
+        tl.fromTo("#s4-flowcam", { x: 60 }, { x: -560, duration: 3.5, ease: "sine.inOut" }, 8.75);
+        kicker("#k4", 9.15);
+        words("#h4", 9.2, 0.08);
+        tl.set("#s4-orb", { opacity: 1 }, 9.1);
+        tl.fromTo("#s4-orb", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.5)" }, 9.1);
+        tl.fromTo("#s4-orb", { x: 0 }, { x: 1720, duration: 2.4, ease: "none" }, 9.3);
+        tl.fromTo("#s4-line", { scaleX: 0 }, { scaleX: 1, duration: 2.4, ease: "none" }, 9.3);
+        var rings = qa("#s4-flow .fring"),
+          chks = qa("#s4-flow .fchk");
+        [9.3, 9.9, 10.5, 11.1, 11.7].forEach(function (t, i) {
+          tl.fromTo(rings[i], { opacity: 0, scale: 1.05 }, { opacity: 1, scale: 1, duration: 0.25, ease: "power3.out" }, t);
+          tl.set(chks[i], { opacity: 1 }, t + 0.05);
+          tl.fromTo(chks[i], { scale: 0 }, { scale: 1, duration: 0.35, ease: "back.out(2.6)" }, t + 0.05);
+        });
+
+        // ================= T4 mask 12.0 =================
+        mask(12.0, "#s4", "#s5");
+
+        // ================= S5 (12.0 – 15.0) =================
+        tl.fromTo(
+          "#s5-dash",
+          { y: 460, z: -400, rotationX: 44, rotationY: -8 },
+          { y: 0, z: 0, rotationX: 14, rotationY: -20, duration: 1.0, ease: "power4.out" },
+          11.85,
+        );
+        tl.fromTo("#c5", { scale: 1 }, { scale: 1.04, duration: 2.7, ease: "sine.inOut" }, 12.0);
+        kicker("#k5", 12.2);
+        words("#h5", 12.3);
+        var frames = qa("#s5-dash img");
+        frames.forEach(function (im, i) {
+          if (i > 0) tl.set(im, { opacity: 1 }, 12.6 + i / 30);
+        });
+        tl.fromTo("#s5-kpi", { opacity: 0, y: 60, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.6)" }, 12.55);
+        var kv = q("#s5-kv"),
+          c = { v: 0 };
+        function fmt(v) {
+          return v.toFixed(1).replace(".", ",");
+        }
+        tl.fromTo(
+          c,
+          { v: 0 },
+          { v: 48.6, duration: 1.57, ease: "power3.out", onUpdate: function () { kv.textContent = fmt(c.v); }, immediateRender: false },
+          12.6,
+        );
+        tl.fromTo("#s5-kv", { scale: 1 }, { scale: 1.05, duration: 0.12, ease: "power2.out" }, 14.2);
+        tl.to("#s5-kv", { scale: 1, duration: 0.35, ease: "power3.out" }, 14.32);
+        tl.fromTo("#s5-kpi .bar i", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.out", stagger: 0.07 }, 12.9);
+
+        // ================= T5 iris 15.0 (climax) =================
+        tl.set("#s6", { opacity: 1 }, 14.7);
+        tl.fromTo(
+          "#s6",
+          { clipPath: "circle(0px at 300px 700px)" },
+          { clipPath: "circle(2300px at 300px 700px)", duration: 0.75, ease: "expo.inOut", immediateRender: false },
+          14.7,
+        );
+        tl.to("#c5", { scale: 1.14, duration: 0.75, ease: "power3.in" }, 14.7);
+        tl.set("#s5", { opacity: 0 }, 15.45);
+        tl.to(["#rail", "#url"], { opacity: 0, duration: 0.3, ease: "power2.out" }, 14.75);
+        tl.to("#brand", { scale: 1.45, duration: 0.7, ease: "power3.inOut" }, 14.9);
+
+        // ================= S6 end card (15.0 – 18.6) =================
+        tl.fromTo("#e-line", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 15.2);
+        words("#h6", 15.3, 0.08);
+        tl.set("#e-dot", { opacity: 1 }, 15.65);
+        tl.fromTo("#e-dot", { scale: 0, x: 40 }, { scale: 1, x: 0, duration: 0.45, ease: "back.out(3)" }, 15.65);
+        tl.fromTo("#e-pill", { opacity: 0, scale: 0.7, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(2)" }, 16.0);
+        tl.fromTo("#e-url", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.7, ease: "expo.out" }, 16.1);
+        tl.fromTo("#e-svc > *", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out", stagger: 0.05 }, 16.3);
+
+        window.__timelines["main"] = tl;
+        tl.seek(0);
+      })();
+    </script>
+  </body>
+</html>

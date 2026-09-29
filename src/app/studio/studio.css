@@ -1,0 +1,219 @@
+/* studio.enkd.uz: theme over scrollcraft.css. Light glass world, one orange accent.
+   Orange #E37830 is a fill (dark ink on it clears 5.7:1); as small text on the canvas use --accent-text. */
+:root {
+  --sc-canvas: #eef4f1;
+  --sc-surface: #f8fbfa;
+  --sc-ink: #0f1b1d;
+  --sc-ink-soft: #46585a;
+  --sc-accent: #e37830;
+  --sc-accent-ink: #0f1b1d;
+  --accent-text: #a94f17;
+  --mint: #7fd1b9;
+  --sc-font-display: var(--font-display), "Geist", system-ui, sans-serif;
+  --sc-font-text: var(--font-text), system-ui, sans-serif;
+  --sc-shadow-color: 180 30% 12%;
+  --sc-e2: 0 2px 4px hsl(var(--sc-shadow-color) / 0.06), 0 12px 28px -8px hsl(var(--sc-shadow-color) / 0.16);
+  --sc-edge: inset 0 1px 0 rgb(255 255 255 / 0.9);
+  --glass: color-mix(in oklab, #fff 72%, transparent);
+  --bar-h: 4.25rem;
+}
+
+/* The engine sizes direct children of a leg; the poster sits one level down inside <picture>. */
+.sc-world__seg > picture, .sc-world__seg > picture > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------------------------------------------------------------- type -- */
+.studio h1, .studio h2 {
+  font-family: var(--sc-font-display);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  text-wrap: balance;
+  margin: 0;
+}
+.studio h1 { font-size: clamp(2.1rem, 1.3rem + 3.1vw, 4.3rem); max-width: 15ch; }
+.studio h2 { font-size: clamp(1.55rem, 1.15rem + 1.5vw, 2.5rem); max-width: 19ch; }
+.studio p { margin: 0; text-wrap: pretty; }
+.lede { margin-top: var(--sc-4); max-width: 44ch; color: var(--sc-ink-soft); font-size: var(--sc-t-lg); line-height: 1.5; }
+.body { margin-top: var(--sc-4); max-width: 44ch; color: var(--sc-ink-soft); }
+.svc {
+  margin-top: var(--sc-5); display: inline-flex; align-items: center; gap: var(--sc-2);
+  font-size: var(--sc-t-sm); font-weight: 600; color: var(--sc-ink);
+}
+.svc::before { content: ""; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--sc-accent); }
+.sc-copy--trail .svc { flex-direction: row-reverse; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ------------------------------------------------------------- buttons -- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--sc-2);
+  min-height: 2.75rem; padding: 0 1.25rem; border-radius: var(--sc-r-pill);
+  border: 1px solid transparent; font-weight: 600; font-size: var(--sc-t-sm);
+  text-decoration: none; white-space: nowrap; cursor: pointer;
+  transition: transform 140ms var(--sc-ease-out), background-color 160ms var(--sc-ease-out), box-shadow 160ms var(--sc-ease-out);
+}
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn--accent { background: var(--sc-accent); color: var(--sc-accent-ink); box-shadow: 0 1px 2px hsl(20 60% 30% / 0.2), 0 6px 16px -6px hsl(20 70% 40% / 0.45); }
+.btn--ghost { background: var(--glass); border-color: color-mix(in oklab, var(--sc-ink) 14%, transparent); color: var(--sc-ink); backdrop-filter: blur(10px); }
+@media (hover: hover) and (pointer: fine) {
+  .btn--accent:hover { background: #ec8742; }
+  .btn--ghost:hover { background: #fff; }
+}
+.actions { margin-top: var(--sc-6); display: flex; flex-wrap: wrap; gap: var(--sc-3); }
+.sc-copy--trail .actions { justify-content: flex-end; }
+
+/* ----------------------------------------------------------------- bar -- */
+.bar {
+  position: fixed; inset: 0 0 auto 0; z-index: var(--sc-z-chrome);
+  height: var(--bar-h); padding: 0 var(--sc-gutter);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--sc-4);
+}
+.wordmark { display: inline-flex; align-items: baseline; gap: 0.4em; text-decoration: none; }
+.wordmark b { font-family: var(--sc-font-display); font-weight: 600; font-size: 1.15rem; letter-spacing: -0.03em; }
+.wordmark span { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); font-weight: 500; }
+.bar__end { display: flex; align-items: center; gap: var(--sc-4); }
+.langs { display: flex; gap: 2px; padding: 3px; border-radius: var(--sc-r-pill); background: var(--glass); backdrop-filter: blur(10px); }
+.langs a {
+  min-width: 2.5rem; min-height: 2.25rem; display: grid; place-items: center; padding: 0 0.5rem;
+  border-radius: var(--sc-r-pill); font-size: var(--sc-t-xs); font-weight: 600; letter-spacing: 0.04em;
+  text-decoration: none; color: var(--sc-ink-soft); transition: background-color 160ms var(--sc-ease-out), color 160ms var(--sc-ease-out);
+}
+.langs a[aria-current="true"] { background: var(--sc-ink); color: var(--sc-canvas); }
+@media (hover: hover) and (pointer: fine) { .langs a:not([aria-current="true"]):hover { color: var(--sc-ink); } }
+
+/* ---------------------------------------------------- route rail (map) -- */
+.rail {
+  position: fixed; right: var(--sc-gutter); top: 50%; translate: 0 -50%; z-index: var(--sc-z-chrome);
+  margin: 0; padding: 0; list-style: none; display: grid; gap: var(--sc-1);
+}
+.rail::before {
+  content: ""; position: absolute; right: 0.72rem; top: 1.2rem; bottom: 1.2rem; width: 1px;
+  background: color-mix(in oklab, var(--sc-ink) 16%, transparent);
+}
+.rail button {
+  position: relative; display: flex; align-items: center; justify-content: flex-end; gap: var(--sc-3);
+  min-height: 2.5rem; padding: 0; background: none; border: 0; cursor: pointer;
+  font-size: var(--sc-t-xs); font-weight: 500; color: var(--sc-ink-soft);
+  transition: color 160ms var(--sc-ease-out);
+}
+.rail button::after {
+  content: ""; width: 0.55rem; height: 0.55rem; margin-right: 0.45rem; border-radius: 50%;
+  background: var(--sc-canvas); border: 1.5px solid color-mix(in oklab, var(--sc-ink) 35%, transparent);
+  transition: transform 200ms var(--sc-ease-out), background-color 200ms var(--sc-ease-out), border-color 200ms var(--sc-ease-out);
+}
+.rail button[aria-current="true"] { color: var(--sc-ink); font-weight: 600; }
+.rail button[aria-current="true"]::after { background: var(--sc-accent); border-color: var(--sc-accent); transform: scale(1.35); }
+@media (hover: hover) and (pointer: fine) { .rail button:hover { color: var(--sc-ink); } }
+@media (max-width: 1100px) { .rail { display: none; } }
+
+/* ---------------------------------------------------------- copy layer -- */
+.studio .sc-copy { max-width: min(38rem, 80vw); }
+.studio .sc-copy--trail > * { margin-left: auto; }
+.studio .sc-copy--trail h2 { margin-left: auto; }
+
+/* Full-frame so the engine's transform on the copy block doesn't collapse the pane's containing block.
+   Clicks pass through except onto the pane, and only while the engine marks the block live. */
+.agent-wrap { position: absolute; inset: 0; pointer-events: none !important; }
+.agent-wrap .agent { pointer-events: none; }
+.agent-wrap[style*="pointer-events: auto"] .agent { pointer-events: auto; }
+
+/* The live agent sits on the glass pane in the middle of the frame. `translate`, not
+   `transform`: the engine owns the copy block's transform. */
+.agent {
+  position: absolute; left: 50%; top: 52%; translate: -50% -50%;
+  width: min(40rem, calc(100vw - 2 * var(--sc-gutter)));
+  max-height: calc(100svh - var(--bar-h) - 2rem);
+  display: flex; flex-direction: column;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-radius: var(--sc-r-lg);
+  background: color-mix(in oklab, #fff 80%, transparent);
+  backdrop-filter: blur(18px) saturate(1.1);
+  border: 1px solid rgb(255 255 255 / 0.9);
+  box-shadow: var(--sc-edge), var(--sc-e2);
+}
+.agent h2 { font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2.1rem); }
+.agent .body { margin-top: var(--sc-2); font-size: var(--sc-t-sm); }
+.agent__log {
+  list-style: none; margin: var(--sc-5) 0 0; padding: 0;
+  display: flex; flex-direction: column; gap: var(--sc-3);
+  overflow-y: auto; overscroll-behavior: contain; min-height: 0; max-height: 36svh;
+}
+.agent__log:empty { display: none; }
+.msg { max-width: 88%; padding: 0.7rem 1rem; border-radius: 1.1rem; font-size: var(--sc-t-sm); line-height: 1.55; white-space: pre-wrap; }
+.msg--user { align-self: flex-end; background: var(--sc-accent); color: var(--sc-accent-ink); border-bottom-right-radius: 0.35rem; }
+.msg--assistant { align-self: flex-start; background: var(--sc-surface); border: 1px solid color-mix(in oklab, var(--sc-ink) 9%, transparent); border-bottom-left-radius: 0.35rem; }
+.dots { display: inline-flex; gap: 4px; padding: 0.35rem 0; }
+.dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--sc-ink-soft); animation: dot 1s var(--sc-ease-in-out) infinite; }
+.dots i:nth-child(2) { animation-delay: 0.15s; }
+.dots i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes dot { 0%, 100% { opacity: 0.25; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .dots i { animation: none; opacity: 0.6; } }
+.chips { margin-top: var(--sc-5); display: flex; flex-wrap: wrap; gap: var(--sc-2); }
+.chip {
+  min-height: 2.5rem; padding: 0 0.95rem; border-radius: var(--sc-r-pill); cursor: pointer;
+  background: var(--sc-surface); border: 1px solid color-mix(in oklab, var(--sc-ink) 12%, transparent);
+  font-size: var(--sc-t-sm); transition: border-color 160ms var(--sc-ease-out), transform 140ms var(--sc-ease-out);
+}
+.chip:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .chip:hover { border-color: var(--sc-accent); } }
+.agent__note { margin-top: var(--sc-4); font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+.agent__note a, .agent__cont { color: var(--accent-text); font-weight: 600; }
+.agent__cont { margin-top: var(--sc-4); align-self: flex-start; font-size: var(--sc-t-sm); }
+.ask { margin-top: var(--sc-5); display: flex; gap: var(--sc-2); }
+.ask input {
+  flex: 1; min-width: 0; min-height: 3rem; padding: 0 1.1rem; border-radius: var(--sc-r-pill);
+  background: #fff; border: 1px solid color-mix(in oklab, var(--sc-ink) 16%, transparent);
+  font-size: 1rem; /* 16px keeps iOS from zooming on focus */
+  transition: border-color 160ms var(--sc-ease-out);
+}
+.ask input:focus-visible { outline: none; border-color: var(--sc-accent); box-shadow: 0 0 0 3px color-mix(in oklab, var(--sc-accent) 25%, transparent); }
+.ask .btn { min-height: 3rem; }
+
+/* --------------------------------------------------------------- finale -- */
+.finale { position: absolute; left: var(--sc-gutter); right: var(--sc-gutter); top: calc(var(--bar-h) + clamp(1.5rem, 8vh, 5rem)); max-width: 62rem; }
+.finale h2 { font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3.4rem); max-width: 18ch; }
+.steps { list-style: none; margin: var(--sc-7) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sc-5); counter-reset: s; }
+.steps li { counter-increment: s; padding-top: var(--sc-4); border-top: 1px solid color-mix(in oklab, var(--sc-ink) 18%, transparent); }
+.steps li::before { content: counter(s); display: block; font-family: var(--sc-font-display); font-size: var(--sc-t-sm); color: var(--accent-text); font-variant-numeric: tabular-nums; }
+.steps b { display: block; margin-top: var(--sc-2); font-weight: 600; }
+.steps span { display: block; margin-top: var(--sc-1); font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+.proof { margin-top: var(--sc-6); max-width: 60ch; font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+.fine { margin-top: var(--sc-6); font-size: var(--sc-t-xs); color: var(--sc-ink-soft); display: flex; flex-wrap: wrap; gap: var(--sc-4); }
+.fine a { color: inherit; }
+
+/* ---------------------------------------------------------- promo modal -- */
+.promo-dialog { width: min(72rem, 94vw); padding: 0; border: 0; border-radius: var(--sc-r-lg); background: var(--sc-ink); box-shadow: var(--sc-e3); }
+.promo-dialog::backdrop { background: color-mix(in oklab, var(--sc-ink) 55%, transparent); backdrop-filter: blur(6px); }
+.promo-dialog video { width: 100%; height: auto; aspect-ratio: 16 / 9; }
+.promo-dialog form { position: absolute; top: var(--sc-3); right: var(--sc-3); }
+
+/* ------------------------------------------------------------- mobile -- */
+@media (max-width: 860px) {
+  :root { --bar-h: 3.75rem; }
+  /* Phone copy spans the full width over the lower half of the frame: the band has to reach it. */
+  .studio .sc-world__scrim.sc-scrim--band {
+    background: linear-gradient(to top,
+      color-mix(in oklab, var(--sc-canvas) 97%, transparent) 0%,
+      color-mix(in oklab, var(--sc-canvas) 93%, transparent) 42%,
+      color-mix(in oklab, var(--sc-canvas) 55%, transparent) 56%,
+      transparent 68%);
+  }
+  .wordmark span { display: none; }
+  .bar .btn { padding: 0 0.9rem; }
+  .langs a { min-width: 2.25rem; }
+  .studio .sc-copy { max-width: none; bottom: clamp(1.5rem, 6vh, 3rem); }
+  .studio .sc-copy--trail > *, .studio .sc-copy--trail h2 { margin-left: 0; }
+  .sc-copy--trail .svc { flex-direction: row; }
+  .sc-copy--trail .actions { justify-content: flex-start; }
+  .lede { font-size: var(--sc-t-base); }
+  .agent { top: calc(50% + var(--bar-h) / 2); }
+  .agent__log { max-height: 30svh; }
+  .steps { grid-template-columns: 1fr; gap: var(--sc-3); margin-top: var(--sc-5); }
+  .steps li { padding-top: var(--sc-3); display: grid; grid-template-columns: 1.5rem 1fr; column-gap: var(--sc-2); }
+  .steps li::before { grid-row: span 2; }
+  .steps b { margin-top: 0; }
+}
+@media (max-width: 420px) {
+  .bar__end { gap: var(--sc-2); }
+  .bar .btn { display: none; }
+}

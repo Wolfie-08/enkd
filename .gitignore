@@ -32,3 +32,12 @@ next-env.d.ts
 *.tsbuildinfo
 
 .env*
+
+# scroll-craft build intermediates (frames, masters, blend, tool installs)
+scrollcraft/builds/*/renders/
+scrollcraft/builds/*/blender/*.blend*
+scrollcraft/builds/*/lab/
+scrollcraft/builds/*/**/node_modules/
+scrollcraft/builds/*/promo/renders/
+scrollcraft/builds/*/promo/.media/
+!.env.example

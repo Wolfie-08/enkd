@@ -4,6 +4,15 @@ import { NextResponse, type NextRequest } from "next/server";
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  // studio.enkd.uz (and studio.localhost in dev) is its own site under /studio/[lang]. UZ is unprefixed.
+  if ((req.headers.get("host") ?? "").startsWith("studio.")) {
+    if (pathname.startsWith("/api/")) return;
+    const m = pathname.match(/^\/(ru|en)(\/.*)?$/);
+    const url = req.nextUrl.clone();
+    url.pathname = m ? `/studio/${m[1]}${m[2] ?? ""}` : `/studio/uz${pathname === "/" ? "" : pathname}`;
+    return NextResponse.rewrite(url);
+  }
+
   if (pathname === "/en" || pathname.startsWith("/en/")) {
     if (pathname.includes("opengraph-image")) return;
     const url = req.nextUrl.clone();

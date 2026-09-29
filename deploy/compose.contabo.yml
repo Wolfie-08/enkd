@@ -1,0 +1,28 @@
+# studio.enkd.uz on Contabo. From the repo root on the box (/opt/apps/enkd):
+#   docker compose -f deploy/compose.contabo.yml up -d --build
+# Secrets go in /opt/apps/enkd/.env (you create it by hand, never committed):
+#   ANTHROPIC_API_KEY=...   live agent on studio.enkd.uz
+#   RESEND_API_KEY=...      www contact form (optional here)
+# No public port: the SHARED Caddy in /opt/apps (project "apps", network apps_default)
+# proxies to `enkd-studio:3000` — see deploy/Caddyfile.studio.enkd.uz.
+name: enkd
+services:
+  web:
+    build: ..
+    restart: unless-stopped
+    env_file:
+      - path: ../.env
+        required: false
+    networks:
+      apps:
+        aliases: [enkd-studio]
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "--header=Host: studio.enkd.uz", "http://127.0.0.1:3000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+networks:
+  apps:
+    external: true
+    name: apps_default
